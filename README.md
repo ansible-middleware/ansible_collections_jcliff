@@ -2,7 +2,7 @@
 
 ## About
 
-This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/jcliff), designed to integrate the Java EE server [JBoss Enterprise Application (EAP)](https://www.redhat.com/en/technologies/jboss-middleware/application-platform) or its upstream counterpart [Wildfly](https://wildfly.org/) into a configuration management tool such as Ansible.
+This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/jcliff), designed to integrate the [Wildfly](https://wildfly.org/) server (or its product counterpart  [JBoss Enterprise Application (EAP)](https://www.redhat.com/en/technologies/jboss-middleware/application-platform) ) into a configuration management tool such as Ansible.
 
 ## Install
 
