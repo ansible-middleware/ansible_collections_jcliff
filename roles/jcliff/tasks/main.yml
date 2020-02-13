@@ -6,6 +6,10 @@
       - CentOS
       - Red Hat Enterprise Linux
 
+- fail:
+    msg: "The variable ansible_distribution is not define and is required by this playook. Set gather_facts to true or provided manually using --extra-var."
+  when: ansible_distribution is undefined
+
 - block:
     - name: "Check if JCliff installation is supported on {{ ansible_distribution }}"
       debug:
