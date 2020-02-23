@@ -1,0 +1,36 @@
+---
+name: CI
+"on":
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python_version: ["3.7"]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+        with:
+          path: ansible_collections/redhat/jcliff
+
+      - name: Set up Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Install molecule
+        run: |
+          python -m pip install --upgrade pip
+          pip install yamllint molecule[docker] ansible
+
+      - name: Create default collection path symlink
+        run: |
+          mkdir -p /home/runner/.ansible
+          ln -s /home/runner/work/ansible_collections_jcliff /home/runner/.ansible/collections
+      - name: Run molecule test
+        run: molecule test
