@@ -1,0 +1,34 @@
+---
+- name: Converge
+  hosts: all
+  vars_files:
+    - vars/main.yml
+  vars:
+    app_url: http://people.redhat.com/~rpelisse/simple-webapp.war
+    app: /tmp/simple-webapp.war
+  collections:
+    - redhat.jcliff
+  roles:
+    - jcliff
+  tasks:
+    - name: "Download a demo app to deploy"
+      get_url:
+        url: "{{ app_url }}"
+        dest: "{{ app }}"
+
+    - jcliff:
+        wfly_home: "{{ wildfly.home }}"
+        subsystems:
+          - system_props:
+              - name: jcliff.enabled
+                value: "enabled.plus"
+          - deployments:
+              - artifact_id: simple-webapp-v1.war
+                name: simple-webapp
+                path: /tmp/simple-webapp.war
+          - datasources:
+              - name: ExampleDS2
+                use_java_context: "true"
+                jndi_name: java:jboss/datasources/ExampleDS2
+                connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+                driver_name: h2
