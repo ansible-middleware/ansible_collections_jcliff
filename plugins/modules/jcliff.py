@@ -97,7 +97,7 @@ options:
   state:
     description:
       - If 'present', configurations will be applied to the Wildfly/JBoss EAP server.
-      - If 'absent', configurations will be removed from the Wildfly/JBoss EAP server.
+      - If 'absent', configurations will be removed from the Wildfly/JBoss EAP server - this is NOT implemented yet!
     type: str
     default: 'present'
     choices: ['present','absent']
