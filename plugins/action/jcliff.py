@@ -1,3 +1,7 @@
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+
 """ This action module use JCliff rule templates to
     render directive before transfering them as rule
     file to the target host. """
