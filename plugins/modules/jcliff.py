@@ -1,4 +1,9 @@
 #!/usr/bin/python
+
+from __future__ import (absolute_import, division, print_function)
+__metaclass__ = type
+
+
 """ This is a jcliff module, wrapping the utility Java tool JCliff
     in order to have Ansible supports fine tuning of Wildfly / JBoss
     EAP server configuration (subsystems)"""
