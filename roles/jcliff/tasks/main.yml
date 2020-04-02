@@ -29,6 +29,7 @@
         command: rpm -q {{ jcliff_package_name }}
         args:
           warn: no
+        changed_when: false
       rescue:
       - name: "Ensure JCliff is installed"
         yum:
