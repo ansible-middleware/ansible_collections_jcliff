@@ -480,7 +480,23 @@ def main():
                                     artifact_id=dict(
                                         type='str', required=True),
                                     name=dict(type='str', required=False),
-                                    path=dict(type='str', required=True))))),
+                                    path=dict(type='str', required=True))),
+                            keycloak=dict(
+                                type='list', required=True, elements='dict', options=dict(
+                                  secure_deployment=dict(
+                                    type='list', required=False, elements='dict', options=dict(
+                                    deployment_name=dict(type='str', required=True),
+                                    realm=dict(type='str', required=True),
+                                    auth_server_url=dict(type='str', required=True),
+                                    ssl_required=dict(type='str', required=True),
+                                    resource=dict(type='str', required=True),
+                                    verify_token_audience=dict(type='bool', required=False),
+                                    credential=dict(
+                                      name=dict(type='str', required=False, default="secure"),
+                                      value=dict(type='str', required=True),
+                                    ),
+                                    use_resource_role_mapping=dict(type='bool', required=False),
+                                  )))))),
         state=dict(default="present", choices=[
                    'present', 'absent'], type='str')
     )
