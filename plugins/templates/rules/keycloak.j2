@@ -1,0 +1,19 @@
+{ "subsystem" => {
+  "keycloak" => {
+    {% if 'secure_deployment' in values %}
+      "secure-deployment" => {
+        {% for secure_deployment in values['secure_deployment'] %}
+          "{{ secure_deployment['deployment_name'] }}" => {
+            "realm" => "{{ secure_deployment['realm'] }}",
+            "auth-server-url" => "{{ secure_deployment['auth_server_url'] }}",
+            "ssl-required" => "{{ secure_deployment['ssl_required'] }}",
+            "resource" => "{{ secure_deployment['resource'] }}",
+            {% if 'verify_token_audience' in secure_deployment %} "verify-token-audience" => "{{ secure_deployment['verify_token_audience'] }}", {% endif %}
+            {% if 'use_resource_role_mapping' in secure_deployment %} "use-resource-role-mapping" => "{{ secure_deployment['use_resource_role_mapping'] }}", {% endif %}
+           }
+         {% endfor %}
+      },
+     {% endif %}
+    }
+  }
+}

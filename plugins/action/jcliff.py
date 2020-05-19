@@ -59,13 +59,14 @@ class ActionModule(ActionBase):
             'drivers': 'drivers.j2',
             'datasources': 'datasource.j2',
             'system_props': 'system-properties.j2',
-            'deployments': 'deployments.j2'
+            'deployments': 'deployments.j2',
+            'keycloak': 'keycloak.j2'
         }
         subsystems = self._task.args['subsystems']
         if subsystems is not None:
             for subsys in subsystems:
                 for key in subsys.keys():
-                    if key in ('drivers', 'datasources'):
+                    if key in ('drivers', 'datasources', 'keycloak'):
                         for index, subsystem_values in enumerate(subsys[key]):
                             self._transfer_file(
                                 self._template_from_jinja_to_yml(
