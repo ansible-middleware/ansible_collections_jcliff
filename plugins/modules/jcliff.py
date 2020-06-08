@@ -281,6 +281,62 @@ options:
               - Path to the deployment.
             type: str
             required: True
+
+      keycloak:
+        description:
+          - Keycloak.
+        type: list
+        suboptions:
+
+          secure_deployment:
+            description:
+              - List of applications to secure using Keycloak.
+            type: list
+            suboptions:
+
+              deployment_name:
+                description:
+                  - Name of the deployment.
+                type: str
+                required: True
+
+              resource:
+                description:
+                  - The client-id of the application.
+                type: str
+                required: True
+
+              auth_server_url:
+                description:
+                  - Base URL of the Keycloak server.
+                type: str
+                required: True
+
+              realm:
+                description:
+                  - Name of the Keycloak realm.
+                type: str
+
+              ssl_required:
+                description:
+                  - Ensures that all communication to and from the Keycloak server is over HTTPS.
+                type: str
+
+              verify_token_audience:
+                description:
+                  - Whether the adapter will verify whether the token contains this client name (resource) as an audience.
+                type: bool
+
+              use_resource_role_mappings:
+                description:
+                  - Whether the adapter will look inside the token for application level role mappings for the user.
+                type: bool
+
+              credential:
+                description:
+                  - The secure value for the application.
+                type: str
+
 '''
 
 EXAMPLES = '''
@@ -482,21 +538,18 @@ def main():
                                     name=dict(type='str', required=False),
                                     path=dict(type='str', required=True))),
                             keycloak=dict(
-                                type='list', required=True, elements='dict', options=dict(
-                                  secure_deployment=dict(
-                                    type='list', required=False, elements='dict', options=dict(
-                                    deployment_name=dict(type='str', required=True),
-                                    realm=dict(type='str', required=True),
-                                    auth_server_url=dict(type='str', required=True),
-                                    ssl_required=dict(type='str', required=True),
-                                    resource=dict(type='str', required=True),
-                                    verify_token_audience=dict(type='bool', required=False),
-                                    credential=dict(
-                                      name=dict(type='str', required=False, default="secure"),
-                                      value=dict(type='str', required=True),
-                                    ),
-                                    use_resource_role_mapping=dict(type='bool', required=False),
-                                  )))))),
+                                type='list', required=False, elements='dict', options=dict(
+                                    secure_deployment=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            deployment_name=dict(type='str', required=True),
+                                            realm=dict(type='str', required=False),
+                                            auth_server_url=dict(type='str', required=True),
+                                            ssl_required=dict(type='str', required=False),
+                                            resource=dict(type='str', required=True),
+                                            verify_token_audience=dict(type='bool', required=False),
+                                            credential=dict(type='str', required=False),
+                                            use_resource_role_mappings=dict(type='bool', required=False),
+                                        )))))),
         state=dict(default="present", choices=[
                    'present', 'absent'], type='str')
     )
