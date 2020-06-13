@@ -23,8 +23,8 @@
               - name: jcliff.enabled
                 value: "enabled.plus"
           - deployments:
-              - artifact_id: simple-webapp-v1.war
-                name: simple-webapp
+              - name: simple-webapp
+                runtime_name: simple-webapp-v1.war
                 path: /tmp/simple-webapp.war
           - datasources:
               - name: ExampleDS2

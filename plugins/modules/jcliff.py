@@ -265,12 +265,6 @@ options:
         type: list
         suboptions:
 
-          artifact_id:
-            description:
-              - Artifact ID.
-            type: str
-            required: True
-
           name:
             description:
               - Name of the deployment.
@@ -281,6 +275,36 @@ options:
               - Path to the deployment.
             type: str
             required: True
+
+          disabled:
+            description:
+              - Adds to the repository in a disabled state.
+            type: bool
+            required: False
+
+          runtime_name:
+            description:
+              - Runtime of the deployment.
+            type: str
+            required: False
+
+          replace_name_regex:
+            description:
+              - Regex pattern to replace the deployment if the value matches the name.
+            type: str
+            required: False
+
+          replace_runtime_name_regex:
+            description:
+              - Regex pattern to replace the deployment if the value matches the runtime name.
+            type: str
+            required: False
+
+          unmanaged:
+            description:
+              - Specifies whether the deployment should be managed.
+            type: bool
+            required: False
 
       keycloak:
         description:
@@ -533,10 +557,13 @@ def main():
                                     value=dict(type='str', required=False))),
                             deployments=dict(
                                 type='list', required=False, elements='dict', options=dict(
-                                    artifact_id=dict(
-                                        type='str', required=True),
-                                    name=dict(type='str', required=False),
-                                    path=dict(type='str', required=True))),
+                                    name=dict(type='str', required=True),
+                                    path=dict(type='str', required=True),
+                                    disabled=dict(type='bool', required=False),
+                                    runtime_name=dict(type='str', required=False),
+                                    replace_name_regex=dict(type='str', required=False),
+                                    replace_runtime_name_regex=dict(type='str', required=False),
+                                    unmanaged=dict(type='bool', required=False))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
