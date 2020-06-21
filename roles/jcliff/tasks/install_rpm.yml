@@ -1,0 +1,22 @@
+---
+
+- name: "Install JCliff RPM if possible on {{ ansible_distribution}}"
+  block:
+    - name: "Add JCliff Yum Repository ({{ ansible_distribution}})"
+      yum_repository:
+        name: jcliff
+        description: JCliff repository
+        baseurl: "{{ jcliff_yum_baseurl }}"
+        gpgcheck: 0
+    - block:
+      - name: "Test if package {{ jcliff_package_name }} is already installed"
+        command: rpm -q {{ jcliff_package_name }}
+        args:
+          warn: no
+        changed_when: false
+      rescue:
+      - name: "Ensure JCliff is installed"
+        package:
+          name: "{{ jcliff_package_name }}"
+          state: present
+          #use_backend: "{{ jcliff_yum_backend | default('yum') }}"

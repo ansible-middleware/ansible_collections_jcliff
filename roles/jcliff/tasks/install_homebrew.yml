@@ -1,0 +1,10 @@
+---
+- name: Add HomeBrew Tap
+  homebrew_tap:
+    name: "{{ jcliff_homebrew_tap }}"
+  when: jcliff_homebrew_tap is defined and (jcliff_homebrew_tap | length > 0)
+
+- name: Add Jcliff package
+  homebrew:
+    name: "{{ jcliff_package_name }}"
+    state: present
