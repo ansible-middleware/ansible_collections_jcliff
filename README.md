@@ -25,12 +25,10 @@ For commodity purpose, the Collection comes with a role 'jcliff' to have Ansible
     - hosts: ...
       collections:
         - redhat.jcliff
-      roles:
-        - jcliff
-      vars:
-        - ansible_distribution: Fedora
       tasks:
-        ...
+        - name: Include Jcliff role
+          include_role:
+            name: jcliff
 
 ## Using the JCliff collection within your playbook
 
@@ -40,12 +38,12 @@ Once the Collection has been installed and JCliff is available on the system, yo
     - hosts: localhost
       gather_facts: false
       collections:
-        - redhat_middleware.jcliff
+        - redhat.jcliff
 
       tasks:
 
         - jcliff:
-            wfly_home: /home/rpelisse/Repositories/redhat/ansible-jcliff-workspace/jboss-eap-7.2
+            wfly_home: /var/opt/jboss-eap-7.3
             subsystems:
               - system_props:
                   - name: jcliff.enabled

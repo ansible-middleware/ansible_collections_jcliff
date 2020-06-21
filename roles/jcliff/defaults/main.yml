@@ -1,0 +1,11 @@
+---
+jcliff_package_name: jcliff
+jcliff_homebrew_tap: redhat-cop/redhat-cop
+jcliff_install_matrix:
+  rpm:
+    - Fedora
+    - CentOS
+    - RedHat
+  homebrew:
+    - MacOSX
+jcliff_yum_baseurl: http://people.redhat.com/~rpelisse/jcliff.yum/

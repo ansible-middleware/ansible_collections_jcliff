@@ -1,39 +1,22 @@
 ---
-- set_fact:
-    jcliff_package_name: jcliff
-    jcliff_install_supported_os:
-      - Fedora
-      - CentOS
-      - Red Hat Enterprise Linux
 
-- fail:
-    msg: "The variable ansible_distribution is not define and is required by this playook. Set gather_facts to true or provided manually using --extra-var."
-  when: ansible_distribution is undefined
+- name: Collect Supported Operating Systems
+  set_fact:
+    jcliff_install_supported_os: "{{ ( jcliff_install_supported_os | default([]) ) + item.value }}"
+  loop: "{{ lookup('dict', jcliff_install_matrix) }}"
 
-- block:
-    - name: "Check if JCliff installation is supported on {{ ansible_distribution }}"
-      debug:
-        msg: "Installation of JCliff on {{ ansible_distribution }} is not yet supported. Please ensure that JCliff has been installed on the system before using the associated module."
-  when: ansible_distribution not in jcliff_install_supported_os
+- name: Verify supported Operating Systems
+  assert:
+    that:
+      - ansible_distribution is not undefined
+      - ansible_distribution in jcliff_install_supported_os
+    fail_msg: "Unsppoorted Operating system"
+    quiet: true
 
-- name: "Install JCliff RPM if possible on {{ ansible_distribution}}"
-  block:
-    - name: "Add JCliff Yum Repository ({{ ansible_distribution}})"
-      yum_repository:
-        name: jcliff
-        description: JCliff repository
-        baseurl: http://people.redhat.com/~rpelisse/jcliff.yum/
-        gpgcheck: 0
-    - block:
-      - name: "Test if package {{ jcliff_package_name }} is already installed"
-        command: rpm -q {{ jcliff_package_name }}
-        args:
-          warn: no
-        changed_when: false
-      rescue:
-      - name: "Ensure JCliff is installed"
-        yum:
-          name: "{{ jcliff_package_name }}"
-          state: present
-          use_backend: "{{ jcliff_yum_backend | default('yum') }}"
-  when: ansible_distribution in jcliff_install_supported_os
+- name: Install JCliff using HomeBrew
+  include_tasks: install_homebrew.yml
+  when: ansible_distribution in jcliff_install_matrix.homebrew
+
+- name: Install JCliff using RPM
+  include_tasks: install_rpm.yml
+  when: ansible_distribution in jcliff_install_matrix.rpm
