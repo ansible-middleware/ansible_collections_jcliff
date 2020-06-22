@@ -1,5 +1,6 @@
 ---
 jcliff_package_name: jcliff
+jcliff_program_name: jcliff
 jcliff_homebrew_tap: redhat-cop/redhat-cop
 jcliff_install_matrix:
   rpm:
@@ -9,3 +10,11 @@ jcliff_install_matrix:
   homebrew:
     - MacOSX
 jcliff_yum_baseurl: http://people.redhat.com/~rpelisse/jcliff.yum/
+
+jcliff_standalone: false
+jcliff_standalone_version: 2.12.5
+jcliff_standalone_archive: "https://github.com/bserdar/jcliff/releases/download/v{{ jcliff_standalone_version }}/jcliff-{{ jcliff_standalone_version }}-dist.tar.gz"
+jcliff_standalone_root: "/usr/share"
+jcliff_standalone_home_dir: "{{ jcliff_standalone_root }}/{{ jcliff_program_name }}-{{ jcliff_standalone_version }}"
+jcliff_standalone_commmon_link: "{{ jcliff_standalone_root }}/{{ jcliff_program_name }}"
+jcliff_standalone_binary_dir: "/usr/bin"
