@@ -13,7 +13,7 @@
         that:
           - ansible_distribution is not undefined
           - ansible_distribution in jcliff_install_supported_os
-        fail_msg: "Unsppoorted Operating system for package installation"
+        fail_msg: "Unsupported Operating system for package installation"
         quiet: true
 
     - name: Install JCliff using HomeBrew
