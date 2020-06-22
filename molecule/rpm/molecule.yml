@@ -25,5 +25,6 @@ provisioner:
         ansible_python_interpreter: "{{ ansible_playbook_python }}"
   env:
     ANSIBLE_FORCE_COLOR: "true"
+    ANSIBLE_COLLECTIONS_PATHS: "~/.ansible/collections/"
 verifier:
   name: ansible
