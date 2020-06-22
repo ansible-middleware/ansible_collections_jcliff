@@ -4,6 +4,8 @@
 
 This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/jcliff), designed to integrate the [Wildfly](https://wildfly.org/) server (or its product counterpart  [JBoss Enterprise Application (EAP)](https://www.redhat.com/en/technologies/jboss-middleware/application-platform) ) into a configuration management tool such as Ansible.
 
+**Note that for only Linux and MacOSX, using homebrew, is currently supported**
+
 ## Install
 
 ### Installing the collection
@@ -18,9 +20,9 @@ Alternatively, you can simply build the tarball (to then install it):
 
 ### Ensuring JCliff is available
 
-The collection itself only provides the integration of JCliff into Ansible. The tool needs to be installed and available on the system Ansible is running on. Refers to [JCliff](https://github.com/bserdar/jcliff) for more information on how to install the tool manually.
+The collection itself only provides the integration of JCliff into Ansible. JCliff itself needs to be installed and available on the system Ansible is running on.
 
-For commodity purpose, the Collection comes with a role 'jcliff' to have Ansible install 'jcliff'. However, currently, this role **only** supports Linux distribution using Yum (namely Fedora, RHEL and CentOS):
+For commodity purpose, the Collection comes with a role named 'jcliff:' that will take care of installing JCliff. However, currently, this role **only** supports Linux distribution using Yum (namely Fedora, RHEL and CentOS) and MacOSX using [Homebrew](https://brew.sh/).
 
     - hosts: ...
       collections:
@@ -31,6 +33,8 @@ For commodity purpose, the Collection comes with a role 'jcliff' to have Ansible
         - ansible_distribution: Fedora
       tasks:
         ...
+
+Refers to [JCliff](https://github.com/bserdar/jcliff) for more information on how to install the tool manually. JCliff being a Java based application setting up is pretty simple, so do not let it deter you from using the collection.
 
 ## Using the JCliff collection within your playbook
 
