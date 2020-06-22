@@ -5,18 +5,26 @@
     jcliff_install_supported_os: "{{ ( jcliff_install_supported_os | default([]) ) + item.value }}"
   loop: "{{ lookup('dict', jcliff_install_matrix) }}"
 
-- name: Verify supported Operating Systems
-  assert:
-    that:
-      - ansible_distribution is not undefined
-      - ansible_distribution in jcliff_install_supported_os
-    fail_msg: "Unsppoorted Operating system"
-    quiet: true
 
-- name: Install JCliff using HomeBrew
-  include_tasks: install_homebrew.yml
-  when: ansible_distribution in jcliff_install_matrix.homebrew
+- name: Install JCliff using package managers
+  block:
+    - name: Verify supported Operating Systems
+      assert:
+        that:
+          - ansible_distribution is not undefined
+          - ansible_distribution in jcliff_install_supported_os
+        fail_msg: "Unsppoorted Operating system for package installation"
+        quiet: true
 
-- name: Install JCliff using RPM
-  include_tasks: install_rpm.yml
-  when: ansible_distribution in jcliff_install_matrix.rpm
+    - name: Install JCliff using HomeBrew
+      include_tasks: install_homebrew.yml
+      when: ansible_distribution in jcliff_install_matrix.homebrew
+
+    - name: Install JCliff using RPM
+      include_tasks: install_rpm.yml
+      when: ansible_distribution in jcliff_install_matrix.rpm
+  when: jcliff_standalone | bool == false
+
+- name: Install Jcliff using standalone binary
+  include_tasks: install_standalone.yml
+  when: jcliff_standalone | bool == true

@@ -15,6 +15,10 @@ platforms:
       - 0.0.0.0:8080:8080/TCP
 provisioner:
   name: ansible
+  playbooks:
+    converge: ../resources/converge.yml
+    prepare: ../resources/prepare.yml
+    verify: ../resources/verify.yml
   inventory:
     host_vars:
       localhost:
@@ -23,18 +27,3 @@ provisioner:
     ANSIBLE_FORCE_COLOR: "true"
 verifier:
   name: ansible
-scenario:
-  name: default
-  test_sequence:
-    - dependency
-    - lint
-    - destroy
-    - dependency
-    - syntax
-    - create
-    - prepare
-    - converge
-    # -   idempotence
-    - side_effect
-    - verify
-    - destroy
