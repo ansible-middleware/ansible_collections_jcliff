@@ -361,6 +361,29 @@ options:
                   - The secure value for the application.
                 type: str
 
+      messaging_hornetq:
+        description:
+          - jms-queue.
+        type: list
+        suboptions:
+
+          queue_address:
+            description:
+              - Name of the queue.
+            type: str
+            required: True
+
+          entries:
+            description:
+              - Entries of the queue.
+            type: list
+            required: True
+
+          durable:
+            description:
+              - durable or not.
+            type: bool
+            required: True
 '''
 
 EXAMPLES = '''
@@ -564,6 +587,11 @@ def main():
                                     replace_name_regex=dict(type='str', required=False),
                                     replace_runtime_name_regex=dict(type='str', required=False),
                                     unmanaged=dict(type='bool', required=False))),
+                            messaging_hornetq=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    queue_address=dict(type='str', required=True),
+                                    entries=dict(type='list', required=True),
+                                    durable=dict(type='bool', required=True))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
