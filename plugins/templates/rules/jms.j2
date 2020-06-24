@@ -1,0 +1,15 @@
+{ "messaging" => {
+    "hornetq-server" => {
+      "default" => {
+        "jms-queue" => {
+          {% for item in values %}
+            "{{ item['queue_address'] }}" => {
+            "entries" => "{{ item['entries'] }}",
+            "durable" => "{{ item['durable'] }}"
+          }
+          {% endfor %}
+        }
+      }
+    } 
+  }
+}
