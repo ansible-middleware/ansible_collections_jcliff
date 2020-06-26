@@ -495,12 +495,14 @@ def jcliff_absent(data=None):
 def main():
     """ Main method for this module """
     default_jcliff_home = "/usr/share/jcliff"
+    default_path_to_jcliff = "/usr/bin/jcliff"
+    default_rules_dir = default_jcliff_home + "/rules"
     fields = dict(
         jcliff_home=dict(type='str', default=default_jcliff_home),
-        jcliff=dict(default='/usr/bin/jcliff', type='str'),
+        jcliff=dict(default=default_path_to_jcliff, type='str'),
         management_username=dict(required=False, type='str'),
         management_password=dict(required=False, type='str', no_log=True),
-        rules_dir=dict(type='str', default=default_jcliff_home + "/rules"),
+        rules_dir=dict(type='str', default=default_rules_dir),
         wfly_home=dict(required=True, aliases=['jboss_home'], type='str'),
         management_host=dict(default='localhost', type='str'),
         management_port=dict(default='9990', type='str'),
@@ -584,6 +586,15 @@ def main():
 
     if os.environ.get("JCLIFF_HOME"):
         module.params["jcliff_home"] = os.environ.get("JCLIFF_HOME")
+
+    # if JCLIFF_HOME is not set to default value, we need to recompute
+    # other related default valueswe need to compute the "new" default value
+    # unless they have been already redefined
+    if module.params["jcliff_home"] != default_jcliff_home:
+        if module.params["jcliff"] == default_path_to_jcliff:
+            module.params["jcliff"] = module.params["jcliff_home"] + "/jcliff"
+        if module.params["rules_dir"] == default_rules_dir:
+            module.params["rules_dir"] = module.params["jcliff_home"] + "/rules"
 
     check_if_folder_exists(module, "jcliff_home")
     check_if_folder_exists(module, "wfly_home")
