@@ -19,7 +19,7 @@
     - jcliff:
         wfly_home: "{{ wildfly.home }}"
         subsystems:
-          - system_props:
+          - system_properties:
               - name: jcliff.enabled
                 value: "enabled.plus"
           - deployments:
