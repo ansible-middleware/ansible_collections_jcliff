@@ -60,6 +60,7 @@ class ActionModule(ActionBase):
             'datasources': 'datasource.j2',
             'system_props': 'system-properties.j2',
             'deployments': 'deployments.j2',
+            'logging': 'logging.j2',
             'keycloak': 'keycloak.j2'
         }
         subsystems = self._task.args['subsystems']
@@ -74,7 +75,7 @@ class ActionModule(ActionBase):
                                     {"values": subsystem_values}),
                                 tmp_remote_src + key + "-" +
                                 str(index) + self.TARGET_FILENAME_SUFFIX)
-                    if key in ('system_props', 'deployments'):
+                    if key in ('system_props', 'deployments', 'logging'):
                         self._transfer_file(self._template_from_jinja_to_yml(
                             template_name_by_subsys[key], {"values": subsys[key]}),
                             tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)

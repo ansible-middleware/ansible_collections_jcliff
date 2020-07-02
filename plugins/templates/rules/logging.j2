@@ -1,0 +1,10 @@
+{ "logging" => {
+    "logger" => {
+      {% for item in values %}
+      "{{ item['name'] }}" => {
+            "value" => "{{ item['value'] }}"
+        }
+      {% endfor %}
+    }
+  }
+}
