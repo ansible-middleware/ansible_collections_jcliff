@@ -360,6 +360,21 @@ options:
                 description:
                   - The secure value for the application.
                 type: str
+      logging:
+        description:
+          - logger.
+        type: list
+        suboptions:
+          name:
+            description:
+              - Replace name with name of the log category
+            type: str
+            required: True
+          value:
+            description:
+              - Replace level with log level that is to be set
+            type: str
+            required: False
 
 '''
 
@@ -566,6 +581,10 @@ def main():
                                     replace_name_regex=dict(type='str', required=False),
                                     replace_runtime_name_regex=dict(type='str', required=False),
                                     unmanaged=dict(type='bool', required=False))),
+                            logging=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    name=dict(type='str', required=True),
+                                    value=dict(type='str', required=False))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
