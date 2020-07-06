@@ -6,8 +6,6 @@ authors:
   - Romain Pelisse <belaran@redhat.com>
   - Andrew Block <ablock@redhat.com>
 description: Provides integration with JCliff to enable Ansible to provisioning JBoss EAP or Wildfly instances.
-license:
-  - GPL-2.0-or-later
 license_file: "LICENSE"
 tags:
   - java
