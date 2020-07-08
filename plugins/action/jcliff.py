@@ -9,7 +9,7 @@ import os
 import tempfile
 
 from ansible.plugins.action import ActionBase
-
+from ansible.template import Templar
 from ansible.utils.display import Display
 
 display = Display()
@@ -42,8 +42,8 @@ class ActionModule(ActionBase):
 
         with open(templates, 'r') as file:
             data = file.read()
-        self._templar.available_variables = subsystem_values
-        return _write_template_result_to_file(self._templar.template(data))
+        templar = Templar(loader=self._loader, variables=subsystem_values)
+        return _write_template_result_to_file(templar.template(data))
 
     def _deploy_custom_rules_if_any(self, tmp_remote_src):
         if 'rule_file' in self._task.args:
