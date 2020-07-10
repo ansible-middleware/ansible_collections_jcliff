@@ -16,7 +16,7 @@ The following are a set of key varaiables for the role:
 
 | Variable | Description | Required | Defaults |
 |:---------|:------------|:---------|:---------|
-|`jcliff_package_name`| Name of the RPM package | no | `jcliff` |
+|`jcliff_package_name`| Name of the package | no | `jcliff` |
 |`jcliff_program_name`| Name of the program to install | no | `jcliff` |
 |`jcliff_homebrew_tap`| Name of the Homebrew tap | no | `redhat-cop/redhat-cop` |
 |`jcliff_yum_baseurl`| Base URL for the RPM repository | `http://people.redhat.com/~rpelisse/jcliff.yum` | `` |
