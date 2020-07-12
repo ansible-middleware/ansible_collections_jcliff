@@ -13,7 +13,7 @@ Function Check_If_Folder_Exists {
 
     $folder = $module.Params[$key]
 
-    if (-not (Test-Path $module.Params[$key] -PathType Container)) {
+    if (-not (Test-Path -LiteralPath $(Resolve-Path -LiteralPath $module.Params[$key]) -PathType Container)) {
         $module.FailJson("$key is invalid: $folder")
     }
 }
@@ -46,7 +46,7 @@ Function List_Rule_files {
 
     $rule_files = @()
 
-    Get-ChildItem -Path $rules_dir -Filter *jcliff.yml | foreach {
+    Get-ChildItem -LiteralPath $rules_dir -Filter *jcliff.yml | ForEach-Object {
         $rule_files += $_.fullname
     }
 
@@ -58,9 +58,9 @@ Function Execute_Rules_With_Jcliff {
         [Parameter(Mandatory=$true)][Ansible.Basic.AnsibleModule]$module
     )
 
-    $jboss_cli_path = Join-Path -Path $module.Params.wfly_home -ChildPath "bin/jboss-cli.bat"
+    $jboss_cli_path = Join-Path -Path $(Resolve-Path -LiteralPath $module.Params.wfly_home) -ChildPath "bin/jboss-cli.bat"
 
-    $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$($module.Params.rules_dir)", "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
+    $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$(Resolve-Path -LiteralPath $module.Params.rules_dir)", "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
 
     if ($module.Params.management_username) {
         $jcliff_command_line_args += "--user=$($module.Params.management_username)"
@@ -70,11 +70,11 @@ Function Execute_Rules_With_Jcliff {
         $jcliff_command_line_args += "--password=$($module.Params.management_password)"
     }
 
-    $jcliff_command_line_args += List_Rule_files $module.Params.remote_rulesdir
+    $jcliff_command_line_args += List_Rule_files $(Resolve-Path -LiteralPath $module.Params.remote_rulesdir)
 
-    $env:JAVA_HOME = $module.Params.jcliff_jvm
-    $env:JBOSS_HOME = $module.Params.wfly_home
-    $env:JCLIFF_HOME = $module.Params.jcliff_home
+    $env:JAVA_HOME = Resolve-Path -LiteralPath $module.Params.jcliff_jvm
+    $env:JBOSS_HOME = Resolve-Path -LiteralPath $module.Params.wfly_home
+    $env:JCLIFF_HOME = Resolve-Path -LiteralPath $module.Params.jcliff_home
 
     $psi = New-object System.Diagnostics.ProcessStartInfo
 
@@ -97,7 +97,7 @@ Function Execute_Rules_With_Jcliff {
     $module.Result.rc = $process.ExitCode
 
     if ($process.ExitCode -eq 0) {
-        if($output -like '*Server configuration changed: true*') { 
+        if($output -like '*Server configuration changed: true*') {
             $module.Result.jcliff = $jcliff_command_line_args
             $module.Result.changed = $true
 
@@ -106,27 +106,32 @@ Function Execute_Rules_With_Jcliff {
         }
         $module.Result.present = $output
     } else {
-        $module.Result.jcliff_cli = "$($module.Params.jcliff) $($jcliff_command_line_args)"
+        $module.Result.jcliff_cli = "$(Resolve-Path -LiteralPath $module.Params.jcliff) $($jcliff_command_line_args)"
         $module.FailJson("Failed to execute jcliff module", $output)
 
     }
 }
 
+
+$default_jcliff_home = "/usr/share/jcliff"
+$default_jcliff = "/usr/bin/jcliff"
+$default_rules_dir = "/usr/share/jcliff/rules"
+
 $spec = @{
     options = @{
-        jcliff_home = @{ type = "path" }
-        jcliff = @{ type = "path"  }
+        jcliff_home = @{ type = "str"; default = $default_jcliff_home }
+        jcliff = @{ type = "str"; default = $default_jcliff }
         management_username = @{ type = "str"; }
         management_password = @{ type = "str"; no_log = $true }
-        rules_dir = @{ type = "path"  }
-        wfly_home = @{ type = "path" ; required = $true ; aliases = "jboss_home" }
+        rules_dir = @{ type = "str"; default = $default_rules_dir  }
+        wfly_home = @{ type = "str" ; required = $true ; aliases = @("jboss_home") }
         management_host = @{ type = "str" ; default = "localhost" }
         management_port = @{ type = "str" ; default = "9990" }
-        jcliff_jvm = @{ type = "path" ; default = $env:JAVA_HOME  }
-        rule_file = @{ type = "path" }
-        remote_rulesdir = @{ type = "path" }
+        jcliff_jvm = @{ type = "str" ; default = $env:JAVA_HOME  }
+        rule_file = @{ type = "str" }
+        remote_rulesdir = @{ type = "str" }
         debug_mode = @{ type = "bool"; default = $false }
-        subsystems = @{ type = "list"; elements = "dict"; 
+        subsystems = @{ type = "list"; elements = "dict";
             options = @{
                 drivers = @{ type = "list"; elements = "dict";
                     options = @{
@@ -182,13 +187,6 @@ $spec = @{
                                 use_resource_role_mappings = @{ type = "bool" }
                             }
                         }
-                        name = @{ type = "str"; required = $true }
-                        path = @{ type = "str"; required = $true }
-                        disabled = @{ type = "bool"; default = $false }
-                        runtime_name = @{ type = "str" }
-                        replace_name_regex = @{ type = "str" }
-                        replace_runtime_name_regex = @{ type = "str" }
-                        unmanaged = @{ type = "bool"; default = $false }
                     }
                 }
                 system_props = @{ type = "list"; elements = "dict";
@@ -206,15 +204,15 @@ $spec = @{
 
 $module = [Ansible.Basic.AnsibleModule]::Create($args, $spec)
 
-if (Test-Path env:JCLIFF_HOME) {
+if (Test-Path -LiteralPath env:JCLIFF_HOME) {
     $module.Params.jcliff_home = $env:JCLIFF_HOME
 }
 
-if (!$module.Params.jcliff) {
+if ($module.Params.jcliff -eq $default_jcliff) {
     $module.Params.jcliff =Join-Path -Path $module.Params.jcliff_home -ChildPath "jcliff.bat"
 }
 
-if (!$module.Params.rules_dir) {
+if ($module.Params.rules_dir -eq $default_rules_dir) {
     $module.Params.rules_dir = Join-Path -Path $module.Params.jcliff_home -ChildPath "rules"
 }
 
