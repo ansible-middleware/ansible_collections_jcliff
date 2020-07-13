@@ -2,7 +2,7 @@
     "logger" => {
       {% for item in values %}
       "{{ item['name'] }}" => {
-            "value" => "{{ item['value'] }}"
+            "level" => "{{ item['level'] }}"
         }
       {% endfor %}
     }
