@@ -195,6 +195,11 @@ $spec = @{
                         value = @{ type = "str"}
                     }
                 }
+                logging = @{ type = "list"; required = False ; elements="dict" ; options = @{
+                                    name = @{ type = "str" , required = True }
+                                    level = @{ type = "str" , required = False }
+                    }
+               }
             }
         }
         state = @{ type = "str"; choices = "absent", "present"; default = "present"  }
