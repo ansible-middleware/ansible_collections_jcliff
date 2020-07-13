@@ -370,7 +370,7 @@ options:
               - Replace name with name of the log category
             type: str
             required: True
-          value:
+          level:
             description:
               - Replace level with log level that is to be set
             type: str
@@ -584,7 +584,7 @@ def main():
                             logging=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=True),
-                                    value=dict(type='str', required=False))),
+                                    level=dict(type='str', required=False))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
