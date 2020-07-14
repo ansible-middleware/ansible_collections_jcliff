@@ -197,8 +197,8 @@ $spec = @{
                 }
                 logging = @{ type = "list"; required = $false ; elements = "dict";
                     options = @{
-                        name = @{ type = "str" , required = $true }
-                        level = @{ type = "str" , required = $false }
+                        name = @{ type = "str" ; required = $true }
+                        level = @{ type = "str"; required = $false }
                     }
                }
             }
