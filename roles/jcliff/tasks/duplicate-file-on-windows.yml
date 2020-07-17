@@ -1,0 +1,24 @@
+---
+
+- set_fact:
+    collection_roles_path: "{{ role_path | dirname }}"
+
+- set_fact:
+    collection_path: "{{ role_path | dirname }}"
+
+- set_fact:
+    collection_action_folder: "{{ collection_path | dirname }}/plugins/action/"
+
+- set_fact:
+    path_to_powershell_script: "{{ collection_action_folder }}/win_{{ role_name }}.ps1"
+
+- stat:
+    path: "{{ path_to_powershell_script }}.py"
+  register: path_to_powershell_script_file
+
+- name: "Add powershell script if not running on Windows: {{ path_to_powershell_script }}"
+  copy:
+    src: "{{ collection_action_folder }}/{{ role_name }}.py"
+    remote_src: yes
+    dest: "{{ path_to_powershell_script }}"
+  when: not path_to_powershell_script_file.stat.exists
