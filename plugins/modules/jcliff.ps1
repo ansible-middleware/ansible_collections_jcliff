@@ -131,6 +131,7 @@ $spec = @{
         rule_file = @{ type = "str" }
         remote_rulesdir = @{ type = "str" }
         debug_mode = @{ type = "bool"; default = $false }
+        timeout = @{ type = "int"; default = 30000 }
         subsystems = @{ type = "list"; elements = "dict";
             options = @{
                 drivers = @{ type = "list"; elements = "dict";

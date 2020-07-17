@@ -94,6 +94,12 @@ options:
     type: bool
     default: False
 
+  timeout:
+    description:
+      - Set jcliff timeout (how long a jcliff will allow a query to the server to last)
+    type: int
+    defaut: 30000
+
   state:
     description:
       - If 'present', configurations will be applied to the Wildfly/JBoss EAP server.
@@ -436,6 +442,7 @@ def execute_rules_with_jcliff(data):
                            data["jcliff"], "--cli=" +
                            data['wfly_home'] + "/bin/jboss-cli.sh",
                            "--ruledir=" + data['rules_dir'],
+                           "--timeout=" + str(data['timeout']),
                            "--controller=" +
                            data['management_host'] + ":" +
                            data['management_port'],
@@ -529,6 +536,7 @@ def main():
         remote_rulesdir=dict(required=False, type='str'),
         # Careful, switching to 'True' will mean each run of the module will create temporary files that it will NOT be deleted!
         debug_mode=dict(required=False, type='bool', default=False),
+        timeout=dict(required=False, type='int', default=30000),
         subsystems=dict(type='list', required=False, elements='dict',
                         options=dict(
                             drivers=dict(type='list', required=False, elements='dict', options=dict(
