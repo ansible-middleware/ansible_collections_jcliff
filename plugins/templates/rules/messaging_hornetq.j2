@@ -4,11 +4,7 @@
         "jms-queue" => {
           {% for item in values %}
             "{{ item['queue_address'] }}" => {
-            "entries" => [
-              {% for entry in item['entries']%}
-              "{{ entry }}"{{ "," if not loop.last }}
-              {% endfor %}
-              ],
+            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
             "durable" => "{{ item['durable'] }}"
           }
           {% endfor %}
