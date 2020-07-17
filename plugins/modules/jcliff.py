@@ -376,6 +376,29 @@ options:
             type: str
             required: False
 
+      jms:
+        description:
+          - jms-queue.
+        type: list
+        suboptions:
+
+          queue_address:
+            description:
+              - Name of the queue.
+            type: str
+            required: True
+
+          entries:
+            description:
+              - Entries of the queue.
+            type: str
+            required: True
+
+          durable:
+            description:
+              - durable or not.
+            type: bool
+            required: True
 '''
 
 EXAMPLES = '''
@@ -585,6 +608,11 @@ def main():
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=True),
                                     level=dict(type='str', required=False))),
+                            jms=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    queue_address=dict(type='str', required=True),
+                                    entries=dict(type='list', required=True),
+                                    durable=dict(type='bool', required=True))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
