@@ -391,7 +391,7 @@ options:
           entries:
             description:
               - Entries of the queue.
-            type: str
+            type: list
             required: True
 
           durable:

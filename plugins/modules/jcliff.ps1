@@ -201,6 +201,13 @@ $spec = @{
                         level = @{ type = "str"; required = $false }
                     }
                }
+               jms = @{ type = "list"; required = $false ; elements = "dict";
+                    options = @{
+                        queue_address = @{ type = "str" ; required = $true }
+                        entries = @{ type = "list"; required = $true }
+                        durable = @{ type = "bool"; required = $true }
+                    }
+                }
             }
         }
         state = @{ type = "str"; choices = "absent", "present"; default = "present"  }
