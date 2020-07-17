@@ -98,7 +98,7 @@ options:
     description:
       - Set jcliff timeout (how long a jcliff will allow a query to the server to last)
     type: int
-    defaut: 30000
+    default: 30000
 
   state:
     description:
