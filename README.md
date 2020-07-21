@@ -55,4 +55,27 @@ Once the Collection has been installed and JCliff is available on the system, yo
                     value: 'enabled'
                   - name: jcliff.version
                     value: '1.0'
+  
+  ## Windows support
+
+  Support for Windows based targets is available by using the `win_jcliff` module.
+
+    ---
+    - hosts: localhost
+      gather_facts: false
+      collections:
+        - redhat.jcliff
+
+      tasks:
+
+        - win_jcliff:
+            wfly_home: c:/servers/wildfly-19.0.0.Final
+            subsystems:
+              - system_props:
+                  - name: jcliff.enabled
+                    value: 'enabled'
+                  - name: jcliff.version
+                    value: '1.0'
+
+  Full feature parity exists between both `jcliff` and `win_jcliff` modules
 
