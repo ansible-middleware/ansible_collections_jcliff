@@ -60,7 +60,7 @@ Function Execute_Rules_With_Jcliff {
 
     $jboss_cli_path = Join-Path -Path $(Resolve-Path -LiteralPath $module.Params.wfly_home) -ChildPath "bin/jboss-cli.bat"
 
-    $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$(Resolve-Path -LiteralPath $module.Params.rules_dir)", "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
+    $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$(Resolve-Path -LiteralPath $module.Params.rules_dir)", "--timeout=$($module.Params.timeout)", "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
 
     if ($module.Params.management_username) {
         $jcliff_command_line_args += "--user=$($module.Params.management_username)"
@@ -131,6 +131,7 @@ $spec = @{
         rule_file = @{ type = "str" }
         remote_rulesdir = @{ type = "str" }
         debug_mode = @{ type = "bool"; default = $false }
+        timeout = @{ type = "int"; default = 30000 }
         subsystems = @{ type = "list"; elements = "dict";
             options = @{
                 drivers = @{ type = "list"; elements = "dict";
