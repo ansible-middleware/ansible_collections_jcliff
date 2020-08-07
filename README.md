@@ -1,4 +1,4 @@
-# Ansible Collection - redhat.jcliff
+# Ansible Collection - wildfly.jcliff
 
 [![Build Status](https://github.com/wildfly-extras/ansible_collections_jcliff/workflows/CI/badge.svg?branch=master)](https://github.com/wildfly-extras/ansible_collections_jcliff/actions?workflow=CI)
 
@@ -15,7 +15,7 @@ This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/
 
 To install this Ansible collection simply download the latest tarball and run the following command:
 
-    $ ansible-galaxy collection install /path/to/redhat.jcliff.tgz
+    $ ansible-galaxy collection install /path/to/wildfly.jcliff.tgz
 
 Alternatively, you can simply build the tarball (to then install it):
 
@@ -29,7 +29,7 @@ For commodity purpose, the Collection comes with a role named 'jcliff:' that wil
 
     - hosts: ...
       collections:
-        - redhat.jcliff
+        - wildfly.jcliff
       tasks:
         - name: Include Jcliff role
           include_role:
@@ -45,7 +45,7 @@ Once the Collection has been installed and JCliff is available on the system, yo
     - hosts: localhost
       gather_facts: false
       collections:
-        - redhat.jcliff
+        - wildfly.jcliff
 
       tasks:
 

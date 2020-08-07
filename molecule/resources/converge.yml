@@ -7,7 +7,7 @@
     app_url: http://people.redhat.com/~rpelisse/simple-webapp.war
     app: /tmp/simple-webapp.war
   collections:
-    - redhat.jcliff
+    - wildfly.jcliff
   roles:
     - jcliff
   tasks:
