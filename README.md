@@ -2,12 +2,11 @@
 
 [![Build Status](https://github.com/wildfly-extras/ansible_collections_jcliff/workflows/CI/badge.svg?branch=master)](https://github.com/wildfly-extras/ansible_collections_jcliff/actions?workflow=CI)
 
-
 ## About
 
 This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/jcliff), designed to integrate the [Wildfly](https://wildfly.org/) server (or its product counterpart  [JBoss Enterprise Application (EAP)](https://www.redhat.com/en/technologies/jboss-middleware/application-platform) ) into a configuration management tool such as Ansible.
 
-**Note that for only Linux and MacOSX, using homebrew, is currently supported**
+**Note that for only Linux and MacOSX ( using [Homebrew](https://brew.sh/) ) is currently supported**
 
 ## Install
 
