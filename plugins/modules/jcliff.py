@@ -432,6 +432,21 @@ options:
                 https://docs.jboss.org/infinispan/9.4/serverconfigdocs/jboss-as-deployment-scanner_2_0.html
             type: str
             required: False
+      transactions:
+        description:
+          - Setting node-identifier
+        type: list
+        suboptions:
+          name:
+            description:
+              - Node-identifier
+            type: str
+            required: True
+          value:
+            description:
+              - enter the respective value, corresponding to name.
+            type: str
+            required: True
 '''
 
 EXAMPLES = '''
@@ -651,6 +666,10 @@ def main():
                                     outbound_socket_binding_ref=dict(type='str', required=True),
                                     ssl=dict(type='bool', required=False))),
                             scanner=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    name=dict(type='str', required=False),
+                                    value=dict(type='str', required=False))),
+                            transactions=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),
                                     value=dict(type='str', required=False))),
