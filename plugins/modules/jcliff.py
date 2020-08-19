@@ -411,6 +411,27 @@ options:
               - Set ssl
             type: bool
             required: False
+      scanner:
+        description:
+          - The deployment scanner is only used in standalone mode.
+          - It can be found in standalone.xml.
+        type: list
+        suboptions:
+          name:
+            description:
+              - The name of the scanner.
+              - It can be path, relative-to, scan-enabled, scan-interval,
+                auto-deploy-zipped, auto-deploy-exploded, auto-deploy-xml,
+                deployment-timeout
+            type: str
+            required: False
+          value:
+            description:
+              - enter the respective value,
+                corresponding to name.
+                https://docs.jboss.org/infinispan/9.4/serverconfigdocs/jboss-as-deployment-scanner_2_0.html
+            type: str
+            required: False
 '''
 
 EXAMPLES = '''
@@ -629,6 +650,10 @@ def main():
                                     jndi_name=dict(type='str', required=True),
                                     outbound_socket_binding_ref=dict(type='str', required=True),
                                     ssl=dict(type='bool', required=False))),
+                            scanner=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    name=dict(type='str', required=False),
+                                    value=dict(type='str', required=False))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
