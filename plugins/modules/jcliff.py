@@ -381,7 +381,36 @@ options:
               - Replace level with log level that is to be set
             type: str
             required: False
-
+      mail:
+        description:
+          - mail.
+        type: list
+        suboptions:
+          name:
+            description:
+              - Replace name with subject.
+            type: str
+            required: True
+          from_email:
+            description:
+              - Replace from_email with email id.
+            type: str
+            required: True
+          jndi_name:
+            description:
+              - Set jndi_name, for ex. java:jboss/mail/testSession
+            type: str
+            required: False
+          outbound_socket_binding_ref:
+            description:
+              - Set outbound_socket_binding_ref, for ex. mail-smtp
+            type: str
+            required: False
+          ssl:
+            description:
+              - Set ssl
+            type: bool
+            required: False
 '''
 
 EXAMPLES = '''
@@ -593,6 +622,13 @@ def main():
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=True),
                                     level=dict(type='str', required=False))),
+                            mail=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    name=dict(type='str', required=True),
+                                    from_email=dict(type='str', required=True),
+                                    jndi_name=dict(type='str', required=True),
+                                    outbound_socket_binding_ref=dict(type='str', required=True),
+                                    ssl=dict(type='bool', required=False))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
