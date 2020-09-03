@@ -64,6 +64,7 @@ class ActionModule(ActionBase):
             'mail': 'mail.j2',
             'scanner': 'scanner.j2',
             'transactions': 'transactions.j2',
+            'standard_sockets': 'standard-sockets.j2',
             'keycloak': 'keycloak.j2'
         }
         subsystems = self._task.args['subsystems']
@@ -78,7 +79,7 @@ class ActionModule(ActionBase):
                                     {"values": subsystem_values}),
                                 tmp_remote_src + key + "-" +
                                 str(index) + self.TARGET_FILENAME_SUFFIX)
-                    if key in ('system_props', 'deployments', 'logging', 'mail', 'scanner', 'transactions'):
+                    if key in ('system_props', 'deployments', 'logging', 'mail', 'scanner', 'transactions', 'standard_sockets'):
                         self._transfer_file(self._template_from_jinja_to_yml(
                             template_name_by_subsys[key], {"values": subsys[key]}),
                             tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)
