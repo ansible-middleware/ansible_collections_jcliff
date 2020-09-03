@@ -1,0 +1,13 @@
+{ "standard-sockets" => {
+    {% for item in values %}
+      "socket-binding" => {
+        "{{ item['name'] }}" => {
+          {% if 'port' in item %} "port" => "{{ item['port'] }}", {% endif %}
+          {% if 'interface' in item %} "interface" => "{{ item['interface'] }}", {% endif %}
+          {% if 'multicast_address' in item %} "multicast_address" => "{{ item['multicast_address'] }}", {% endif %}
+          {% if 'multicast_port' in item %} "multicast_port" => "{{ item['multicast_port'] }}", {% endif %}
+        }
+      }
+    {% endfor %}
+  }
+}

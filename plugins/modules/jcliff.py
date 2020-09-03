@@ -447,6 +447,36 @@ options:
               - enter the respective value, corresponding to name.
             type: str
             required: True
+      standard_sockets:
+        description:
+          - Create Socket bindings.
+        type: list
+        suboptions:
+          name:
+            description:
+              - Logical name of the socket configuration that should be used elsewhere in the configuration.
+            type: str
+            required: True
+          port:
+            description:
+              - Base port to which a socket based on this configuration should be bound.
+            type: str
+            required: True
+          interface:
+            description:
+              - Logical name of the interface to which a socket based on this configuration should be bound.
+            type: str
+            required: False
+          multicast_address:
+            description:
+              - If the socket will be used for multicast, the multicast address to use.
+            type: str
+            required: False
+          multicast_port:
+            description:
+              - If the socket will be used for multicast, the multicast port to use.
+            type: str
+            required: False
 '''
 
 EXAMPLES = '''
@@ -673,6 +703,13 @@ def main():
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),
                                     value=dict(type='str', required=False))),
+                            standard_sockets=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    name=dict(type='str', required=True),
+                                    port=dict(type='str', required=True),
+                                    interface=dict(type='str', required=False),
+                                    multicast_address=dict(type='str', required=False),
+                                    multicast_port=dict(type='str', required=False))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
