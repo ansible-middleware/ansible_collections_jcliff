@@ -312,6 +312,92 @@ options:
             type: bool
             required: False
 
+      interfaces:
+        description:
+          - Interface.
+        type: list
+        suboptions:
+          name:
+            description:
+              - Name of the interface
+            type: str
+            required: True
+          any_address:
+            description:
+              - Sockets using this interface should be bound to a wildcard address
+            type: bool
+            required: False
+          inet_address:
+            description:
+              - Whether or not the address matches the given value
+            type: str
+            required: False
+          link_local_address:
+            description:
+              - Part of the selection criteria for choosing an IP address for this interface should be whether or not the address is link-local
+            type: bool
+            required: False
+          loopback:
+            description:
+              - Part of the selection criteria for choosing an IP address for this interface should be whether or not it is a loopback address
+            type: bool
+            required: False
+          loopback_address:
+            description:
+              - Value indicating that the IP address for this interface should be the given value, if a loopback interface exists on the machine
+            type: str
+            required: False
+          multicast:
+            description:
+              - Whether or not its network interface supports multicast
+            type: bool
+            required: False
+          nic:
+            description:
+              - Part of the selection criteria for choosing an IP address for this interface should be whether its network interface has the given name
+            type: str
+            required: False
+          nic_match:
+            description:
+              -  Whether its network interface has a name that matches the given regular expression
+            type: str
+            required: False
+          point_to_point:
+            description:
+              - Whether or not its network interface is a point-to-point interface
+            type: bool
+            required: False
+          public_address:
+            description:
+              - Whether or not it is a publicly routable address
+            type: bool
+            required: False
+          resolved_address:
+            description:
+              - The resolved ip address for this interface
+            type: str
+            required: False
+          site_local_address:
+            description:
+              - Whether or it is a site-local address
+            type: bool
+            required: False
+          subnet_match:
+            description:
+              - Whether or it the address fits in the given subnet definition. Value is a network IP address and the number of bits in the address
+            type: str
+            required: False
+          up:
+            description:
+              - Whether its network interface is currently up
+            type: bool
+            required: False
+          virtual:
+            description:
+              - Whether its network interface is a virtual interface
+            type: bool
+            required: False
+
       keycloak:
         description:
           - Keycloak.
@@ -684,6 +770,24 @@ def main():
                                     replace_name_regex=dict(type='str', required=False),
                                     replace_runtime_name_regex=dict(type='str', required=False),
                                     unmanaged=dict(type='bool', required=False))),
+                            interfaces=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    name=dict(type='str', required=True),
+                                    any_address=dict(type='bool', required=False),
+                                    inet_address=dict(type='str', required=False),
+                                    link_local_address=dict(type='bool', required=False),
+                                    loopback=dict(type='bool', required=False),
+                                    loopback_address=dict(type='str', required=False),
+                                    multicast=dict(type='bool', required=False),
+                                    nic=dict(type='str', required=False),
+                                    nic_match=dict(type='str', required=False),
+                                    point_to_point=dict(type='bool', required=False),
+                                    public_address=dict(type='bool', required=False),
+                                    resolved_address=dict(type='str', required=False),
+                                    site_local_address=dict(type='bool', required=False),
+                                    subnet_match=dict(type='str', required=False),
+                                    up=dict(type='bool', required=False),
+                                    virtual=dict(type='bool', required=False))),
                             logging=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=True),
