@@ -16,7 +16,7 @@
       {% if 'subnet_match' in item %} "subnet-match" => "{{ item['subnet_match'] }}" {% endif %}
       {% if 'up' in item %} "up" => "{{ item['up'] }}" {% endif %}
       {% if 'virtual' in item %} "virtual" => "{{ item['virtual'] }}" {% endif %}
-  }
+  },
   {% endfor %}
   }
 }
