@@ -14,7 +14,7 @@ jobs:
         python_version: ["3.7"]
     steps:
       - name: Check out code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           path: ansible_collections/wildfly/jcliff
 
@@ -31,8 +31,10 @@ jobs:
       - name: Create default collection path symlink
         run: |
           mkdir -p /home/runner/.ansible
-          ln -s /home/runner/work/ansible_collections_jcliff /home/runner/.ansible/collections
+          ln -s /home/runner/work/ansible_collections_jcliff/ansible_collections_jcliff /home/runner/.ansible/collections
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
+        working-directory: ./ansible_collections/wildfly/jcliff
       - name: Run molecule test
         run: molecule test --all
+        working-directory: ./ansible_collections/wildfly/jcliff
