@@ -54,35 +54,31 @@ class ActionModule(ActionBase):
                                         tmp_remote_src + custom_rule_file +
                                         "-custom" + self.TARGET_FILENAME_SUFFIX)
 
+    def _lookup_subsys_template(self, subsys_name):
+        return subsys_name + ".j2"
+
+    def _subsystems_with_items(self):
+        return ('drivers', 'datasources', 'keycloak')
+
+    def _subsystems(self):
+        return ('system_properties', 'deployments', 'interfaces', 'logging', 'mail', 'scanner', 'transactions', 'standard_sockets')
+
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
-        template_name_by_subsys = {
-            'drivers': 'drivers.j2',
-            'datasources': 'datasource.j2',
-            'system_props': 'system-properties.j2',
-            'deployments': 'deployments.j2',
-            'interfaces': 'interfaces.j2',
-            'logging': 'logging.j2',
-            'mail': 'mail.j2',
-            'scanner': 'scanner.j2',
-            'transactions': 'transactions.j2',
-            'standard_sockets': 'standard-sockets.j2',
-            'keycloak': 'keycloak.j2'
-        }
         subsystems = self._task.args['subsystems']
         if subsystems is not None:
             for subsys in subsystems:
                 for key in subsys.keys():
-                    if key in ('drivers', 'datasources', 'keycloak'):
+                    if key in self._subsystems_with_items():
                         for index, subsystem_values in enumerate(subsys[key]):
                             self._transfer_file(
                                 self._template_from_jinja_to_yml(
-                                    template_name_by_subsys[key],
+                                    self._lookup_subsys_template(key),
                                     {"values": subsystem_values}),
                                 tmp_remote_src + key + "-" +
                                 str(index) + self.TARGET_FILENAME_SUFFIX)
-                    if key in ('system_props', 'deployments', 'interfaces', 'logging', 'mail', 'scanner', 'transactions', 'standard_sockets'):
+                    if key in self._subsystems():
                         self._transfer_file(self._template_from_jinja_to_yml(
-                            template_name_by_subsys[key], {"values": subsys[key]}),
+                            self._lookup_subsys_template(key), {"values": subsys[key]}),
                             tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)
 
     def run(self, tmp=None, task_vars=None):

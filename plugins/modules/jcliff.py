@@ -249,7 +249,7 @@ options:
             type: str
             default: 'undefined'
 
-      system_props:
+      system_properties:
         description:
           - System properties.
         type: list
@@ -575,7 +575,7 @@ EXAMPLES = '''
   jcliff:
     wfly_home: "/opt/wildfly"
     subsystems:
-      - system_props:
+      - system_properties:
           - name: jcliff.enabled
             value: 'enabled.plus'
       - datasources:
@@ -762,7 +762,7 @@ def main():
                                     check_valid_connection_sql=dict(
                                         type='str', default='undefined'),
                                     validate_on_match=dict(type='str', default='undefined'))),
-                            system_props=dict(
+                            system_properties=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),
                                     value=dict(type='str', required=False))),
