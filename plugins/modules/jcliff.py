@@ -568,6 +568,42 @@ options:
                   - If the socket will be used for multicast, the multicast port to use.
                 type: str
                 required: False
+          remote_destination_outbound_socket_binding:
+            description:
+              - Remote destination outbound socket binding.
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the remote destination outbound socket configuration that should be used elsewhere in the configuration.
+                type: str
+                required: True
+              host:
+                description:
+                  - The host name or the IP address of the remote destination to which this outbound socket will connect.
+                type: str
+                required: True
+              port:
+                description:
+                  - The port number of the remote destination to which the outbound socket should connect.
+                type: int
+                required: True
+              fixed_source_port:
+                description:
+                  - Whether the port value should remain fixed even if numeric offsets are applied to the other outbound sockets in the socket group.
+                type: bool
+                required: False
+                default: 'false'
+              source_interface:
+                description:
+                  - The name of the interface which will be used for the source address of the outbound socket.
+                type: str
+                required: False
+              source_port:
+                description:
+                  - The port number which will be used as the source port of the outbound socket.
+                type: int
+                required: False
 '''
 
 EXAMPLES = '''
@@ -821,6 +857,15 @@ def main():
                                             interface=dict(type='str', required=False),
                                             multicast_address=dict(type='str', required=False),
                                             multicast_port=dict(type='str', required=False),
+                                        )),
+                                    remote_destination_outbound_socket_binding=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            host=dict(type='str', required=True),
+                                            port=dict(type='int', required=True),
+                                            fixed_source_port=dict(type='bool', required=False),
+                                            source_interface=dict(type='str', required=False),
+                                            source_port=dict(type='int', required=False),
                                         )))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(

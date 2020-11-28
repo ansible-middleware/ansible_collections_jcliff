@@ -1,0 +1,28 @@
+{ "standard-sockets" => {
+    {% if 'socket_binding' in values %}
+    "socket-binding" => {
+      {% for item in values['socket_binding'] %}
+        "{{ item['name'] }}" => {
+          {% if 'port' in item %} "port" => "{{ item['port'] }}", {% endif %}
+          {% if 'interface' in item %} "interface" => "{{ item['interface'] }}", {% endif %}
+          {% if 'multicast_address' in item %} "multicast_address" => "{{ item['multicast_address'] }}", {% endif %}
+          {% if 'multicast_port' in item %} "multicast_port" => "{{ item['multicast_port'] }}", {% endif %}
+        },
+      {% endfor %}
+      },
+     {% endif %}
+    {% if 'remote_destination_outbound_socket_binding' in values %}
+    "remote-destination-outbound-socket-binding" => {
+      {% for item in values['remote_destination_outbound_socket_binding'] %}
+        "{{ item['name'] }}" => {
+          {% if 'host' in item %} "host" => "{{ item['host'] }}", {% endif %}
+          {% if 'port' in item %} "port" => "{{ item['port'] }}", {% endif %}
+          {% if 'fixed_source_port' in item %} "fixed-source-port" => "{{ item['fixed_source_port'] }}", {% endif %}
+          {% if 'source_interface' in item %} "source-interface" => "{{ item['source_interface'] }}", {% endif %}
+          {% if 'source_port' in item %} "source-port" => {{ item['source_port'] }}, {% endif %}
+        },
+      {% endfor %}
+      },
+     {% endif %}
+  }
+}
