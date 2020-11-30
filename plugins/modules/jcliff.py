@@ -497,6 +497,162 @@ options:
               - Set ssl
             type: bool
             required: False
+      modcluster:
+        description:
+          - Manage Modcluster.
+        type: dict
+        suboptions:
+          proxy:
+            description:
+              - Modcluster proxy.
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the modcluster proxy.
+                type: str
+                required: True
+              listener:
+                description:
+                  - The name of Undertow listener that will be registered with the reverse proxy.
+                type: str
+                required: False
+              advertise:
+                description:
+                  - Whether to enable multicast-based advertise mechanism.
+                type: bool
+                required: False
+              advertise_security_key:
+                description:
+                  - If specified, reverse proxy advertisements checksums will be verified using this value as a salt.
+                type: str
+                required: False
+              advertise_socket:
+                description:
+                  - Name of socket binding to use for the advertise socket.
+                type: str
+                required: False
+              auto_enable_contexts:
+                description:
+                  - If false, the contexts are registered with the reverse proxy as disabled.
+                type: bool
+                required: False
+              balancer:
+                description:
+                  - The name of the balancer on the reverse proxy to register with.
+                type: str
+                required: False
+              excluded_contexts:
+                description:
+                  - List of contexts to exclude from registration with the reverse proxies.
+                type: str
+                required: False
+              flush_packets:
+                description:
+                  - Whether to enable packet flushing on the reverse proxy.
+                type: bool
+                required: False
+              flush_wait:
+                description:
+                  - Time to wait before flushing packets on the reverse proxy.
+                type: int
+                required: False
+              load_balancing_group:
+                description:
+                  - Name of the load balancing group this node belongs to.
+                type: str
+                required: False
+              max_attempts:
+                description:
+                  - Maximum number of failover attempts by reverse proxy when sending the request to the backend server.
+                type: int
+                required: False
+              node_timeout:
+                description:
+                  - Timeout (in seconds) for proxy connections to a node. Time mod_cluster will wait for the back-end response before returning an error.
+                type: int
+                required: False
+              ping:
+                description:
+                  - Number of seconds for which to wait for a pong answer to a ping.
+                type: int
+                required: False
+              proxies:
+                description:
+                  - List of reverse proxies for mod_cluster to register with defined by 'outbound-socket-binding' in 'socket-binding-group'.
+                type: list
+                required: False
+                elements: str
+              proxy_list:
+                description:
+                  - List of reverse proxies to register with. Format (hostname:port) separated with commas.
+                type: str
+                required: False
+              proxy_url:
+                description:
+                  - Base URL for MCMP requests.
+                type: str
+                required: False
+              session_draining_strategy:
+                description:
+                  - Session draining strategy used during undeployment of a web application.
+                type: str
+                required: False
+              simple_load_provider:
+                description:
+                  - Simple load provider returns constant pre-configured load balancing factor.
+                type: int
+                required: False
+              smax:
+                description:
+                  - Soft maximum idle connection count for reverse proxy.
+                type: int
+                required: False
+              socket_timeout:
+                description:
+                  - Timeout to wait for the reverse proxy to answer a MCMP message.
+                type: int
+                required: False
+              ssl_context:
+                description:
+                  - Reference to the SSLContext to be used by mod_cluster.
+                type: str
+                required: False
+              status_interval:
+                description:
+                  - Number of seconds a STATUS message is sent from the application server to the proxy.
+                type: int
+                required: False
+              sticky_session:
+                description:
+                  - Indicates whether subsequent requests for a given session should be routed to the same node, if possible.
+                type: bool
+                required: False
+              sticky_session_force:
+                description:
+                  - Whether the reverse proxy should run an error in the event that the balancer is unable to route a request to the node to which it is stuck.
+                type: bool
+                required: False
+              sticky_session_remove:
+                description:
+                  - Whether the reverse proxy should remove session stickiness when the balancer is unable to route a request to the node to which it is stuck.
+                type: bool
+                required: False
+              stop_context_timeout:
+                description:
+                  - Maximum time to wait for context to process pending requests.
+                type: int
+                required: False
+              ttl:
+                description:
+                  - Time to live (in seconds) for idle connections above smax.
+                type: int
+                required: False
+              worker_timeout:
+                description:
+                  - Number of seconds to wait for a worker to become available to handle a request.
+                type: int
+                required: False
       scanner:
         description:
           - The deployment scanner is only used in standalone mode.
@@ -840,6 +996,40 @@ def main():
                                     jndi_name=dict(type='str', required=True),
                                     outbound_socket_binding_ref=dict(type='str', required=True),
                                     ssl=dict(type='bool', required=False))),
+                            modcluster=dict(
+                                type='dict', required=False, options=dict(
+                                    proxy=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            listener=dict(type='str', required=False),
+                                            advertise=dict(type='bool', required=False),
+                                            advertise_security_key=dict(type='str', required=False),
+                                            advertise_socket=dict(type='str', required=False),
+                                            auto_enable_contexts=dict(type='bool', required=False),
+                                            balancer=dict(type='str', required=False),
+                                            excluded_contexts=dict(type='str', required=False),
+                                            flush_packets=dict(type='bool', required=False),
+                                            flush_wait=dict(type='int', required=False),
+                                            load_balancing_group=dict(type='str', required=False),
+                                            max_attempts=dict(type='int', required=False),
+                                            node_timeout=dict(type='int', required=False),
+                                            ping=dict(type='int', required=False),
+                                            proxies=dict(type='list', required=False, elements='str'),
+                                            proxy_list=dict(type='str', required=False),
+                                            proxy_url=dict(type='str', required=False),
+                                            session_draining_strategy=dict(type='str', required=False),
+                                            simple_load_provider=dict(type='int', required=False),
+                                            smax=dict(type='int', required=False),
+                                            socket_timeout=dict(type='int', required=False),
+                                            ssl_context=dict(type='str', required=False),
+                                            status_interval=dict(type='int', required=False),
+                                            sticky_session=dict(type='bool', required=False),
+                                            sticky_session_force=dict(type='bool', required=False),
+                                            sticky_session_remove=dict(type='bool', required=False),
+                                            stop_context_timeout=dict(type='int', required=False),
+                                            ttl=dict(type='int', required=False),
+                                            worker_timeout=dict(type='int', required=False),
+                                        )))),
                             scanner=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),

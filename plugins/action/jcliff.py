@@ -61,7 +61,7 @@ class ActionModule(ActionBase):
         return ('drivers', 'datasources', 'keycloak')
 
     def _subsystems(self):
-        return ('system_properties', 'deployments', 'interfaces', 'logging', 'mail', 'scanner', 'transactions', 'standard_sockets')
+        return ('system_properties', 'deployments', 'interfaces', 'logging', 'mail', 'modcluster', 'scanner', 'transactions', 'standard_sockets')
 
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
         subsystems = self._task.args['subsystems']
