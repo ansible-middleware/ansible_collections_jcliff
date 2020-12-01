@@ -8,7 +8,7 @@
     {% if 'disabled' in item %} "disabled" => {{ item['disabled'] }}, {% endif %}
     {% if 'replace_name_regex' in item %} "replace-name-regex" => "{{ item['replace_name_regex'] }}", {% endif %}
     {% if 'replace_runtime_name_regex' in item %} "replace-runtime-name-regex" => "{{ item['replace_runtime_name_regex'] }}", {% endif %}
-  }
+  },
   {% endfor %}
   }
 }
