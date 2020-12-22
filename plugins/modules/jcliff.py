@@ -1077,7 +1077,6 @@ def main():
     # allow env var to override value set in module
     module.params["jcliff_home"] = os.getenv("JCLIFF_HOME", module.params["jcliff_home"])
 
-
     # if JCLIFF_HOME is not set to default value, we need to recompute
     # other related default valueswe need to compute the "new" default value
     # unless they have been already redefined
