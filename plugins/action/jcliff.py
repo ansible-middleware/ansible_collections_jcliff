@@ -69,9 +69,12 @@ class ActionModule(ActionBase):
         return subsys_name + ".j2"
 
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
+        display.vvvv(u"Build and deploy jcliff rule tmpfile: %s" % tmp_remote_src)
+        display.vvvv(u"Subsystems: %s" % self._task.args['subsystems'])
         subsystems = self._task.args['subsystems']
         if subsystems is not None:
             for subsys in subsystems:
+                display.vvvv(u"Component ID: %s" % subsys)
                 for key in subsys.keys():
                     if key in self.components_with_items:
                         display.vvvv("Components has items:")
