@@ -1074,9 +1074,9 @@ def main():
                    'present', 'absent'], type='str')
     )
     module = AnsibleModule(argument_spec=fields)
+    # allow env var to override value set in module
+    module.params["jcliff_home"] = os.getenv("JCLIFF_HOME", module.params["jcliff_home"])
 
-    if os.environ.get("JCLIFF_HOME"):
-        module.params["jcliff_home"] = os.environ.get("JCLIFF_HOME")
 
     # if JCLIFF_HOME is not set to default value, we need to recompute
     # other related default valueswe need to compute the "new" default value
