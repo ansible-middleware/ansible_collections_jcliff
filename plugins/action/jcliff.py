@@ -70,8 +70,12 @@ class ActionModule(ActionBase):
 
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
         display.vvvv(u"Build and deploy jcliff rule tmpfile: %s" % tmp_remote_src)
-        display.vvvv(u"Subsystems: %s" % self._task.args['subsystems'])
-        subsystems = self._task.args['subsystems']
+
+        if 'subsystems' in self._task.args:
+            subsystems = self._task.args['subsystems']
+        if 'components' in self._task.args:
+            subsystems = self._task.args['components']
+
         if subsystems is not None:
             for subsys in subsystems:
                 display.vvvv(u"Component ID: %s" % subsys)
