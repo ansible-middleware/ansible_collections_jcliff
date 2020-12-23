@@ -34,6 +34,17 @@ class ActionModule(ActionBase):
     TRANSFERS_FILES = True
     TARGET_FILENAME_SUFFIX = ".jcliff.yml"
 
+    components = ()
+    components_with_items = ()
+
+    def __init__(self, *args, **kwargs):
+        super(ActionModule, self).__init__(*args, **kwargs)
+        self.components = self._load_component_mapping('component_rule.map.csv')
+        self.components_with_items = self._load_component_mapping('component_with_items_rule.map.csv')
+
+    def _load_component_mapping(self, filename):
+        return tuple(open(os.path.join(os.path.dirname(__file__), '..', filename), "r").read().rstrip('\n').split(","))
+
     def _template_from_jinja_to_yml(self, template_name, subsystem_values):
         templates = self._loader.path_dwim_relative(self._loader.get_basedir(),
                                                     'templates/rules', template_name)
@@ -57,18 +68,16 @@ class ActionModule(ActionBase):
     def _lookup_subsys_template(self, subsys_name):
         return subsys_name + ".j2"
 
-    def _subsystems_with_items(self):
-        return ('drivers', 'datasources', 'keycloak')
-
-    def _subsystems(self):
-        return ('system_properties', 'deployments', 'interfaces', 'logging', 'mail', 'modcluster', 'scanner', 'transactions', 'standard_sockets')
-
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
+        display.vvvv(u"Build and deploy jcliff rule tmpfile: %s" % tmp_remote_src)
+        display.vvvv(u"Subsystems: %s" % self._task.args['subsystems'])
         subsystems = self._task.args['subsystems']
         if subsystems is not None:
             for subsys in subsystems:
+                display.vvvv(u"Component ID: %s" % subsys)
                 for key in subsys.keys():
-                    if key in self._subsystems_with_items():
+                    if key in self.components_with_items:
+                        display.vvvv("Components has items:")
                         for index, subsystem_values in enumerate(subsys[key]):
                             self._transfer_file(
                                 self._template_from_jinja_to_yml(
@@ -76,7 +85,8 @@ class ActionModule(ActionBase):
                                     {"values": subsystem_values}),
                                 tmp_remote_src + key + "-" +
                                 str(index) + self.TARGET_FILENAME_SUFFIX)
-                    if key in self._subsystems():
+                    if key in self.components:
+                        display.vvvv("Components:")
                         self._transfer_file(self._template_from_jinja_to_yml(
                             self._lookup_subsys_template(key), {"values": subsys[key]}),
                             tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)
