@@ -108,10 +108,11 @@ options:
     default: 'present'
     choices: ['present','absent']
 
-  subsystems:
+  components:
     description:
-      - Wildfly or JBoss EAP Subsystems.
+      - Wildfly or JBoss EAP Subsystems or configuration component
     type: list
+    aliases: ['subsystems']
     suboptions:
 
       drivers:
@@ -915,7 +916,7 @@ def main():
         # Careful, switching to 'True' will mean each run of the module will create temporary files that it will NOT be deleted!
         debug_mode=dict(required=False, type='bool', default=False),
         timeout=dict(required=False, type='int', default=30000),
-        subsystems=dict(type='list', required=False, elements='dict',
+        components=dict(type='list', aliases=['subsystems'], required=False, elements='dict',
                         options=dict(
                             drivers=dict(type='list', required=False, elements='dict', options=dict(
                                 driver_name=dict(type='str', required=True),
