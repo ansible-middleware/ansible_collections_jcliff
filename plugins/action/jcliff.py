@@ -45,7 +45,7 @@ class ActionModule(ActionBase):
     def _load_component_mapping(self, filename):
         return tuple(open(os.path.join(os.path.dirname(__file__), '..', filename), "r").read().rstrip('\n').split(","))
 
-    def _template_from_jinja_to_yml(self, template_name, subsystem_values):
+    def _template_from_jinja_to_yml(self, template_name, component_values):
         templates = self._loader.path_dwim_relative(self._loader.get_basedir(),
                                                     'templates/rules', template_name)
         if not os.path.isfile(templates):
@@ -53,7 +53,7 @@ class ActionModule(ActionBase):
 
         with open(templates, 'r') as file:
             data = file.read()
-        templar = Templar(loader=self._loader, variables=subsystem_values)
+        templar = Templar(loader=self._loader, variables=component_values)
         return _write_template_result_to_file(templar.template(data))
 
     def _deploy_custom_rules_if_any(self, tmp_remote_src):
@@ -65,34 +65,31 @@ class ActionModule(ActionBase):
                                         tmp_remote_src + custom_rule_file +
                                         "-custom" + self.TARGET_FILENAME_SUFFIX)
 
-    def _lookup_subsys_template(self, subsys_name):
-        return subsys_name + ".j2"
+    def _lookup_component_template(self, component_name):
+        return component_name + ".j2"
 
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
         display.vvvv(u"Build and deploy jcliff rule tmpfile: %s" % tmp_remote_src)
 
-        if 'subsystems' in self._task.args:
-            subsystems = self._task.args['subsystems']
-        if 'components' in self._task.args:
-            subsystems = self._task.args['components']
+        components = self._task.args.get('components', self._task.args.get('subsystems'))
 
-        if subsystems is not None:
-            for subsys in subsystems:
-                display.vvvv(u"Component ID: %s" % subsys)
-                for key in subsys.keys():
+        if components is not None:
+            for component in components:
+                display.vvvv(u"Component ID: %s" % component)
+                for key in component.keys():
                     if key in self.components_with_items:
                         display.vvvv("Components has items:")
-                        for index, subsystem_values in enumerate(subsys[key]):
+                        for index, component_values in enumerate(component[key]):
                             self._transfer_file(
                                 self._template_from_jinja_to_yml(
-                                    self._lookup_subsys_template(key),
-                                    {"values": subsystem_values}),
+                                    self._lookup_component_template(key),
+                                    {"values": component_values}),
                                 tmp_remote_src + key + "-" +
                                 str(index) + self.TARGET_FILENAME_SUFFIX)
                     if key in self.components:
                         display.vvvv("Components:")
                         self._transfer_file(self._template_from_jinja_to_yml(
-                            self._lookup_subsys_template(key), {"values": subsys[key]}),
+                            self._lookup_component_template(key), {"values": component[key]}),
                             tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)
 
     def run(self, tmp=None, task_vars=None):
