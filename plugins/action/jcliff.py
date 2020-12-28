@@ -7,9 +7,9 @@ __metaclass__ = type
     file to the target host. """
 import os
 import tempfile
+import json
 
 from ansible.plugins.action import ActionBase
-from ansible.template import Templar
 from ansible.utils.display import Display
 
 display = Display()
@@ -29,32 +29,28 @@ def _get_role_home():
     return os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
 
 
+def _unescape_keys(d):
+    if isinstance(d, dict):
+        new = {}
+        for k, v in d.items():
+            new[k.replace('_', '-')] = _unescape_keys(v)
+        return new
+    elif isinstance(d, list):
+        new = []
+        for v in d:
+            new.append(_unescape_keys(v))
+        return new
+    else:
+        return d
+
+
 class ActionModule(ActionBase):
     """ JCliff action module """
     TRANSFERS_FILES = True
     TARGET_FILENAME_SUFFIX = ".jcliff.yml"
 
-    components = ()
-    components_with_items = ()
-
     def __init__(self, *args, **kwargs):
         super(ActionModule, self).__init__(*args, **kwargs)
-        self.components = self._load_component_mapping('component_rule.map.csv')
-        self.components_with_items = self._load_component_mapping('component_with_items_rule.map.csv')
-
-    def _load_component_mapping(self, filename):
-        return tuple(open(os.path.join(os.path.dirname(__file__), '..', filename), "r").read().rstrip('\n').split(","))
-
-    def _template_from_jinja_to_yml(self, template_name, component_values):
-        templates = self._loader.path_dwim_relative(self._loader.get_basedir(),
-                                                    'templates/rules', template_name)
-        if not os.path.isfile(templates):
-            templates = _get_role_home() + '/templates/rules/' + template_name
-
-        with open(templates, 'r') as file:
-            data = file.read()
-        templar = Templar(loader=self._loader, variables=component_values)
-        return _write_template_result_to_file(templar.template(data))
 
     def _deploy_custom_rules_if_any(self, tmp_remote_src):
         if 'rule_file' in self._task.args:
@@ -65,32 +61,26 @@ class ActionModule(ActionBase):
                                         tmp_remote_src + custom_rule_file +
                                         "-custom" + self.TARGET_FILENAME_SUFFIX)
 
-    def _lookup_component_template(self, component_name):
-        return component_name + ".j2"
-
     def _build_and_deploy_jcliff_rule_files(self, tmp_remote_src):
         display.vvvv(u"Build and deploy jcliff rule tmpfile: %s" % tmp_remote_src)
 
-        components = self._task.args.get('components', self._task.args.get('subsystems'))
+        components = self._get_component_list(self._task.args.get('components', self._task.args.get('subsystems')))
 
         if components is not None:
-            for component in components:
+            for idx, component in enumerate(components):
                 display.vvvv(u"Component ID: %s" % component)
-                for key in component.keys():
-                    if key in self.components_with_items:
-                        display.vvvv("Components has items:")
-                        for index, component_values in enumerate(component[key]):
-                            self._transfer_file(
-                                self._template_from_jinja_to_yml(
-                                    self._lookup_component_template(key),
-                                    {"values": component_values}),
-                                tmp_remote_src + key + "-" +
-                                str(index) + self.TARGET_FILENAME_SUFFIX)
-                    if key in self.components:
-                        display.vvvv("Components:")
-                        self._transfer_file(self._template_from_jinja_to_yml(
-                            self._lookup_component_template(key), {"values": component[key]}),
-                            tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)
+
+                component_jcliff_content = json.dumps(_unescape_keys(component), separators=(',', '=>'))
+                display.vvvv(u"JCliff Component Content: %s" % component_jcliff_content)
+
+                self._transfer_file(_write_template_result_to_file(component_jcliff_content),
+                                    tmp_remote_src + str(idx) + self.TARGET_FILENAME_SUFFIX)
+
+    def _get_component_list(self, input_component):
+        if isinstance(input_component, dict):
+            return [input_component]
+
+        return input_component
 
     def run(self, tmp=None, task_vars=None):
         tmp_remote_src = self._make_tmp_path()

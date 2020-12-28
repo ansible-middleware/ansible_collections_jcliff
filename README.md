@@ -50,10 +50,8 @@ Once the Collection has been installed and JCliff is available on the system, yo
 
         - jcliff:
             wfly_home: /var/opt/jboss-eap-7.3
-            subsystems:
-              - system_props:
-                  - name: jcliff.enabled
-                    value: 'enabled'
-                  - name: jcliff.version
-                    value: '1.0'
+            components:
+              system_property:
+                "jcliff.enabled": 'enabled'
+                "jcliff.version": '1.0'
 
