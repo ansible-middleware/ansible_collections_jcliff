@@ -18,17 +18,17 @@
 
     - jcliff:
         wfly_home: "{{ wildfly.home }}"
-        subsystems:
-          - system_properties:
-              - name: jcliff.enabled
-                value: "enabled.plus"
-          - deployments:
-              - name: simple-webapp
-                runtime_name: simple-webapp-v1.war
-                path: /tmp/simple-webapp.war
-          - datasources:
-              - name: ExampleDS2
-                use_java_context: "true"
-                jndi_name: java:jboss/datasources/ExampleDS2
-                connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-                driver_name: h2
+        components:
+          system_property:
+            "jcliff.enabled": "enabled.plus"
+          deployments:
+            "simple-webapp":
+              name: "simple-webapp"
+              RUNTIME-NAME: simple-webapp-v1.war
+              path: /tmp/simple-webapp.war
+          datasource:
+            "ExampleDS2":
+              use_java_context: "true"
+              jndi_name: java:jboss/datasources/ExampleDS2
+              connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+              driver_name: h2
