@@ -1058,6 +1058,79 @@ def main():
                                             source_interface=dict(type='str', required=False),
                                             source_port=dict(type='int', required=False),
                                         )))),
+                            messaging_activemq=dict(
+                                type='dict', required=False, options=dict(
+                                    jms_queue=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            entries=dict(type='str', required=True),
+                                            durable=dict(type='str', required=False),
+                                            legacy_entries=dict(type='str', required=False),
+                                            headers=dict(type='str', required=False),
+                                            selector=dict(type='str', required=False),
+                                        )),
+                                    jms_topic=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            entries=dict(type='str', required=True),
+                                            legacy_entries=dict(type='str', required=False),
+                                            headers=dict(type='str', required=False),
+                                        )),
+                                    connection_factory=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            entries=dict(type='str', required=True),
+                                            connectors=dict(type='str', required=False),
+                                            discovery_group=dict(type='str', required=False),
+                                        )),
+                                    connector=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            factory_class=dict(type='str', required=True),
+                                        )),
+                                    bridge=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            static_connectors=dict(type='str', required=True),
+                                            queue_name=dict(type='str', required=True),
+                                            discovery_group=dict(type='str', required=True),
+                                        )),
+                                    address_setting=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                        )),
+                                    security_setting=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            send=dict(type='str', required=True),
+                                            consume=dict(type='str', required=False),
+                                            create_non_durable_queue=dict(type='str', required=False),
+                                            delete_non_durable_queue=dict(type='str', required=False),
+                                            manage=dict(type='str', required=False),
+                                            create_durable_queue=dict(type='str', required=False),
+                                            delete_durable_queue=dict(type='str', required=False),
+                                        )),
+                                    remote_acceptor=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                        )),
+                                    remote_connector=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            socket_binding=dict(type='str', required=True),
+                                        )),
+                                    in_vm_acceptor=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            server_id=dict(type='str', required=True),
+                                        )),
+                                    pooled_connection_factory=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            connector=dict(type='str', required=True),
+                                            entries=dict(type='str', required=True),
+                                            discovery=dict(type='str', required=True),
+                                        )))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
