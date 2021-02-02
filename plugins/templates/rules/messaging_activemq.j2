@@ -1,0 +1,133 @@
+{ "messaging-activemq" => {
+    "server" => {
+        "default" => {
+            {% if 'jms_queue' in values %}
+                "jms-queue" => {
+                    {% for item in values['jms_queue'] %}
+                        "{{ item['name'] }}" => {
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
+                            {% if 'durable' in item %} "durable" => "{{ item['durable'] }}", {% endif %}
+                            {% if 'legacy_entries' in item %} "legacy-entries" => "{{ item['legacy_entries'] }}", {% endif %}
+                            {% if 'headers' in item %} "headers" => "{{ item['headers'] }}", {% endif %}
+                            {% if 'selector' in item %} "selector" => "{{ item['selector'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'jms_topic' in values %}
+                "jms-topic" => {
+                    {% for item in values['jms_topic'] %}
+                        "{{ item['name'] }}" => {
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
+                            {% if 'legacy_entries' in item %} "legacy-entries" => "{{ item['legacy_entries'] }}", {% endif %}
+                            {% if 'headers' in item %} "headers" => "{{ item['headers'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'connection_factory' in values %}
+                "connection-factory" => {
+                    {% for item in values['connection_factory'] %}
+                        "{{ item['name'] }}" => {
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
+                            {% if 'connectors' in item %} "connectors" => "{{ item['connectors'] }}", {% endif %}
+                            {% if 'discovery_group' in item %} "discovery-group" => "{{ item['discovery_group'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'connector' in values %}
+                "connector" => {
+                    {% for item in values['connector'] %}
+                        "{{ item['name'] }}" => {
+                            {% if 'factory_class' in item %} "factory-class" => "{{ item['factory_class'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'bridge' in values %}
+                "bridge" => {
+                    {% for item in values['bridge'] %}
+                        "{{ item['name'] }}" => {
+                            {% if 'static_connectors' in item %} "static-connectors" => "{{ item['static_connectors'] }}", {% endif %}
+                            {% if 'queue_name' in item %} "queue-name" => "{{ item['queue_name'] }}", {% endif %}
+                            {% if 'discovery_group' in item %} "discovery-group" => "{{ item['discovery_group'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'address_setting' in values %}
+                "address-setting" => {
+                    {% for item in values %}
+                        "{{ item.name }}" => "{{ item.value }}",
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'security_setting' in values %}
+                "security-setting" => {
+                    "role" => {
+                        {% for item in values['role'] %}
+                            "{{ item['name'] }}" => {
+                                {% if 'send' in item %} "send" => "{{ item['send'] }}", {% endif %}
+                                {% if 'consume' in item %} "consume" => "{{ item['consume'] }}", {% endif %}
+                                {% if 'create_non_durable_queue' in item %} "create-non-durable-queue" => "{{ item['create_non_durable_queue'] }}", {% endif %}
+                                {% if 'delete_non_durable_queue)' in item %} "delete-non-durable-queue)" => "{{ item['delete_non_durable_queue)'] }}", {% endif %}
+                                {% if 'manage' in item %} "manage" => "{{ item['manage'] }}", {% endif %}
+                                {% if 'create_durable_queue' in item %} "create_durable_queue" => "{{ item['create_durable_queue'] }}", {% endif %}
+                                {% if 'delete_durable_queue' in item %} "delete_durable_queue" => "{{ item['delete_durable_queue'] }}", {% endif %}
+                            },
+                        {% endfor %}
+                    },
+                },
+            {% endif %}
+
+            {% if 'remote_acceptor' in values %}
+                "remote-acceptor" => {
+                    {% for item in values %}
+                        "{{ item.name }}" => "{{ item.value }}",
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'remote-connector' in values %}
+                "remote-connector" => {
+                    {% for item in values['connector'] %}
+                        "{{ item['name'] }}" => {
+                            {% if 'socket_binding' in item %} "socket-binding" => "{{ item['socket_binding'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'in_vm_acceptor' in values %}
+                "in-vm-acceptor" => {
+                    {% for item in values['in-vm-acceptor'] %}
+                        "{{ item['name'] }}" => {
+                            {% if 'server_id' in item %} "server-id" => "{{ item['server_id'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+
+            {% if 'pooled_connection_factory' in values %}
+                "pooled-connection-factory" => {
+                    {% for item in values['pooled_connection_factory'] %}
+                        "{{ item['name'] }}" => {
+                            {% if 'connector' in item %} "connector" => "{{ item['connector'] }}", {% endif %}
+                            {% if 'entries' in item %} "entries" => "{{ item['entries'] }}", {% endif %}
+                            {% if 'discovery' in item %} "discovery" => "{{ item['discovery'] }}", {% endif %}
+                        },
+                    {% endfor %}
+                },
+            {% endif %}
+        }
+
+    }
+  }
+}
