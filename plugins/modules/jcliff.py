@@ -761,6 +761,256 @@ options:
                   - The port number which will be used as the source port of the outbound socket.
                 type: int
                 required: False
+      messaging_activemq:
+        description:
+          - Create messaging activemq.
+        type: dict
+        suboptions:
+          jms_queue:
+            description:
+              - Create JMS queue
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the jms queue
+                type: str
+                required: True
+              entries:
+                description:
+                  - Enter the required entries.
+                type: list
+                required: True
+              durable:
+                description:
+                  - Enter if it is durable or not.
+                type: str
+                required: False
+              legacy_entries:
+                description:
+                  - Legacy entries
+                type: str
+                required: False
+              headers:
+                description:
+                  - headers
+                type: str
+                required: False
+              selector:
+                description:
+                  - seclecor
+                type: str
+                required: False
+          jms_topic:
+            description:
+              - Configure jms topic.
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the jms topic.
+                type: str
+                required: True
+              entries:
+                description:
+                  - Enter the required entries.
+                type: list
+                required: True
+              legacy_entries:
+                description:
+                  - Legacy entries
+                type: str
+                required: False
+              headers:
+                description:
+                  - headers
+                type: str
+                required: False
+          connection_factory:
+            description:
+              - Configure connection factory.
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the connection factory
+                type: str
+                required: True
+              entries:
+                description:
+                  - Enter the required entries
+                type: list
+                required: True
+              connectors:
+                description:
+                  - Legacy entries
+                type: str
+                required: False
+              discovery_group:
+                description:
+                  - discovery group
+                type: str
+                required: False
+          connector:
+            description:
+              - Configure connector.
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the connector.
+                type: str
+                required: True
+              factory_class:
+                description:
+                  - factory class
+                type: str
+                required: False
+          bridge:
+            description:
+              - Configure bridge
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the bridge
+                type: str
+                required: True
+              static_connectors:
+                description:
+                  - static connectors
+                type: str
+                required: False
+              queue_name:
+                description:
+                  - queue name
+                type: str
+                required: False
+              discovery_group:
+                description:
+                  - discovery group
+                type: str
+                required: False
+          address_setting:
+            description:
+              - Configure address setting
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Enter the details of address setting.
+                type: str
+                required: True
+          security_setting:
+            description:
+              - Configure security setting
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Logical name of the bridge
+                type: str
+                required: True
+              send:
+                description:
+                  - enter details to send
+                type: str
+                required: True
+              consume:
+                description:
+                  - Consume
+                type: str
+                required: False
+              create_non_durable_queue:
+                description:
+                  - create_non_durable_queue
+                type: str
+                required: False
+              delete_non_durable_queue:
+                description:
+                  - delete_non_durable_queue
+                type: str
+                required: False
+              manage:
+                description:
+                  - manage
+                type: str
+                required: False
+              create_durable_queue:
+                description:
+                  - create_durable_queue
+                type: str
+                required: False
+              delete_durable_queue:
+                description:
+                  - delete_durable_queue
+                type: str
+                required: False
+          remote_acceptor:
+            description:
+              - Configure remote acceptor
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Enter the details of remote acceptor.
+                type: str
+                required: True
+          remote_connector:
+            description:
+              - Configure remote connector
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Enter the details of remote acceptor.
+                type: str
+                required: True
+              socket_binding:
+                description:
+                  - Enter the details of socket binding.
+                type: str
+                required: True
+          in_vm_acceptor:
+            description:
+              - Configure in vm acceptor
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Enter the details of in vm acceptor.
+                type: str
+                required: True
+              server_id:
+                description:
+                  - Enter the details of server id.
+                type: str
+                required: True
+          pooled_connection_factory:
+            description:
+              - Configure pooled connection factory
+            type: list
+            suboptions:
+              name:
+                description:
+                  - Enter the details of pooled connection factory.
+                type: str
+                required: True
+              connector:
+                description:
+                  - Enter the details of connector.
+                type: str
+                required: True
+              entries:
+                description:
+                  - Enter entries.
+                type: str
+                required: True
+              discovery:
+                description:
+                  - Enter the details of discovery.
+                type: str
+                required: True
 '''
 
 EXAMPLES = '''
@@ -1057,6 +1307,79 @@ def main():
                                             fixed_source_port=dict(type='bool', required=False),
                                             source_interface=dict(type='str', required=False),
                                             source_port=dict(type='int', required=False),
+                                        )))),
+                            messaging_activemq=dict(
+                                type='dict', required=False, options=dict(
+                                    jms_queue=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            entries=dict(type='list', required=True),
+                                            durable=dict(type='str', required=False),
+                                            legacy_entries=dict(type='str', required=False),
+                                            headers=dict(type='str', required=False),
+                                            selector=dict(type='str', required=False),
+                                        )),
+                                    jms_topic=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            entries=dict(type='list', required=True),
+                                            legacy_entries=dict(type='str', required=False),
+                                            headers=dict(type='str', required=False),
+                                        )),
+                                    connection_factory=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            entries=dict(type='list', required=True),
+                                            connectors=dict(type='str', required=False),
+                                            discovery_group=dict(type='str', required=False),
+                                        )),
+                                    connector=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            factory_class=dict(type='str', required=True),
+                                        )),
+                                    bridge=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            static_connectors=dict(type='str', required=True),
+                                            queue_name=dict(type='str', required=True),
+                                            discovery_group=dict(type='str', required=True),
+                                        )),
+                                    address_setting=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                        )),
+                                    security_setting=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            send=dict(type='str', required=True),
+                                            consume=dict(type='str', required=False),
+                                            create_non_durable_queue=dict(type='str', required=False),
+                                            delete_non_durable_queue=dict(type='str', required=False),
+                                            manage=dict(type='str', required=False),
+                                            create_durable_queue=dict(type='str', required=False),
+                                            delete_durable_queue=dict(type='str', required=False),
+                                        )),
+                                    remote_acceptor=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                        )),
+                                    remote_connector=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            socket_binding=dict(type='str', required=True),
+                                        )),
+                                    in_vm_acceptor=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            server_id=dict(type='str', required=True),
+                                        )),
+                                    pooled_connection_factory=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            connector=dict(type='str', required=True),
+                                            entries=dict(type='str', required=True),
+                                            discovery=dict(type='str', required=True),
                                         )))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
