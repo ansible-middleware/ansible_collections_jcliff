@@ -6,8 +6,6 @@
 
 This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/jcliff), designed to integrate the [Wildfly](https://wildfly.org/) server (or its product counterpart  [JBoss Enterprise Application (EAP)](https://www.redhat.com/en/technologies/jboss-middleware/application-platform) ) into a configuration management tool such as Ansible.
 
-**Note that for only Linux and MacOSX ( using [Homebrew](https://brew.sh/) ) is currently supported**
-
 ## Install
 
 ### Installing the collection
@@ -51,9 +49,8 @@ Once the Collection has been installed and JCliff is available on the system, yo
         - jcliff:
             wfly_home: /var/opt/jboss-eap-7.3
             subsystems:
-              - system_props:
+              - system_properties:
                   - name: jcliff.enabled
                     value: 'enabled'
                   - name: jcliff.version
                     value: '1.0'
-

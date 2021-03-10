@@ -6,6 +6,7 @@ __metaclass__ = type
     render directive before transfering them as rule
     file to the target host. """
 import os
+import platform
 import tempfile
 
 from ansible.plugins.action import ActionBase
@@ -99,8 +100,9 @@ class ActionModule(ActionBase):
         result = super(ActionModule, self).run(tmp, task_vars)
         new_module_args = self._task.args.copy()
         new_module_args.update(dict(remote_rulesdir=tmp_remote_src,))
+        module_name = ('win_cliff' if platform.system() == 'Windows' else 'jcliff')
         result.update(self._execute_module(
-            module_name='jcliff', module_args=new_module_args, task_vars=task_vars))
+            module_name=module_name, module_args=new_module_args, task_vars=task_vars))
         if 'debug_mode' in self._task.args and not self._task.args['debug_mode']:
             self._remove_tmp_path(self._connection._shell.tmpdir)
         return result

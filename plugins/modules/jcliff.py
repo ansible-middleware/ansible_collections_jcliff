@@ -17,7 +17,7 @@ DOCUMENTATION = '''
 
 module: jcliff
 
-author: Andrew Block (@sabre1041), Romain Pelisse (@rpelisse)
+author: Andrew Block (@sabre1041), Romain Pelisse (@rpelisse), Harsha Cherukuri (@hcheruku)
 
 short_description: Manages the configuration of Wildfly / JBoss EAP servers
 
@@ -1028,7 +1028,6 @@ EXAMPLES = '''
             connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
             driver_name: h2
 '''
-
 
 import subprocess
 import os

@@ -9,6 +9,8 @@ jcliff_install_matrix:
     - RedHat
   homebrew:
     - MacOSX
+  chocolatey:
+    - Windows
 jcliff_yum_baseurl: http://people.redhat.com/~rpelisse/jcliff.yum/
 
 jcliff_standalone: false
