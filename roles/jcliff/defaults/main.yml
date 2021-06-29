@@ -11,6 +11,8 @@ jcliff_install_matrix:
     - MacOSX
   chocolatey:
     - Windows
+jcliff_yumrepository_skip: "{{ override_jcliff_yumrepository_skip | default('false') }}"
+jcliff_yumrepository_enabled: "{{ override_jcliff_yumrepository_enabled | default('true') }}"
 jcliff_yum_baseurl: http://people.redhat.com/~rpelisse/jcliff.yum/
 
 jcliff_standalone: false
