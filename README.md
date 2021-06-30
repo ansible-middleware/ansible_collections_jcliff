@@ -32,6 +32,16 @@ For commodity purpose, the Collection comes with a role named 'jcliff:' that wil
           include_role:
             name: jcliff
 
+If you would like to use it on windows we have named the role "win-jcliff" that will install out jcliff collection on windows. We have created a separate role for windows environment.
+    - hosts: ...
+      collections:
+        - wildfly.jcliff
+      tasks:
+        - name: Include Jcliff role for windows
+          include_role:
+            name: win-jcliff
+
+
 Refers to [JCliff](https://github.com/bserdar/jcliff) for more information on how to install the tool manually. JCliff being a Java based application setting up is pretty simple, so do not let it deter you from using the collection.
 
 ## Using the JCliff collection within your playbook
