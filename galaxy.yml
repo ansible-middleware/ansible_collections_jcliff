@@ -1,10 +1,11 @@
-namespace: wildfly
+namespace: middleware_automation
 name: jcliff
-version: 0.0.5
+version: "0.0.6"
 readme: README.md
 authors:
   - Romain Pelisse <belaran@redhat.com>
   - Andrew Block <ablock@redhat.com>
+  - Harsha Cherukuri <hcheruku@redhat.com>
 description: Provides integration with JCliff to enable Ansible to provisioning JBoss EAP or Wildfly instances.
 license_file: "LICENSE"
 tags:
