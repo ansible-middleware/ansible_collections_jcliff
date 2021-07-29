@@ -16,14 +16,9 @@
         fail_msg: "Unsupported Operating system for package installation"
         quiet: true
 
-    - name: Install JCliff using HomeBrew
-      include_tasks: install_homebrew.yml
-      when: ansible_distribution in jcliff_install_matrix.homebrew or ansible_os_family in jcliff_install_matrix.homebrew
-
-    - name: Install JCliff using RPM
-      include_tasks: install_rpm.yml
-      when: ansible_distribution in jcliff_install_matrix.rpm or ansible_os_family in jcliff_install_matrix.rpm
-  when: jcliff_standalone | bool == false
+    - name: Install JCliff using Chocolatey
+      include_tasks: install_chocolatey.yml
+      when: ansible_distribution in jcliff_install_matrix.chocolatey or ansible_os_family in jcliff_install_matrix.chocolatey
 
 - name: Install Jcliff using standalone binary
   include_tasks: install_standalone.yml

@@ -1,0 +1,25 @@
+---
+
+- name: Downloding and extracting Jcliff package
+  unarchive:
+    remote_src: yes
+    src: "{{ jcliff_standalone_archive  }}"
+    dest: "{{ jcliff_standalone_root }}"
+    creates: "{{ jcliff_standalone_home_dir }}/{{ jcliff_program_name }}"
+
+- name: Creating Jcliff Symbolic Link
+  file:
+    src: "{{ jcliff_standalone_home_dir }}"
+    dest: "{{ jcliff_standalone_commmon_link }}"
+    state: link
+
+- name: Set Jcliff script to executable
+  file:
+    path: "{{ jcliff_standalone_home_dir }}/{{ jcliff_program_name }}"
+    mode: 0755
+
+- name: Creating Jcliff Symbolic Link to exec
+  file:
+    src: "{{ jcliff_standalone_home_dir }}/{{ jcliff_program_name }}"
+    dest: "{{ jcliff_standalone_binary_dir }}/{{ jcliff_program_name }}"
+    state: link

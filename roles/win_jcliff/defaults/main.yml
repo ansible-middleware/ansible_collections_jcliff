@@ -3,12 +3,8 @@ jcliff_package_name: jcliff
 jcliff_program_name: jcliff
 jcliff_homebrew_tap: redhat-cop/redhat-cop
 jcliff_install_matrix:
-  rpm:
-    - Fedora
-    - CentOS
-    - RedHat
-  homebrew:
-    - MacOSX
+  chocolatey:
+    - Windows
 jcliff_yumrepository_skip: "{{ override_jcliff_yumrepository_skip | default('False') }}"
 jcliff_yumrepository_enabled: "{{ override_jcliff_yumrepository_enabled | default('true') }}"
 jcliff_yum_baseurl: http://people.redhat.com/~rpelisse/jcliff.yum/
