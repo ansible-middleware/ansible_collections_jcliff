@@ -1,6 +1,6 @@
 # Ansible Collection - wildfly.jcliff
 
-[![Build Status](https://github.com/wildfly-extras/ansible_collections_jcliff/workflows/CI/badge.svg?branch=master)](https://github.com/wildfly-extras/ansible_collections_jcliff/actions?workflow=CI)
+[![Build Status](https://github.com/ansible-middleware/ansible_collections_jcliff/workflows/CI/badge.svg?branch=master)](https://github.com/ansible-middleware/ansible_collections_jcliff/actions/workflows/ci.yml)
 
 ## About
 

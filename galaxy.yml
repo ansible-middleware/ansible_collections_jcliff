@@ -15,7 +15,7 @@ tags:
   - cli
   - server
 dependencies: {}
-repository: https://github.com/wildfly-extras/ansible_collections_jcliff
-documentation: https://github.com/wildfly-extras/ansible_collections_jcliff
-homepage: https://github.com/wildfly-extras/ansible_collections_jcliff
-issues: https://github.com/wildfly-extras/ansible_collections_jcliff/issues
+repository: https://github.com/ansible-middleware/ansible_collections_jcliff
+documentation: https://github.com/ansible-middleware/ansible_collections_jcliff
+homepage: https://github.com/ansible-middleware/ansible_collections_jcliff
+issues: https://github.com/ansible-middleware/ansible_collections_jcliff/issues
