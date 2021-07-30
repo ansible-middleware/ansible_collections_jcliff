@@ -1,4 +1,4 @@
-# Ansible Collection - wildfly.jcliff
+# Ansible Collection - middleware_automation.jcliff
 
 [![Build Status](https://github.com/ansible-middleware/ansible_collections_jcliff/workflows/CI/badge.svg?branch=master)](https://github.com/ansible-middleware/ansible_collections_jcliff/actions/workflows/ci.yml)
 
@@ -12,7 +12,7 @@ This Ansible Collection wraps a tool called [JCliff](https://github.com/bserdar/
 
 To install this Ansible collection simply download the latest tarball and run the following command:
 
-    $ ansible-galaxy collection install /path/to/wildfly.jcliff.tgz
+    $ ansible-galaxy collection install /path/to/middleware_automation.jcliff.tgz
 
 Alternatively, you can simply build the tarball (to then install it):
 
@@ -26,7 +26,7 @@ For commodity purpose, the Collection comes with a role named 'jcliff:' that wil
 
     - hosts: ...
       collections:
-        - wildfly.jcliff
+        - middleware_automation.jcliff
       tasks:
         - name: Include Jcliff role
           include_role:
@@ -35,7 +35,7 @@ For commodity purpose, the Collection comes with a role named 'jcliff:' that wil
 If you would like to use it on windows we have named the role "win-jcliff" that will install out jcliff collection on windows. We have created a separate role for windows environment.
     - hosts: ...
       collections:
-        - wildfly.jcliff
+        - middleware_automation.jcliff
       tasks:
         - name: Include Jcliff role for windows
           include_role:
@@ -52,7 +52,7 @@ Once the Collection has been installed and JCliff is available on the system, yo
     - hosts: localhost
       gather_facts: false
       collections:
-        - wildfly.jcliff
+        - middleware_automation.jcliff
 
       tasks:
 
