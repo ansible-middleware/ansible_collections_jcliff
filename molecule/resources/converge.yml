@@ -7,10 +7,12 @@
     app_url: http://people.redhat.com/~rpelisse/simple-webapp.war
     app: /tmp/simple-webapp.war
   collections:
-    - wildfly.jcliff
-  roles:
-    - jcliff
+    - middleware_automation.jcliff
   tasks:
+    - name: Include jcliff role
+      include_role:
+        name: jcliff
+
     - name: "Download a demo app to deploy"
       get_url:
         url: "{{ app_url }}"

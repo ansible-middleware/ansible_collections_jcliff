@@ -16,25 +16,27 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
         with:
-          path: ansible_collections/wildfly/jcliff
+          path: ansible_collections/middleware_automation/jcliff
 
       - name: Set up Python ${{ matrix.python_version }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python_version }}
 
-      - name: Install molecule
+      - name: Install yamllint, ansible and molecule
         run: |
           python -m pip install --upgrade pip
-          pip install yamllint 'molecule[docker]==3.0.2' ansible~=2.9.0
+          pip install yamllint 'molecule[docker]' ansible~=2.9.0 ansible-lint
 
       - name: Create default collection path symlink
         run: |
           mkdir -p /home/runner/.ansible
           ln -s /home/runner/work/ansible_collections_jcliff/ansible_collections_jcliff /home/runner/.ansible/collections
+
       - name: Run sanity tests
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
-        working-directory: ./ansible_collections/wildfly/jcliff
+        working-directory: ./ansible_collections/middleware_automation/jcliff
+
       - name: Run molecule test
         run: molecule test --all
-        working-directory: ./ansible_collections/wildfly/jcliff
+        working-directory: ./ansible_collections/middleware_automation/jcliff
