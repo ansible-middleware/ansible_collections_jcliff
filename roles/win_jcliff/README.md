@@ -40,12 +40,12 @@ The following is an example playbook that makes use of the role
 ```yaml
 ---
 - hosts: ...
-      collections:
-        - middleware_automation.jcliff
-      tasks:
-        - name: Include Jcliff role
-          include_role:
-            name: jcliff
+    collections:
+      - middleware_automation.jcliff
+    tasks:
+      - name: Include Jcliff role for windows
+        include_role:
+          name: win-jcliff
 ```
 
 License
