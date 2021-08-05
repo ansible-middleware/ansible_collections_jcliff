@@ -1,0 +1,134 @@
+---
+
+- name: Check that required information has been provided
+  assert:
+    that:
+      - java_home is defined
+      - java_version is defined
+      - jboss_home is defined
+      - jdk_id is defined
+    fail_msg: "java_home, java_version, jdk_id and jboss_home must defined."
+    quiet: true
+
+- name: Verify supported Operating Systems {{ supported_arch_by_os.RedHat7 }}
+  assert:
+    that:
+      - ansible_distribution is not undefined
+    fail_msg: "Unsupported Operating system for package installation"
+    quiet: true
+
+- name:
+  set_fact:
+    cc_os_id: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}"
+
+- name: "Check if OS {{ cc_os_id }} is in compliance with Common Criteria"
+  assert:
+    that:
+      - supported_arch_by_os.{{ cc_os_id }} is defined
+    fail_msg: "Operating System is not compliant with Common Criteria: {{ cc_os_id }}"
+    quiet: true
+
+- name: "Check if arch is supported for OS {{ cc_os_id }}"
+  assert:
+    that:
+      - ansible_architecture in supported_arch_by_os.{{ cc_os_id }}
+    fail_msg: "Architecture is not in compliance with Common Criteria recommendation: {{ ansible_architecture }}"
+    quiet: true
+- name: "Check that the Java version used is in complianece with Common Criteria recommendations: {{ java_home }} /  {{ compliant_jdk_by_os.RedHat7.openjdk[0] }}"
+  assert:
+    that:
+      - compliant_jdk_by_os.{{ cc_os_id }} is defined
+      - compliant_jdk_by_os.{{ cc_os_id }}.{{ jdk_id }} is defined
+#      - java_version in compliant_jdk_by_os.{{ cc_os_id }}.{{ jdk_id }}
+    fail_msg: "This version of Java is not in compliance with Common Criteria recommendations: {{ java_version }}"
+    quiet: true
+
+- name: "Recording informations on {{ java_home }}"
+  stat:
+    path: "{{ java_home }}"
+    follow: True
+  register: java_home_path
+
+- name: "Check that provided JAVA_HOME exists and is a folder: {{ java_home }}"
+  assert:
+    that:
+      - java_home_path.stat.isdir is defined and java_home_path.stat.isdir
+    fail_msg: "Provided JAVA_HOME {{ java_home }} does not exist or is not a directory"
+
+- name:
+  command: "{{ java_home }}/bin/java -version"
+  register: java_version_output
+  changed_when: false
+
+- name:
+  set_fact:
+    actual_java_version: "{{ java_version_output.stderr }}"
+
+- name: "Check that JDK matches expected version: {{ java_version_output }}"
+  assert:
+    that:
+      - java_version in actual_java_version
+    fail_msg: "Provided JDK does not match expected Java version: {{ actual_java_version }}."
+    quiet: true
+
+- name: "Check that JDK matches expected version: {{ java_version_output }}"
+  assert:
+    that:
+      - java_version in actual_java_version
+    fail_msg: "Provided JDK does not match expected Java version: {{ actual_java_version }}."
+    quiet: true
+
+- name: Analyse deployed JDBC driver
+  command: >
+   {{ jboss_home }}/bin/jboss-cli.sh -c --output-json --command="/subsystem=datasources/jdbc-driver=*:read-attribute(name=driver-xa-datasource-class-name)"
+  register: jdbc_driver_class_names
+  changed_when: false
+
+- name: Check that JDBC drivers are in compliance with Common Criteria
+  include_tasks: jdbc_drivers_compliance.yml
+  loop: "{{ (jdbc_driver_class_names.stdout | from_json)['result'] }}"
+
+- name: Check that used network ports are in compliance with Common Criteria recommendations
+  include_tasks: port_compliance.yml
+  loop:
+    - { cli_query_info_port: "/socket-binding-group=standard-sockets/socket-binding=https:read-attribute(name=port)", allowed_port: "8443" }
+    - { cli_query_info_port: "/socket-binding-group=standard-sockets/socket-binding=http:read-attribute(name=port)", allowed_port: "8080" }
+
+- name: Check EAP start script compliance with Common Criteria recommendations
+  include_tasks: service_script_compliance.yml
+
+- name: Analyse network configuration
+  shell: >
+    {{ jboss_home }}/bin/jboss-cli.sh -c  --output-json --command='/interface=*:read-resource'
+  register: jbossas_interfaces
+  changed_when: false
+
+- name: Check EAP network configuration compliance
+  include_tasks: network_configuration_compliance.yml
+  loop: "{{ (jbossas_interfaces.stdout | from_json).result }}"
+  loop_control:
+    loop_var: jbossas_interface
+
+- name: Analyse socket bindings configuration
+  shell: >
+   {{ jboss_home }}/bin/jboss-cli.sh -c --output-json --command=/socket-binding-group=standard-sockets/socket-binding=*:read-resource
+  register: socket_bindings
+  changed_when: false
+
+- name: Check compliance of socket bindings with Common Criteria recommendations
+  include_tasks: protocol_interface_compliance.yml
+  loop: "{{ (socket_bindings.stdout | from_json ).result }}"
+  loop_control:
+    loop_var: socket_binding
+
+- name: Analyse subsystems
+  command: >
+   {{ jboss_home }}/bin/jboss-cli.sh -c --output-json --command="/subsystem=*:read-resource"
+  register: subsystems_names
+  changed_when: false
+
+- name: Check only recommended subsystems are used
+  include_tasks: validate_subsys.yml
+  loop: "{{ (subsystems_names.stdout | from_json)['result'] }}"
+  loop_control:
+    loop_var: subsystem

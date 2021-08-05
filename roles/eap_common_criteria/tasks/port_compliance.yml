@@ -1,0 +1,33 @@
+---
+
+- name: Ensure required values have been prodived
+  assert:
+    that:
+      - item.cli_query_info_port is defined
+      - item.allowed_port is defined
+    fail_msg: "Missing required parameters"
+    quiet: true
+
+- name: Check if port used for protocol is in compliance
+  block:
+    - name: Retrieve port usage information from server configuration
+      command: >
+        {{ jboss_home }}/bin/jboss-cli.sh -c --output-json --command={{ item.cli_query_info_port }}
+      register: infos_on_port
+      changed_when: false
+    
+    - set_fact:
+        port_value: "{{ (infos_on_port.stdout | from_json).result.EXPRESSION_VALUE }}"
+      when: (infos_on_port.stdout | from_json).result.EXPRESSION_VALUE is defined
+    
+    - name: Check that port is in compliance with Common Criteria recommendations
+      assert:
+        that:
+          - port_value is defined
+          - item.allowed_port in port_value
+        fail_msg: "Not in compliance"
+        quiet: true
+  rescue:
+    - debug:
+        msg: "This instance does NOT use the following protocol: {{ item.cli_query_info_port }}" 
+ 
