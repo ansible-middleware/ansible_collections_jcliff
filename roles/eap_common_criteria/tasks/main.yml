@@ -96,6 +96,13 @@
 
 - name: Check EAP start script compliance with Common Criteria recommendations
   include_tasks: service_script_compliance.yml
+  when:
+    - jboss_server_service is defined
+
+- debug: WARN: Service setting undefined, will not check for service integration compliance
+  changed_when: True
+  when:
+    - not jboss_server_service is defined
 
 - name: Analyse network configuration
   shell: >
