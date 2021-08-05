@@ -3,6 +3,8 @@ supported_arch_by_os:
     - x86_64
   RedHat7:
     - x86_64
+  RedHat8:
+    - x86_64
   Solaris11:
     - x86_64
     - SPARC64
@@ -26,6 +28,15 @@ compliant_jdk_by_os:
       - 11
     ibm:
       - 1.8
+  RedHat8:
+    openjdk:
+      - 1.8
+      - 11
+    oracle:
+      - 1.8
+      - 11
+    ibm:
+      - 1.8
   Solaris11:
     oracle:
       - 1.8
@@ -41,7 +52,7 @@ service_manager_types:
   - SystemD
   - InitD
 allowed_network_interfaces:
-  - management 
+  - management
   - public
   - cluster
   - internal
@@ -72,11 +83,11 @@ allowed_protocol_by_interface:
     port: "3528"
   iiop-ssl:
     interface: [internal]
-    port: "3529" 
+    port: "3529"
   jgroups-mping:
     interface: [cluster]
     port: "0"
-  jgroups-tcp: 
+  jgroups-tcp:
     interface: [cluster]
     port: "7600"
   jgroups-udp:
@@ -97,13 +108,13 @@ allowed_subsystems:
   - 'bean-validation'
   - 'mail'
   - 'core-management'
-  - 'microprofile-config-smallrye' 
+  - 'microprofile-config-smallrye'
   - 'datasources'
   - 'deployment-scanner'
   - 'discovery'
   - 'distributable-web'
   - 'ee'
-  - 'ee-security' 
+  - 'ee-security'
   - 'microprofile-health-smallrye'
   - 'microprofile-metrics-smallrye'
   - 'microprofile-opentracing-smallrye'
