@@ -4,15 +4,15 @@
   assert:
     that:
       - jbossas_interface is defined
-    fail_msg: Required parameter(s) not provided
+    fail_msg: "Required parameter 'jbossas_interface' not provided"
     quiet: true
 
 - set_fact:
     interface_name: "{{ jbossas_interface.address[0].interface }}"
- 
+
 - name: Check that interface {{ interface_name }} is a name in compliance with Common Criteria recommendations
   assert:
-    that: 
+    that:
      - interface_name in allowed_network_interfaces
     fail_msg: "{{ interface_name }} is not a Common Criteria compliant name for an inteface"
     quiet: true

@@ -41,6 +41,8 @@
       unarchive:
         src: "{{ wfly_download_url }}"
         dest: "{{ wildfly.workdir }}"
+        owner: "{{ wildfly_user }}"
+        group: "{{ wildfly_group }}"
         remote_src: yes
         creates: "{{ wildfly_home }}"
 
@@ -51,7 +53,36 @@
         recurse: yes
 
   post_tasks:
+    - wait_for:
+        port: 8080
+
     - name: "Checks that Wildfly server is running and accessible"
       get_url:
         url: http://localhost:8080/
         dest: '/dev/null'
+
+
+- name: "Wildfly compliance to Common Criteria"
+  hosts: "all"
+  become: yes
+  vars:
+    wildfly_user: wildfly
+    wildfly_group: wildfly
+    wildfly:
+      workdir: /opt
+      download_base_url: https://download.jboss.org/wildfly/
+      version: 19.0.0.Final
+    wildfly_home: "{{ wildfly.workdir }}/wildfly-{{ wildfly.version }}"
+    wildfly_config_base: standalone.xml
+    java_home: '/usr/lib/jvm/jre-1.8.0-openjdk/'
+    java_version: '1.8'
+    jdk_id: openjdk
+    jboss_home: "{{ wildfly_home }}"
+  collections:
+    - middleware_automation.jcliff
+  roles:
+    - common_criteria
+
+  roles:
+    - common_criteria
+  tasks:

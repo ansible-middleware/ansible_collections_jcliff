@@ -1,5 +1,4 @@
 ---
-
 - name: Ensure required values have been prodived
   assert:
     that:
@@ -11,15 +10,14 @@
 - name: Check if port used for protocol is in compliance
   block:
     - name: Retrieve port usage information from server configuration
-      command: >
-        {{ jboss_home }}/bin/jboss-cli.sh -c --output-json --command={{ item.cli_query_info_port }}
-      register: infos_on_port
-      changed_when: false
-    
+      include_tasks: tasks/jboss_cli.yml
+      vars:
+        query: "{{ item.cli_query_info_port }}"
+
     - set_fact:
-        port_value: "{{ (infos_on_port.stdout | from_json).result.EXPRESSION_VALUE }}"
-      when: (infos_on_port.stdout | from_json).result.EXPRESSION_VALUE is defined
-    
+        port_value: "{{ (cli_result.stdout | from_json).result.EXPRESSION_VALUE }}"
+      when: (cli_result.stdout | from_json).result.EXPRESSION_VALUE is defined
+
     - name: Check that port is in compliance with Common Criteria recommendations
       assert:
         that:
@@ -29,5 +27,4 @@
         quiet: true
   rescue:
     - debug:
-        msg: "This instance does NOT use the following protocol: {{ item.cli_query_info_port }}" 
- 
+        msg: "This instance does NOT use the following protocol: {{ item.cli_query_info_port }}"

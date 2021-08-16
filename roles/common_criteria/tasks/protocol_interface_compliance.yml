@@ -8,7 +8,7 @@
     fail_msg: Missing or invalid required parameters
     quiet: true
 
-- set_fact: 
+- set_fact:
     protocol: "{{ socket_binding.result.name  | replace('-','_') }}"
     interface: "{{ socket_binding.result.interface }}"
 
@@ -19,28 +19,36 @@
 - set_fact:
     port: "{{ socket_binding.result.port }}"
   when: socket_binding.result.port.EXPRESSION_VALUE is not defined
-  
+
 
 - name: "Check that protocol {{ protocol }} is allowed by Common Criteria recommendations"
   assert:
     that:
       - allowed_protocol_by_interface.{{ protocol }} is defined
     fail_msg: "Protocol {{ protocol }} is not allowed by Common Criteria recommendations."
-    quiet: true 
-
-- name: "Check that protocol {{ protocol }} uses the appropriate interface"
-  assert:
-    that:
-      - interface in allowed_protocol_by_interface.{{ protocol }}.interface
-# TODO: find a way to have an informative message:
-#    fail_msg: "Protocol {{ protocol }} should use {{ allowed_protocol_by_interface.{{ protocol }}.interface }} acording to Common Criteria recommendations."
-    fail_msg: "Invalid interface {{ interface }} for {{ protocol }}"
-    quiet: true 
-
-- name: "Check that port ({{ port }}) used by protocol is compliant with Common Criteria recommendations"
-  assert:
-    that:
-# This needs to be enhanced to factor in used of env var
-      - allowed_protocol_by_interface.{{ protocol }}.port == port
-    fail_msg: "The port number {{ port }} is not the one recommended for {{ protocol }}."
     quiet: true
+
+- block:
+    - name: "Check that protocol {{ protocol }} uses the appropriate interface"
+      assert:
+        that:
+          - interface in allowed_protocol_by_interface.{{ protocol }}.interface
+    # TODO: find a way to have an informative message:
+    #    fail_msg: "Protocol {{ protocol }} should use {{ allowed_protocol_by_interface.{{ protocol }}.interface }} acording to Common Criteria recommendations."
+        fail_msg: "Invalid interface {{ interface }} for {{ protocol }}"
+        quiet: true
+  rescue:
+    - debug:
+        msg: "WARN - Invalid interface {{ interface }} for {{ protocol }}"
+
+- block:
+    - name: "Check that port ({{ port }}) used by protocol is compliant with Common Criteria recommendations"
+      assert:
+        that:
+    # This needs to be enhanced to factor in used of env var
+          - allowed_protocol_by_interface.{{ protocol }}.port == port
+        fail_msg: "The port number {{ port }} is not the one recommended for {{ protocol }}."
+        quiet: true
+  rescue:
+    - debug:
+        msg: "WARN - The port number {{ port }} is not the one recommended for {{ protocol }}"

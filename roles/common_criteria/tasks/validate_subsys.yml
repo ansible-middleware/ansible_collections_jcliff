@@ -10,9 +10,13 @@
 - set_fact:
     subsystem_name: "{{ subsystem.address[0].subsystem  }}"
 
-- name: "Ensure that {{ subsystem_name }} is recommended by Common Critera"
-  assert:
-    that:
-      - subsystem_name in allowed_subsystems
-    fail_msg: "Subsystem is not recommend by Common Criteria - consider disabling"
-    quiet: true
+- block:
+    - name: "Ensure that {{ subsystem_name }} is recommended by Common Critera"
+      assert:
+        that:
+          - subsystem_name in allowed_subsystems
+        fail_msg: "Subsystem is not recommend by Common Criteria - consider disabling"
+        quiet: true
+  rescue:
+    - debug:
+        msg: "WARN - Subsystem {{ subsystem_name }} is not recommend by Common Criteria - consider disabling"
