@@ -1,5 +1,4 @@
 ---
-
 - name: Check that required information has been provided
   assert:
     that:
@@ -99,7 +98,7 @@
   when:
     - jboss_server_service is defined
 
-- debug: WARN: Service setting undefined, will not check for service integration compliance
+- debug: 'WARN: Service setting undefined, will not check for service integration compliance'
   changed_when: True
   when:
     - not jboss_server_service is defined
