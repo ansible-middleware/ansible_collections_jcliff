@@ -59,3 +59,4 @@
         jdk_id: openjdk
         jboss_home: "{{ wildfly.home }}"
         override_changed_when_if_cc_violations: False
+        wildfly_user: wildfly
