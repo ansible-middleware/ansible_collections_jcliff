@@ -82,7 +82,4 @@
     - middleware_automation.jcliff
   roles:
     - common_criteria
-
-  roles:
-    - common_criteria
   tasks:
