@@ -60,5 +60,3 @@
     - set_fact:
         compliance_violations: "{{ (compliance_violations | int) + 1 }}"
         compliance_issues: "{{ compliance_issues + fail_msg }}"
-
-
