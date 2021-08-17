@@ -81,5 +81,5 @@
   collections:
     - middleware_automation.jcliff
   roles:
-    - common_criteria
+    - wildfly_common_criteria
   tasks:
