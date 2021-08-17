@@ -29,17 +29,22 @@
     quiet: true
 
 - block:
+    - set_fact:
+        fail_msg:
+          - "Invalid interface {{ interface }} for {{ protocol }}"
+
     - name: "Check that protocol {{ protocol }} uses the appropriate interface"
       assert:
         that:
           - interface in allowed_protocol_by_interface.{{ protocol }}.interface
     # TODO: find a way to have an informative message:
     #    fail_msg: "Protocol {{ protocol }} should use {{ allowed_protocol_by_interface.{{ protocol }}.interface }} acording to Common Criteria recommendations."
-        fail_msg: "Invalid interface {{ interface }} for {{ protocol }}"
+        fail_msg: "{{ fail_msg[0] }}"
         quiet: true
   rescue:
-    - debug:
-        msg: "WARN - Invalid interface {{ interface }} for {{ protocol }}"
+    - set_fact:
+        compliance_violations: "{{ (compliance_violations | int) + 1 }}"
+        compliance_issues: "{{ compliance_issues + fail_msg }}"
 
 - block:
     - name: "Check that port ({{ port }}) used by protocol is compliant with Common Criteria recommendations"
@@ -50,5 +55,6 @@
         fail_msg: "The port number {{ port }} is not the one recommended for {{ protocol }}."
         quiet: true
   rescue:
-    - debug:
-        msg: "WARN - The port number {{ port }} is not the one recommended for {{ protocol }}"
+    - set_fact:
+        compliance_violations: "{{ (compliance_violations | int) + 1 }}"
+        compliance_issues: "{{ compliance_issues + fail_msg }}"

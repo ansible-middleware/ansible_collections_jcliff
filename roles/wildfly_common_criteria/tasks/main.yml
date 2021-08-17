@@ -9,73 +9,13 @@
     fail_msg: "java_home, java_version, jdk_id and jboss_home must defined."
     quiet: true
 
-- name: Verify supported Operating Systems {{ supported_arch_by_os.RedHat7 }}
-  assert:
-    that:
-      - ansible_distribution is not undefined
-    fail_msg: "Unsupported Operating system for package installation"
-    quiet: true
+- set_fact:
+    compliance_violations: 0
+    compliance_issues: []
 
-- name:
-  set_fact:
-    cc_os_id: "{{ ansible_distribution }}{{ ansible_distribution_major_version }}"
+- include_tasks: tasks/os_and_arch_compliance.yml
 
-- name: "Check if OS {{ cc_os_id }} is in compliance with Common Criteria"
-  assert:
-    that:
-      - supported_arch_by_os.{{ cc_os_id }} is defined
-    fail_msg: "Operating System is not compliant with Common Criteria: {{ cc_os_id }}"
-    quiet: true
-
-- name: "Check if arch is supported for OS {{ cc_os_id }}"
-  assert:
-    that:
-      - ansible_architecture in supported_arch_by_os.{{ cc_os_id }}
-    fail_msg: "Architecture is not in compliance with Common Criteria recommendation: {{ ansible_architecture }}"
-    quiet: true
-- name: "Check that the Java version used is in compliance with Common Criteria recommendations: {{ java_home }} /  {{ compliant_jdk_by_os.RedHat7.openjdk[0] }}"
-  assert:
-    that:
-      - compliant_jdk_by_os.{{ cc_os_id }} is defined
-      - compliant_jdk_by_os.{{ cc_os_id }}.{{ jdk_id }} is defined
-#      - java_version in compliant_jdk_by_os.{{ cc_os_id }}.{{ jdk_id }}
-    fail_msg: "This version of Java is not in compliance with Common Criteria recommendations: {{ java_version }}"
-    quiet: true
-
-- name: "Recording informations on {{ java_home }}"
-  stat:
-    path: "{{ java_home }}"
-    follow: True
-  register: java_home_path
-
-- name: "Check that provided JAVA_HOME exists and is a folder: {{ java_home }}"
-  assert:
-    that:
-      - java_home_path.stat.isdir is defined and java_home_path.stat.isdir
-    fail_msg: "Provided JAVA_HOME {{ java_home }} does not exist or is not a directory"
-
-- name:
-  command: "{{ java_home }}/bin/java -version"
-  register: java_version_output
-  changed_when: false
-
-- name:
-  set_fact:
-    actual_java_version: "{{ java_version_output.stderr }}"
-
-- name: "Check that JDK matches expected version: {{ java_version_output }}"
-  assert:
-    that:
-      - java_version in actual_java_version
-    fail_msg: "Provided JDK does not match expected Java version: {{ actual_java_version }}."
-    quiet: true
-
-- name: "Check that JDK matches expected version: {{ java_version_output }}"
-  assert:
-    that:
-      - java_version in actual_java_version
-    fail_msg: "Provided JDK does not match expected Java version: {{ actual_java_version }}."
-    quiet: true
+- include_tasks: tasks/jdk_compliance.yml
 
 - name: Analyse deployed JDBC driver
   include_tasks: tasks/jboss_cli.yml
@@ -135,3 +75,15 @@
   loop: "{{ (cli_result.stdout | from_json)['result'] }}"
   loop_control:
     loop_var: subsystem
+
+- block:
+    - debug:
+        msg: "{{ item }}"
+      loop: "{{ compliance_issues }}"
+
+    - name: "Display list of CC violations"
+      debug:
+        msg: "Number of violations of Common Criteria recommendations: {{ compliance_violations }}."
+      changed_when: True
+  when:
+    - compliance_violations is defined

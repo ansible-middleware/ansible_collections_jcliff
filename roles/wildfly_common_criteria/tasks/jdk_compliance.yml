@@ -1,0 +1,68 @@
+---
+- assert:
+    that:
+      - java_home is defined
+    quiet: true
+
+
+- name: "Recording informations on {{ java_home }}"
+  stat:
+    path: "{{ java_home }}"
+    follow: True
+  register: java_home_path
+
+- block:
+    - set_fact:
+        fail_msg:
+          - "Provided JAVA_HOME {{ java_home }} does not exist or is not a directory"
+
+    - name: "Check that provided JAVA_HOME exists and is a folder: {{ java_home }}"
+      assert:
+        that:
+          - java_home_path.stat.isdir is defined and java_home_path.stat.isdir
+        fail_msg: "{{ fail_msg[0] }}"
+  rescue:
+    - set_fact:
+        compliance_violations: "{{ (compliance_violations | int) + 1 }}"
+        compliance_issues: "{{ compliance_issues + fail_msg }}"
+
+- name:
+  command: "{{ java_home }}/bin/java -version"
+  register: java_version_output
+  changed_when: false
+
+- name:
+  set_fact:
+    actual_java_version: "{{ java_version_output.stderr }}"
+
+- block:
+    - set_fact:
+        fail_msg:
+          - "Provided JDK does not match expected Java version: {{ actual_java_version }}."
+
+    - name: "Check that JDK matches expected version: {{ java_version_output }}"
+      assert:
+        that:
+          - java_version in actual_java_version
+        fail_msg: "{{ fail_msg[0] }}"
+        quiet: true
+  rescue:
+    - set_fact:
+        compliance_violations: "{{ (compliance_violations | int) + 1 }}"
+        compliance_issues: "{{ compliance_issues + fail_msg }}"
+
+- block:
+    - set_fact:
+        fail_msg:
+          - "Provided JDK does not match expected Java version: {{ actual_java_version }}."
+
+    - name: "Check that JDK matches expected version: {{ java_version_output }}"
+      assert:
+        that:
+          - java_version in actual_java_version
+        fail_msg: "{{ fail_msg[0] }}"
+        quiet: true
+  rescue:
+    - set_fact:
+        compliance_violations: "{{ (compliance_violations | int) + 1 }}"
+        compliance_issues: "{{ compliance_issues + fail_msg }}"
