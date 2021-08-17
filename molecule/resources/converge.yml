@@ -18,9 +18,20 @@
         url: "{{ app_url }}"
         dest: "{{ app }}"
 
+    - include_role:
+        name: wildfly_driver
+        tasks_from: jdbc_driver.yml
+        vars:
+          jdbc_driver_module_dir: "{{ wildfly.home }}//modules/org/postgresql/main"
+          jdbc_driver_version: 9.2-1002-jdbc4
+          jdbc_driver_jar_filename: "postgresql-{{ jdbc_driver_version }}.jar"
+          jdbc_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ jdbc_driver_version }}/{{ jdbc_driver_jar_filename }}"
+          jdbc_driver_jar_installation_path: "{{ jdbc_driver_module_dir }}/{{ jdbc_driver_jar_filename }}"
+          jdbc_driver_module_name: 'org.postgresql'
+
     - jcliff:
         wfly_home: "{{ wildfly.home }}"
-        subsystems:
+        components:
           - system_properties:
               - name: jcliff.enabled
                 value: "enabled.plus"
@@ -28,6 +39,11 @@
               - name: simple-webapp
                 runtime_name: simple-webapp-v1.war
                 path: /tmp/simple-webapp.war
+          - drivers:
+              - driver_name: postgresql
+                driver_module_name: org.postgresql
+                driver_class_name: org.postgresql.Driver
+                driver_xa_datasource_class_name: org.postgresql.xa.PGXADataSource
           - datasources:
               - name: ExampleDS2
                 use_java_context: "true"
