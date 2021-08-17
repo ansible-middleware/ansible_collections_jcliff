@@ -41,4 +41,4 @@
         java_home: '/usr/lib/jvm/jre-1.8.0-openjdk/'
         java_version: '1.8'
         jdk_id: openjdk
-        jboss_home: "{{ wildfly_home }}"
+        jboss_home: "{{ wildfly.home }}"
