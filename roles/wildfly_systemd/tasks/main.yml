@@ -52,7 +52,7 @@
 - set_fact:
     wildfly_bind_addr: "{{ overrides_wildfly_bind_addr | default('0.0.0.0') }}"
 
-- name : "Creates basedir {{ basedir }} for instance: {{ instance_name }}"
+- name: "Creates basedir {{ basedir }} for instance: {{ instance_name }}"
   file:
     path: "{{ basedir }}"
     state: directory
@@ -60,7 +60,7 @@
     group: "{{ wildfly_group }}"
     mode: '0755'
 
-- name : "Creates deployment directories for instance: {{ instance_name }}"
+- name: "Creates deployment directories for instance: {{ instance_name }}"
   file:
     path: "{{ basedir }}/deployments"
     state: directory
