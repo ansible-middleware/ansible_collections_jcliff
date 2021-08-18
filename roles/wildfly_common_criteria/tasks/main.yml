@@ -84,6 +84,6 @@
     - name: "Display list of CC violations"
       debug:
         msg: "Number of violations of Common Criteria recommendations: {{ compliance_violations }}."
-      changed_when: "{{ override_changed_when_if_cc_violations | default(True) }}"
+      changed_when: override_changed_when_if_cc_violations | default(True)
   when:
     - compliance_violations is defined
