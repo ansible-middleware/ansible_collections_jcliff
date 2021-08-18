@@ -20,18 +20,17 @@
     port: "{{ socket_binding.result.port }}"
   when: socket_binding.result.port.EXPRESSION_VALUE is not defined
 
-
-- name: "Check that protocol {{ protocol }} is allowed by Common Criteria recommendations"
-  assert:
-    that:
-      - allowed_protocol_by_interface.{{ protocol }} is defined
-    fail_msg: "Protocol {{ protocol }} is not allowed by Common Criteria recommendations."
-    quiet: true
-
 - block:
     - set_fact:
         fail_msg:
           - "Invalid interface {{ interface }} for {{ protocol }}"
+
+    - name: "Check that protocol {{ protocol }} is allowed by Common Criteria recommendations"
+      assert:
+        that:
+          - allowed_protocol_by_interface.{{ protocol }} is defined
+        fail_msg: "Protocol {{ protocol }} is not allowed by Common Criteria recommendations."
+        quiet: true
 
     - name: "Check that protocol {{ protocol }} uses the appropriate interface"
       assert:
