@@ -5,7 +5,7 @@
                 "jms-queue" => {
                     {% for item in values['jms_queue'] %}
                         "{{ item['name'] }}" => {
-                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
                             {% if 'durable' in item %} "durable" => "{{ item['durable'] }}", {% endif %}
                             {% if 'legacy_entries' in item %} "legacy-entries" => "{{ item['legacy_entries'] }}", {% endif %}
                             {% if 'headers' in item %} "headers" => "{{ item['headers'] }}", {% endif %}
@@ -19,7 +19,7 @@
                 "jms-topic" => {
                     {% for item in values['jms_topic'] %}
                         "{{ item['name'] }}" => {
-                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
                             {% if 'legacy_entries' in item %} "legacy-entries" => "{{ item['legacy_entries'] }}", {% endif %}
                             {% if 'headers' in item %} "headers" => "{{ item['headers'] }}", {% endif %}
                         },
@@ -31,7 +31,7 @@
                 "connection-factory" => {
                     {% for item in values['connection_factory'] %}
                         "{{ item['name'] }}" => {
-                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last }}{% endfor %}],
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
                             {% if 'connectors' in item %} "connectors" => "{{ item['connectors'] }}", {% endif %}
                             {% if 'discovery_group' in item %} "discovery-group" => "{{ item['discovery_group'] }}", {% endif %}
                         },
