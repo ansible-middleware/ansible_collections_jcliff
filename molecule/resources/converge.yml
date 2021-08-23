@@ -54,10 +54,10 @@
           - messaging_activemq:
               - jms_queue:
                   - name: myQueue
-                    entries: queue
+                    entries: ["queue/myQueue", "jms/queue/myQueue", "java:jboss/exported/jms/queue/myQueue"]
               - jms_topic:
                   - name: myTopic
-                    entries: topic
+                    entries: ["MyTopic"]
 
     - include_role:
         name: wildfly_common_criteria
