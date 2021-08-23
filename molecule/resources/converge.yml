@@ -51,6 +51,13 @@
                 jndi_name: java:jboss/datasources/ExampleDS2
                 connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
                 driver_name: h2
+          - messaging_activemq:
+              - jms_queue:
+                  - name: myQueue
+                    entries: queue
+              - jms_topic:
+                  - name: myTopic
+                    entries: topic
 
     - include_role:
         name: wildfly_common_criteria
