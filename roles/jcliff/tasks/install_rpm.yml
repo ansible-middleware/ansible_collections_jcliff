@@ -1,13 +1,14 @@
 ---
 
-- name: "Install JCliff RPM if possible on {{ ansible_distribution}}"
+- name: "Install JCliff RPM if possible on {{ ansible_distribution}} using {{ jcliff_yum_baseurl }}"
   block:
     - name: "Add JCliff Yum Repository ({{ ansible_distribution}})"
       yum_repository:
         name: jcliff
-        description: JCliff repository
+        description: Copr repo for jcliff owned by ansiblemiddleware
         baseurl: "{{ jcliff_yum_baseurl }}"
-        gpgcheck: 0
+        gpgcheck: "{{ jcliff_yumrepository_gpgcheck  | default(omit) }}"
+        gpgkey: "{{ jcliff_yumrepository_gpgkey | default(omit) }}"
         enabled: "{{ jcliff_yumrepository_enabled }}"
       when:
         - jcliff_yumrepository_skip is defined
@@ -24,3 +25,6 @@
         package:
           name: "{{ jcliff_package_name }}"
           state: present
+  when:
+    - jcliff_yumrepository_enabled is defined
+    - jcliff_yumrepository_enabled
