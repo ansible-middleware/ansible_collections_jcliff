@@ -6,13 +6,13 @@
       yum_repository:
         name: jcliff
         description: Copr repo for jcliff owned by ansiblemiddleware
-        baseurl: "{{ jcliff_yum_baseurl }}"
-        gpgcheck: "{{ jcliff_yumrepository_gpgcheck  | default(omit) }}"
-        gpgkey: "{{ jcliff_yumrepository_gpgkey | default(omit) }}"
-        enabled: "{{ jcliff_yumrepository_enabled }}"
+        baseurl: "{{ jcliff_yumrepository.baseurl }}"
+        gpgcheck: "{{ jcliff_yumrepository.gpgcheck  | default(omit) }}"
+        gpgkey: "{{ jcliff_yumrepository.gpgkey | default(omit) }}"
+        enabled: "{{ jcliff_yumrepository.enabled }}"
       when:
-        - jcliff_yumrepository_skip is defined
-        - not jcliff_yumrepository_skip
+        - jcliff_yumrepository.skip is defined
+        - not jcliff_yumrepository.skip
 
     - block:
       - name: "Test if package {{ jcliff_package_name }} is already installed"
@@ -26,5 +26,5 @@
           name: "{{ jcliff_package_name }}"
           state: present
   when:
-    - jcliff_yumrepository_enabled is defined
-    - jcliff_yumrepository_enabled
+    - jcliff_yumrepository.enabled is defined
+    - jcliff_yumrepository.enabled

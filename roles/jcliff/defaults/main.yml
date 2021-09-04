@@ -9,11 +9,12 @@ jcliff_install_matrix:
     - RedHat
   homebrew:
     - MacOSX
-jcliff_yumrepository_skip: "{{ override_jcliff_yumrepository_skip | default('False') }}"
-jcliff_yumrepository_enabled: "{{ override_jcliff_yumrepository_enabled | default('true') }}"
-jcliff_yumrepository_gpgcheck: "{{ override_jcliff_yumrepository_gpgcheck | default('1') }}"
-jcliff_yumrepository_gpgkey: "{{ override_jcliff_yumrepository_gpgkey | default('https://download.copr.fedorainfracloud.org/results/ansiblemiddleware/jcliff/pubkey.gpg') }}"
-jcliff_yum_baseurl: "{{ override_jcliff_yum_baseurl | default('https://download.copr.fedorainfracloud.org/results/ansiblemiddleware/jcliff/epel-8-$basearch/') }}"
+jcliff_yumrepository:
+  skip: "{{ override_jcliff_yumrepository_skip | default('False') }}"
+  enabled: "{{ override_jcliff_yumrepository_enabled | default('true') }}"
+  gpgcheck: "{{ override_jcliff_yumrepository_gpgcheck | default('1') }}"
+  gpgkey: "{{ override_jcliff_yumrepository_gpgkey | default('https://download.copr.fedorainfracloud.org/results/ansiblemiddleware/jcliff/pubkey.gpg') }}"
+  baseurl: "{{ override_jcliff_yum_baseurl | default('https://download.copr.fedorainfracloud.org/results/ansiblemiddleware/jcliff/epel-8-$basearch/') }}"
 
 jcliff_standalone: false
 jcliff_standalone_version: 2.12.5
