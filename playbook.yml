@@ -50,12 +50,21 @@
         - wildfly is defined
         - wildfly.download_base_url is defined
         - wildfly.version is defined
+    - stat:
+        path: "{{ wildfly_home }}"
+      register: stat_wildfly_home
+      when:
+        - wildfly_home is defined
 
     - file:
         path: "{{ wildfly_home }}"
         owner: "{{ wildfly_user }}"
         group: "{{ wildfly_group }}"
         recurse: yes
+      when:
+        - stat_wildfly_home is defined
+        - stat_wildfly_home.stat is defined
+        - stat_wildfly_home.stat.exists
 
   post_tasks:
     - wait_for:
