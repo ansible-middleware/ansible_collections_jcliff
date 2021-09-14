@@ -34,17 +34,22 @@
         - tar
         - java-1.8.0-openjdk
 
-    - set_fact:
-        wfly_download_url: "{{ wildfly.download_base_url }}/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.zip"
+    - block:
+        - set_fact:
+            wfly_download_url: "{{ wildfly.download_base_url }}/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.zip"
 
-    - name: "Download and unzip Wildfly zipfile from {{ wfly_download_url }}"
-      unarchive:
-        src: "{{ wfly_download_url }}"
-        dest: "{{ wildfly.workdir }}"
-        owner: "{{ wildfly_user }}"
-        group: "{{ wildfly_group }}"
-        remote_src: yes
-        creates: "{{ wildfly_home }}"
+        - name: "Download and unzip Wildfly zipfile from {{ wfly_download_url }}"
+          unarchive:
+            src: "{{ wfly_download_url }}"
+            dest: "{{ wildfly.workdir }}"
+            owner: "{{ wildfly_user }}"
+            group: "{{ wildfly_group }}"
+            remote_src: yes
+            creates: "{{ wildfly_home }}"
+      when:
+        - wildfly is defined
+        - wildfly.download_base_url is defined
+        - wildfly.version is defined
 
     - file:
         path: "{{ wildfly_home }}"
