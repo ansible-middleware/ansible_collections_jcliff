@@ -1,0 +1,21 @@
+---
+- assert:
+    that:
+      - rhn_id_file is defined
+      - zipfile_dest is defined
+      - rhn_username is defined
+      - rhn_password is defined
+    quiet: true
+
+- set_fact:
+    rhn_base_url: "{{ override_rhn_base_url | default('https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=') }}"
+
+- set_fact:
+    rhn_download_url: "{{ rhn_base_url }}{{ rhn_id_file }}"
+
+- name: "Install zipfile from RHN: {{ rhn_download_url }}"
+  redhat_csp_download:
+    url: "{{ rhn_download_url }}"
+    dest: "{{ zipfile_dest }}"
+    username: "{{ rhn_username }}"
+    password: "{{ rhn_password }}"
