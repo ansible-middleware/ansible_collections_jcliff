@@ -1,11 +1,11 @@
 ---
 
-- name: Ensure required values have been prodived
+- name: "Ensure required params for JBoss CLI have been provided"
   assert:
     that:
       - jboss_home is defined
       - query is defined
-    fail_msg: "Missing required parameters"
+    fail_msg: "Missing required parameters to execute JBoss CLI."
     quiet: true
 
 - set_fact:
@@ -14,7 +14,7 @@
       host: "{{ override_jboss_cli_controller_host | default('localhost') }}"
       port: "{{ override_jboss_cli_controller_port | default('9990') }}"
 
-- name: Retrieve port usage information from server configuration
+- name: "Execute CLI query: {{ query }}"
   command: >
     {{ path_to_cli }} -c --output-json --command={{ query }} --controller={{ controller.host }}:{{ controller.port }}
   register: cli_result
