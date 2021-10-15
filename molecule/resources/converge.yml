@@ -32,6 +32,7 @@
 
     - jcliff:
         wfly_home: "{{ wildfly.home }}"
+        timeout: 60000
         components:
           - system_properties:
               - name: jcliff.enabled
