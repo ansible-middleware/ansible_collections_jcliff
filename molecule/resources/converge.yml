@@ -22,13 +22,13 @@
         name: wildfly_driver
         tasks_from: jdbc_driver.yml
       vars:
-          wildfly_user: wildfly
-          jdbc_driver_module_dir: "{{ wildfly.home }}//modules/org/postgresql/main"
-          jdbc_driver_version: 9.2-1002-jdbc4
-          jdbc_driver_jar_filename: "postgresql-{{ jdbc_driver_version }}.jar"
-          jdbc_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ jdbc_driver_version }}/{{ jdbc_driver_jar_filename }}"
-          jdbc_driver_jar_installation_path: "{{ jdbc_driver_module_dir }}/{{ jdbc_driver_jar_filename }}"
-          jdbc_driver_module_name: 'org.postgresql'
+        wildfly_user: wildfly
+        jdbc_driver_module_dir: "{{ wildfly.home }}//modules/org/postgresql/main"
+        jdbc_driver_version: 9.2-1002-jdbc4
+        jdbc_driver_jar_filename: "postgresql-{{ jdbc_driver_version }}.jar"
+        jdbc_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ jdbc_driver_version }}/{{ jdbc_driver_jar_filename }}"
+        jdbc_driver_jar_installation_path: "{{ jdbc_driver_module_dir }}/{{ jdbc_driver_jar_filename }}"
+        jdbc_driver_module_name: "org.postgresql"
 
     - jcliff:
         wfly_home: "{{ wildfly.home }}"
@@ -51,19 +51,24 @@
                 jndi_name: java:jboss/datasources/ExampleDS2
                 connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
                 driver_name: h2
-          # - messaging_activemq:
-          #     - jms_queue:
-          #         - name: myQueue
-          #           entries: '["queue/myQueue", "jms/queue/myQueue", "java:jboss/exported/jms/queue/myQueue"]'
-          #     - jms_topic:
-          #         - name: myTopic
-          #           entries: '["MyTopic"]'
+          - messaging_activemq:
+              jms_queue:
+                - name: myQueue
+                  entries:
+                    [
+                      "queue/myQueue",
+                      "jms/queue/myQueue",
+                      "java:jboss/exported/jms/queue/myQueue",
+                    ]
+              jms_topic:
+                - name: myTopic
+                  entries: ["MyTopic"]
 
     - include_role:
         name: wildfly_common_criteria
       vars:
-        java_home: '/usr/lib/jvm/jre-1.8.0-openjdk/'
-        java_version: '1.8'
+        java_home: "/usr/lib/jvm/jre-1.8.0-openjdk/"
+        java_version: "1.8"
         jdk_id: openjdk
         jboss_home: "{{ wildfly.home }}"
         override_changed_when_if_cc_violations: False
