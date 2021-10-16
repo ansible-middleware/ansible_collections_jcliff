@@ -1,11 +1,28 @@
 ---
-
 - name: Downloding and extracting Jcliff package
   unarchive:
     remote_src: yes
     src: "{{ jcliff_standalone_archive  }}"
     dest: "{{ jcliff_standalone_root }}"
     creates: "{{ jcliff_standalone_home_dir }}/{{ jcliff_program_name }}"
+  when: not jcliff_standalone_version_latest | bool
+
+- name: Downloading and extracting latest Jcliff package
+  block:
+    - name: Get latest jcliff release version
+      uri:
+        url: https://api.github.com/repos/bserdar/jcliff/releases/latest
+        return_content: true
+      register: jcliff_latest_response
+
+    - name: Downloding and extracting latest Jcliff package
+      unarchive:
+        remote_src: yes
+        src: "https://github.com/bserdar/jcliff/releases/download/{{ jcliff_latest_response.json.name }}/jcliff-{{ jcliff_latest_response.json.name[1:] }}-dist.tar.gz"
+        dest: "{{ jcliff_standalone_root }}"
+        creates: "{{ jcliff_standalone_home_dir }}/{{ jcliff_program_name }}"
+
+  when: jcliff_standalone_version_latest is not defined  | bool
 
 - name: Creating Jcliff Symbolic Link
   file:

@@ -17,6 +17,7 @@ jcliff_yumrepository:
   baseurl: "{{ override_jcliff_yum_baseurl | default('https://download.copr.fedorainfracloud.org/results/ansiblemiddleware/jcliff/epel-8-$basearch/') }}"
 
 jcliff_standalone: false
+jcliff_standalone_version_latest: true
 jcliff_standalone_version: 2.12.8
 jcliff_standalone_archive: "https://github.com/bserdar/jcliff/releases/download/v{{ jcliff_standalone_version }}/jcliff-{{ jcliff_standalone_version }}-dist.tar.gz"
 jcliff_standalone_root: "/usr/share"

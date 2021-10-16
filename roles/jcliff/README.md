@@ -21,7 +21,8 @@ The following are a set of key varaiables for the role:
 |`jcliff_homebrew_tap`| Name of the Homebrew tap | no | `redhat-cop/redhat-cop` |
 |`jcliff_yum_baseurl`| Base URL for the RPM repository | `http://people.redhat.com/~rpelisse/jcliff.yum` | `` |
 |`jcliff_standalone`| Whether to install the standalone application binary instead of a package | no | `false` |
-|`jcliff_standalone_version`| The version of the standalone binary to install | no | `2.12.5` |
+|`jcliff_standalone_version`| The version of the standalone binary to install | no | `2.12.8` |
+|`jcliff_standalone_version_latest`| Use the latest released version | no | `true` |
 |`jcliff_standalone_archive`| Location of the standalone archive containing the binary | no | `https://github.com/bserdar/jcliff/releases/download/<version>/jcliff-<version>-dist.tar.gz` |
 |`jcliff_standalone_root`| Location of where the utility will be installed | no | `/usr/share` |
 |`jcliff_standalone_home_dir`| Home directory for the utility | no | `/usr/share` |
