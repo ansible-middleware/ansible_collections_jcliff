@@ -22,7 +22,7 @@
         dest: "{{ jcliff_standalone_root }}"
         creates: "{{ jcliff_standalone_home_dir }}/{{ jcliff_program_name }}"
 
-  when: jcliff_standalone_version_latest is not defined  | bool
+  when: jcliff_standalone_version_latest | bool
 
 - name: Creating Jcliff Symbolic Link
   file:
