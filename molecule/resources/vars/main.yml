@@ -5,6 +5,7 @@ wfly_zipfile: "wildfly-{{ wfly_version }}.zip"
 wfly_download_url: https://download.jboss.org/wildfly/{{ wfly_version }}/{{ wfly_zipfile }}
 wildfly:
   home: "{{ workdir }}/wildfly-{{ wfly_version }}/"
+  config: standalone-full.xml
   user: wildfly
   min_mem: 64m
   max_mem: 512m
