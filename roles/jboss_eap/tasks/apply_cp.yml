@@ -29,15 +29,13 @@
       register: appy_cp_result
 
     - name: "Restart server to ensure patch application"
-      include_role:
-        name: wildfly_common_criteria
-        tasks_from: jboss_cli.yml
+      include_tasks: jboss_cli.yml
       vars:
         jboss_home: "{{ wildfly_home }}"
         query: "'shutdown --restart'"
       when:
         - not wildfly_no_restart_after_patch is defined
-    
+
     - debug:
         msg: "{{ cli_result.stdout }}"
       when:
@@ -45,13 +43,13 @@
 
   rescue:
     - debug:
-        msg: "{{ cli_result.stdout }}"      
+        msg: "{{ cli_result.stdout }}"
 
     - set_fact:
         error_msg: "{{ cli_result.stdout | string }}"
 
     - assert:
-        that: 
+        that:
           - error_msg is search('WFLYPAT0012')
         quiet: true
         fail_msg: "Patch application failed: {{ error_msg }}"
