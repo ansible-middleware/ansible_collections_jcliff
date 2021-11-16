@@ -74,26 +74,3 @@
       get_url:
         url: http://localhost:8080/
         dest: '/dev/null'
-
-
-- name: "Wildfly compliance to Common Criteria"
-  hosts: "all"
-  become: yes
-  vars:
-    wildfly_user: wildfly
-    wildfly_group: wildfly
-    wildfly:
-      workdir: /opt
-      download_base_url: https://download.jboss.org/wildfly/
-      version: 19.0.0.Final
-    wildfly_home: "{{ wildfly.workdir }}/wildfly-{{ wildfly.version }}"
-    wildfly_config_base: standalone.xml
-    java_home: '/usr/lib/jvm/jre-1.8.0-openjdk/'
-    java_version: '1.8'
-    jdk_id: openjdk
-    jboss_home: "{{ wildfly_home }}"
-  collections:
-    - middleware_automation.jcliff
-  roles:
-    - wildfly_common_criteria
-  tasks:
