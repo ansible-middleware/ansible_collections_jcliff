@@ -11,7 +11,17 @@
     patches_repository: "{{ override_patches_repository | default('/opt') }}"
 
 - set_fact:
-    path_to_patch: "{{ patches_repository }}/{{ rhn_cp_id }}.zip"
+    patch_filename: "{{ override_patch_filename | default(rhn_cp_id + '.zip') }}"
+
+- set_fact:
+    path_to_patch: "{{ patches_repository }}/{{ patch_filename }}"
+  when:
+    - not override_path_to_patch is defined
+
+- set_fact:
+    path_to_patch: "{{ override_path_to_patch }}"
+  when:
+   - override_path_to_patch is defined
 
 - include_tasks: tasks/download_from_rhn.yml
   vars:
@@ -20,13 +30,17 @@
 
 - block:
     - name: "Apply patch {{ path_to_patch }} to server installed in {{ wildfly_home }}"
-      include_role:
-        name: wildfly_common_criteria
-        tasks_from: jboss_cli.yml
+      include_tasks: jboss_cli.yml
       vars:
         jboss_home: "{{ wildfly_home }}"
         query: "'patch apply {{ path_to_patch }}'"
-      register: appy_cp_result
+
+    - debug:
+        msg: "Apply patch operation result: {{ cli_result.stdout | string }}"
+      when:
+        - print_cli_patch_result is defined
+        - cli_result is defined
+        - cli_result.stdout is defined
 
     - name: "Restart server to ensure patch application"
       include_tasks: jboss_cli.yml
@@ -35,6 +49,7 @@
         query: "'shutdown --restart'"
       when:
         - not wildfly_no_restart_after_patch is defined
+        - appy_cp_result.rc == 0
 
     - debug:
         msg: "{{ cli_result.stdout }}"

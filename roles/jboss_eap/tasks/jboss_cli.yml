@@ -14,6 +14,11 @@
       host: "{{ override_jboss_cli_controller_host | default('localhost') }}"
       port: "{{ override_jboss_cli_controller_port | default('9990') }}"
 
+- name: "Ensure server's management interface is reachable"
+  wait_for:
+    host: "{{ controller.host }}"
+    port: "{{ controller.port }}"
+
 - name: "Execute CLI query: {{ query }}"
   command: >
     {{ path_to_cli }} -c --output-json --command={{ query }} --controller={{ controller.host }}:{{ controller.port }}
