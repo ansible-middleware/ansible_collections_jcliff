@@ -49,7 +49,7 @@
         query: "'shutdown --restart'"
       when:
         - not wildfly_no_restart_after_patch is defined
-        - appy_cp_result.rc == 0
+        - cli_result.rc == 0
 
     - debug:
         msg: "{{ cli_result.stdout }}"
