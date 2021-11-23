@@ -19,6 +19,11 @@
     dest: "{{ zipfile_dest }}"
     username: "{{ rhn_username }}"
     password: "{{ rhn_password }}"
+  no_log: "{{ omit_rhn_output | default(true) }}"
+
+- stat:
+    path: "{{ zipfile_dest }}"
+  register: path_to_downloaded_artefact
 
 - block:
 
