@@ -18,5 +18,6 @@ galaxy_info:
       versions:
         - "6"
         - "7"
+        - "8"
   role_name: jcliff
   namespace: middleware_automation
