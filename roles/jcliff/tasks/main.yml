@@ -17,14 +17,14 @@
         quiet: true
 
     - name: Install JCliff using HomeBrew
-      include_tasks: install_homebrew.yml
+      ansible.builtin.include_tasks: install_homebrew.yml
       when: ansible_distribution in jcliff_install_matrix.homebrew or ansible_os_family in jcliff_install_matrix.homebrew
 
     - name: Install JCliff using RPM
-      include_tasks: install_rpm.yml
+      ansible.builtin.include_tasks: install_rpm.yml
       when: ansible_distribution in jcliff_install_matrix.rpm or ansible_os_family in jcliff_install_matrix.rpm
   when: jcliff_standalone | bool == false
 
 - name: Install Jcliff using standalone binary
-  include_tasks: install_standalone.yml
+  ansible.builtin.include_tasks: install_standalone.yml
   when: jcliff_standalone | bool == true
