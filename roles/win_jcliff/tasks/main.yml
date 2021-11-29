@@ -17,9 +17,9 @@
         quiet: true
 
     - name: Install JCliff using Chocolatey
-      include_tasks: install_chocolatey.yml
+      ansible.builtin.include_tasks: install_chocolatey.yml
       when: ansible_distribution in jcliff_install_matrix.chocolatey or ansible_os_family in jcliff_install_matrix.chocolatey
 
 - name: Install Jcliff using standalone binary
-  include_tasks: install_standalone.yml
+  ansible.builtin.include_tasks: install_standalone.yml
   when: jcliff_standalone | bool == true
