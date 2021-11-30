@@ -451,7 +451,7 @@ options:
 
               credential:
                 description:
-                  - The secure value for the application.
+                  - The secure value for the application. If not provided, it is setup as a public client.
                 type: str
       logging:
         description:
