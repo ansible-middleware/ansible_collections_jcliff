@@ -436,7 +436,7 @@ options:
 
               ssl_required:
                 description:
-                  - Ensures that communication to and from the Keycloak server is over HTTPS. Default is 'external'. Possible values: 'all' 'external' 'none'.
+                  - Ensures that communication to and from the Keycloak server is over HTTPS. Default external. Possible values all external none.
                 type: str
 
               verify_token_audience:
