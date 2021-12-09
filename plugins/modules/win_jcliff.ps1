@@ -186,6 +186,7 @@ $spec = @{
                                 verify_token_audience = @{ type = "bool" }
                                 credential = @{ type = "str" }
                                 use_resource_role_mappings = @{ type = "bool" }
+                                disable_trust_manager = @{ type = "bool" }
                             }
                         }
                     }

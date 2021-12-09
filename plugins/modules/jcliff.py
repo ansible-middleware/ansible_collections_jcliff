@@ -436,23 +436,28 @@ options:
 
               ssl_required:
                 description:
-                  - Ensures that all communication to and from the Keycloak server is over HTTPS.
+                  - Ensures that all communication to and from the Keycloak server is over HTTPS. In production this should be set to all. The default value is external meaning that HTTPS is required by default for external requests. Valid values are 'all', 'external' and 'none'.
                 type: str
 
               verify_token_audience:
                 description:
-                  - Whether the adapter will verify whether the token contains this client name (resource) as an audience.
+                  - Whether the adapter will verify whether the token contains this client name (resource) as an audience. This is set to false by default, however for improved security, it is recommended to enable this.
                 type: bool
 
               use_resource_role_mappings:
                 description:
-                  - Whether the adapter will look inside the token for application level role mappings for the user.
+                  - Whether the adapter will look inside the token for application level role mappings for the user. The default value is false.
                 type: bool
 
               credential:
                 description:
                   - The secure value for the application. If not provided, it is setup as a public client.
                 type: str
+
+              disable-trust-manager:
+                description:
+                  - This setting should only be used during development and NEVER in production as it will disable verification of SSL certificates. The default value is false.
+                type: bool
       logging:
         description:
           - logger.
@@ -1392,6 +1397,7 @@ def main():
                                             verify_token_audience=dict(type='bool', required=False),
                                             credential=dict(type='str', required=False),
                                             use_resource_role_mappings=dict(type='bool', required=False),
+                                            disable_trust_manager=dict(type='bool', required=False),
                                         )))))),
         state=dict(default="present", choices=[
                    'present', 'absent'], type='str')
