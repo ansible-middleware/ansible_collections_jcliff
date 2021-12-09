@@ -11,6 +11,7 @@
             {% if 'verify_token_audience' in secure_deployment %} "verify-token-audience" => "{{ secure_deployment['verify_token_audience'] }}", {% endif %}
             {% if 'use_resource_role_mappings' in secure_deployment %} "use-resource-role-mappings" => "{{ secure_deployment['use_resource_role_mappings'] }}", {% endif %}
             {% if 'disable_trust_manager' in secure_deployment %} "disable-trust-manager" => "{{ secure_deployment['disable_trust_manager'] }}", {% endif %}
+            {% if 'enable_cors' in secure_deployment %} "enable-cors" => "{{ secure_deployment['enable_cors'] }}", {% endif %}
             {% if 'credential' in secure_deployment %} "credential" => { "secret" => { "value" =>  "{{ secure_deployment['credential'] }}" } }, {% else %} "public-client" => true, {% endif %}
           }
           {% endfor %}

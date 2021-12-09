@@ -454,9 +454,14 @@ options:
                   - The secure value for the application. If not provided, it is setup as a public client.
                 type: str
 
-              disable-trust-manager:
+              disable_trust_manager:
                 description:
                   - Should only be used during development and NEVER in production as it will disable verification of SSL certificates. Default false.
+                type: bool
+
+              enable_cors:
+                description:
+                  - Enables CORS support. It will handle CORS preflight requests and look into the access token to determine valid origins. Default false.
                 type: bool
       logging:
         description:
