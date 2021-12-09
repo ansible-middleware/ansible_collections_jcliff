@@ -436,12 +436,12 @@ options:
 
               ssl_required:
                 description:
-                  - Ensures that all communication to and from the Keycloak server is over HTTPS. In production this should be set to all. The default value is external meaning that HTTPS is required by default for external requests. Valid values are 'all', 'external' and 'none'.
+                  - Ensures that communication to and from the Keycloak server is over HTTPS. Default is 'external'. Possible values: 'all' 'external' 'none'.
                 type: str
 
               verify_token_audience:
                 description:
-                  - Whether the adapter will verify whether the token contains this client name (resource) as an audience. This is set to false by default, however for improved security, it is recommended to enable this.
+                  - Whether the adapter will verify whether the token contains this client name (resource) as an audience. Default is false.
                 type: bool
 
               use_resource_role_mappings:
@@ -456,7 +456,7 @@ options:
 
               disable-trust-manager:
                 description:
-                  - This setting should only be used during development and NEVER in production as it will disable verification of SSL certificates. The default value is false.
+                  - Should only be used during development and NEVER in production as it will disable verification of SSL certificates. Default false.
                 type: bool
       logging:
         description:
