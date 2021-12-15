@@ -25,6 +25,13 @@
     path: "{{ zipfile_dest }}"
   register: path_to_downloaded_artefact
 
+- stat:
+    path: "{{ zipfile_dest }}"
+  register: path_to_downloaded_artefact
+
+- debug:
+    msg: "{{ workdir }}"
+
 - block:
 
   - file:
