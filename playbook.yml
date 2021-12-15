@@ -8,7 +8,7 @@
     wildfly:
       workdir: /opt
       download_base_url: https://download.jboss.org/wildfly/
-      version: 19.0.0.Final
+      version: 24.0.0.Final
     wildfly_home: "{{ wildfly.workdir }}/wildfly-{{ wildfly.version }}"
     wildfly_config_base: standalone.xml
   roles:
