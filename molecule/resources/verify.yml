@@ -7,10 +7,12 @@
   tasks:
     - name: Get service facts
       service_facts:
+
     - name: Check if wildfly service started
       assert:
         that:
-          - ansible_facts.services["wfly"]["state"] == "running"
+          - ansible_facts.services["wildfly"]["state"] == "running"
+
     - name: "Check if properties have been deployed"
       command: "{{ wildfly.home }}/bin/jboss-cli.sh --connect --output-json --command='/system-property=jcliff.enabled:read-resource'"
       register: cli_result

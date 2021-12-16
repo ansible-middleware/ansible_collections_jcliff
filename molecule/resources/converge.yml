@@ -8,7 +8,12 @@
     app: /tmp/simple-webapp.war
   collections:
     - middleware_automation.jcliff
+    - middleware_automation.wildfly
+  roles:
+    - wildfly_install
+    - wildfly_systemd
   tasks:
+
     - name: Include jcliff role
       include_role:
         name: jcliff

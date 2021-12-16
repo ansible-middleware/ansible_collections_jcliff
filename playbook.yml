@@ -5,66 +5,30 @@
   vars:
     wildfly_user: wildfly
     wildfly_group: wildfly
-    wildfly:
-      workdir: /opt
-      download_base_url: https://download.jboss.org/wildfly/
-      version: 24.0.0.Final
-    wildfly_home: "{{ wildfly.workdir }}/wildfly-{{ wildfly.version }}"
+    wildfly_workdir: /opt
     wildfly_config_base: standalone.xml
+  collections:
+    - middleware_automation.wildfly
+    - middleware_automation.jcliff
   roles:
     - jcliff
+    - wildfly_install
     - wildfly_systemd
-  pre_tasks:
+  tasks:
 
-    - name: "Ensure user {{ wildfly_user }} exists."
-      group:
-        name: "{{ wildfly_group }}"
+    - jcliff:
+        wfly_home: "{{ wildfly_home }}"
+        components:
+          - system_properties:
+            - name: JBOSS_ID
+              value: "{{ instance_name }}"
 
-    - name: "Ensure group {{ wildfly_group }} exists."
-      user:
-        name: "{{ wildfly_user }}"
-        groups: "{{ wildfly_group }}"
-        state: present
-
-    - package:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - unzip
-        - tar
-        - java-1.8.0-openjdk
-
-    - block:
-        - set_fact:
-            wfly_download_url: "{{ wildfly.download_base_url }}/{{ wildfly.version }}/wildfly-{{ wildfly.version }}.zip"
-
-        - name: "Download and unzip Wildfly zipfile from {{ wfly_download_url }}"
-          unarchive:
-            src: "{{ wfly_download_url }}"
-            dest: "{{ wildfly.workdir }}"
-            owner: "{{ wildfly_user }}"
-            group: "{{ wildfly_group }}"
-            remote_src: yes
-            creates: "{{ wildfly_home }}"
-      when:
-        - wildfly is defined
-        - wildfly.download_base_url is defined
-        - wildfly.version is defined
-    - stat:
-        path: "{{ wildfly_home }}"
-      register: stat_wildfly_home
-      when:
-        - wildfly_home is defined
-
-    - file:
-        path: "{{ wildfly_home }}"
-        owner: "{{ wildfly_user }}"
-        group: "{{ wildfly_group }}"
-        recurse: yes
-      when:
-        - stat_wildfly_home is defined
-        - stat_wildfly_home.stat is defined
-        - stat_wildfly_home.stat.exists
+    - include_role:
+        name: jboss_eap
+        tasks_from: jboss_cli.yml
+      vars:
+        jboss_home: "{{ wildfly_home  }}"
+        query: '/system-property=JBOSS_ID:read-resource()'
 
   post_tasks:
     - wait_for:
