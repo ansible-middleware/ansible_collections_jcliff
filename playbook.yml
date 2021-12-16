@@ -3,8 +3,6 @@
   hosts: "all"
   become: yes
   vars:
-    wildfly_user: wildfly
-    wildfly_group: wildfly
     wildfly_workdir: /opt
     wildfly_config_base: standalone.xml
   collections:
