@@ -7,16 +7,13 @@
     app_url: http://people.redhat.com/~rpelisse/simple-webapp.war
     app: /tmp/simple-webapp.war
   collections:
-    #    - middleware_automation.jcliff
     - middleware_automation.wildfly
+    - middleware_automation.jcliff
   roles:
+    - jcliff
     - wildfly_install
     - wildfly_systemd
   tasks:
-
-    - name: Include jcliff role
-      include_role:
-        name: jcliff
 
     - name: "Download a demo app to deploy"
       get_url:
@@ -34,6 +31,7 @@
         jdbc_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ jdbc_driver_version }}/{{ jdbc_driver_jar_filename }}"
         jdbc_driver_jar_installation_path: "{{ jdbc_driver_module_dir }}/{{ jdbc_driver_jar_filename }}"
         jdbc_driver_module_name: "org.postgresql"
+
 
     - jcliff:
         wfly_home: "{{ wildfly.home }}"

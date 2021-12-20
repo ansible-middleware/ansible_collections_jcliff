@@ -1,10 +1,8 @@
 ---
-
 - name: Collect Supported Operating Systems
   set_fact:
     jcliff_install_supported_os: "{{ ( jcliff_install_supported_os | default([]) ) + item.value }}"
   loop: "{{ lookup('dict', jcliff_install_matrix) }}"
-
 
 - name: Install JCliff using package managers
   block:
