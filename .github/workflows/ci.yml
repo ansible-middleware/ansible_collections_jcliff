@@ -37,6 +37,10 @@ jobs:
         run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
         working-directory: ./ansible_collections/middleware_automation/jcliff
 
+      - name: Install requirements.yml
+        run: ansible-galaxy collection install -r molecule/resources/requirements.yml
+        working-directory: ./ansible_collections/middleware_automation/jcliff
+
       - name: Run molecule test
         run: molecule test --all
         working-directory: ./ansible_collections/middleware_automation/jcliff
