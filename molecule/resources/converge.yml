@@ -3,15 +3,9 @@
   hosts: all
   vars_files:
     - vars/main.yml
-  vars:
-    app: /tmp/simple-webapp.war
-    gdrive_url: 'https://drive.google.com/uc?export=download&id='
-    app_url: "{{ gdrive_url }}1w9ss5okctnjUvRAxhPEPyC7DmbUwmbhb"
   collections:
     - middleware_automation.wildfly
-    - middleware_automation.jcliff
   roles:
-    - jcliff
     - wildfly_install
     - wildfly_systemd
   tasks:

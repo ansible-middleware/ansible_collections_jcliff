@@ -1,4 +1,7 @@
 ---
+app: /tmp/simple-webapp.war
+gdrive_url: 'https://drive.google.com/uc?export=download&id='
+app_url: "{{ gdrive_url }}1w9ss5okctnjUvRAxhPEPyC7DmbUwmbhb"
 wildfly_config_base: standalone-full.xml
 pgsql_module_dir: "{{ wildfly.home }}//modules/org/postgresql/main"
 jdbc_driver_filename: postgresql-9.2-1002-jdbc4.jar
