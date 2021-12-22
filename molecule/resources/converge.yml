@@ -43,10 +43,10 @@
           - system_properties:
               - name: jcliff.enabled
                 value: "enabled.plus"
-          - deployments:
-              - name: "{{ app.name }}"
-                runtime_name: "{{ app.name }}-v{{ app.version }}.{{ app.extension }}"
-                path: "{{ path_to_app }}"
+#          - deployments:
+#              - name: "{{ app.name }}"
+#                runtime_name: "{{ app.name }}-v{{ app.version }}.{{ app.extension }}"
+#                path: "{{ path_to_app }}"
           - drivers:
               - driver_name: postgresql
                 driver_module_name: org.postgresql
