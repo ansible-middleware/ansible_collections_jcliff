@@ -1,10 +1,7 @@
 ---
 - name: "Wildfly installation and configuration"
-  hosts: "all"
+  hosts: "{{ hosts_group_name | default('localhost') }}"
   become: yes
-  vars:
-    wildfly_workdir: /opt
-    wildfly_config_base: standalone.xml
   collections:
     - middleware_automation.wildfly
     - middleware_automation.jcliff
@@ -13,6 +10,8 @@
     - wildfly_install
     - wildfly_systemd
   tasks:
+    - wait_for:
+        port: 8080
 
     - jcliff:
         wfly_home: "{{ wildfly_home }}"
