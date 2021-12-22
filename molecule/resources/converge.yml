@@ -13,10 +13,13 @@
     - include_role:
         name: ../../roles/jcliff
 
+    - set_fact:
+        path_to_app: "{{ app.dir }}{{ app.name }}.{{ app.extension }}"
+
     - name: "Download a demo app to deploy"
       get_url:
-        url: "{{ app_url }}"
-        dest: "{{ app }}"
+        url: "{{ app.url }}"
+        dest: "{{ path_to_app }}"
 
     - wait_for:
         port: 8080
@@ -41,9 +44,9 @@
               - name: jcliff.enabled
                 value: "enabled.plus"
           - deployments:
-              - name: simple-webapp
-                runtime_name: simple-webapp-v1.war
-                path: /tmp/simple-webapp.war
+              - name: "{{ app.name }}"
+                runtime_name: "{{ app.name }}-v{{ app.version }}.{{ app.extension }}"
+                path: "{{ path_to_app }}"
           - drivers:
               - driver_name: postgresql
                 driver_module_name: org.postgresql
