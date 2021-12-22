@@ -47,17 +47,17 @@
 #              - name: "{{ app.name }}"
 #                runtime_name: "{{ app.name }}-v{{ app.version }}.{{ app.extension }}"
 #                path: "{{ path_to_app }}"
-          - drivers:
-              - driver_name: postgresql
-                driver_module_name: org.postgresql
-                driver_class_name: org.postgresql.Driver
-                driver_xa_datasource_class_name: org.postgresql.xa.PGXADataSource
-          - datasources:
-              - name: ExampleDS2
-                use_java_context: "true"
-                jndi_name: java:jboss/datasources/ExampleDS2
-                connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
-                driver_name: h2
+#          - drivers:
+#              - driver_name: postgresql
+#                driver_module_name: org.postgresql
+#                driver_class_name: org.postgresql.Driver
+#                driver_xa_datasource_class_name: org.postgresql.xa.PGXADataSource
+#          - datasources:
+#              - name: ExampleDS2
+#                use_java_context: "true"
+#                jndi_name: java:jboss/datasources/ExampleDS2
+#                connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+#                driver_name: h2
 #          - messaging_activemq:
 #              jms_queue:
 #                - name: myQueue
