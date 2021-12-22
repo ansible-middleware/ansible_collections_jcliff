@@ -4,8 +4,9 @@
   vars_files:
     - vars/main.yml
   vars:
-    app_url: http://people.redhat.com/~rpelisse/simple-webapp.war
     app: /tmp/simple-webapp.war
+    gdrive_url: 'https://drive.google.com/uc?export=download&id='
+    app_url: "{{ gdrive_url }}1w9ss5okctnjUvRAxhPEPyC7DmbUwmbhb"
   collections:
     - middleware_automation.wildfly
     - middleware_automation.jcliff
@@ -15,26 +16,31 @@
     - wildfly_systemd
   tasks:
 
+    - include_role:
+        name: ../../roles/jcliff
+
     - name: "Download a demo app to deploy"
       get_url:
         url: "{{ app_url }}"
         dest: "{{ app }}"
+
+    - wait_for:
+        port: 8080
 
     - include_role:
         name: wildfly_driver
         tasks_from: jdbc_driver.yml
       vars:
         wildfly_user: wildfly
-        jdbc_driver_module_dir: "{{ wildfly.home }}//modules/org/postgresql/main"
+        jdbc_driver_module_dir: "{{ wildfly_home }}//modules/org/postgresql/main"
         jdbc_driver_version: 9.2-1002-jdbc4
         jdbc_driver_jar_filename: "postgresql-{{ jdbc_driver_version }}.jar"
         jdbc_driver_jar_url: "https://repo.maven.apache.org/maven2/org/postgresql/postgresql/{{ jdbc_driver_version }}/{{ jdbc_driver_jar_filename }}"
         jdbc_driver_jar_installation_path: "{{ jdbc_driver_module_dir }}/{{ jdbc_driver_jar_filename }}"
         jdbc_driver_module_name: "org.postgresql"
 
-
     - jcliff:
-        wfly_home: "{{ wildfly.home }}"
+        wfly_home: "{{ wildfly_home }}"
         timeout: 60000
         components:
           - system_properties:
@@ -55,15 +61,15 @@
                 jndi_name: java:jboss/datasources/ExampleDS2
                 connection_url: "jdbc:h2:mem:test2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
                 driver_name: h2
-          - messaging_activemq:
-              jms_queue:
-                - name: myQueue
-                  entries:
-                    [
-                      "queue/myQueue",
-                      "jms/queue/myQueue",
-                      "java:jboss/exported/jms/queue/myQueue",
-                    ]
-              jms_topic:
-                - name: myTopic
-                  entries: ["MyTopic"]
+#          - messaging_activemq:
+#              jms_queue:
+#                - name: myQueue
+#                  entries:
+#                    [
+#                      "queue/myQueue",
+#                      "jms/queue/myQueue",
+#                      "java:jboss/exported/jms/queue/myQueue",
+#                    ]
+#              jms_topic:
+#                - name: myTopic
+#                  entries: ["MyTopic"]
