@@ -14,7 +14,8 @@ tags:
   - wildfly
   - cli
   - server
-dependencies: {}
+dependencies:
+  middleware_automation.wildfly: '>=0.0.2'
 repository: https://github.com/ansible-middleware/ansible_collections_jcliff
 documentation: https://github.com/ansible-middleware/ansible_collections_jcliff
 homepage: https://github.com/ansible-middleware/ansible_collections_jcliff
