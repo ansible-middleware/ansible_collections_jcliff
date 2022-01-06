@@ -1081,6 +1081,7 @@ def execute_rules_with_jcliff(data):
                            data['wfly_home'] + "/bin/jboss-cli.sh",
                            "--ruledir=" + data['rules_dir'],
                            "--timeout=" + str(data['timeout']),
+                           "--reconnect-delay=" + str(data['reconnect_delay']),
                            "--controller=" +
                            data['management_host'] + ":" +
                            data['management_port'],
@@ -1175,6 +1176,7 @@ def main():
         # Careful, switching to 'True' will mean each run of the module will create temporary files that it will NOT be deleted!
         debug_mode=dict(required=False, type='bool', default=False),
         timeout=dict(required=False, type='int', default=30000),
+        reconnect_delay=dict(required=False, type='int', default=30000),
         components=dict(type='list', aliases=['subsystems'], required=False, elements='dict',
                         options=dict(
                             drivers=dict(type='list', required=False, elements='dict', options=dict(
