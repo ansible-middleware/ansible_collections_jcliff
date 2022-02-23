@@ -249,6 +249,111 @@ options:
               - Datasource validate on match.
             type: str
             default: 'undefined'
+            
+      xadatasources:
+        description:
+          - XA Datasource configurations.
+        type: list
+        suboptions:
+
+          name:
+            description:
+              - Datasource name.
+            type: str
+            required: True
+
+          pool_name:
+            description:
+              - Name of the datasource pool.
+            type: str
+
+          jndi_name:
+            description:
+              - JNDI name.
+            type: str
+            required: True
+
+          use_java_context:
+            description:
+              - Use the Java context.
+            type: str
+            default: 'true'
+
+          xa_datasource_properties:
+            description:
+              - Properties for XA datasource
+            type: str
+            required: True
+
+          driver_name:
+            description:
+              - Name of the driver.
+            type: str
+            required: True
+
+          enabled:
+            description:
+              - Whether the datasource is enabled.
+            type: str
+            default: 'true'
+
+          password:
+            description:
+              - Datasource password.
+            type: str
+
+          user_name:
+            description:
+              - Datasource user name.
+            type: str
+
+          no_recovery:
+            description:
+              - Should datasource attempt recovery.
+            type: bool
+            default: 'undefined'
+
+          validate_on_match:
+            description:
+              - 
+            type: bool
+            default: 'undefined'
+
+          background-validation:
+            description:
+              - 
+            type: bool
+            default: 'undefined'
+
+          valid_connection_checker_class:
+            description:
+              - .
+            type: str
+            default: 'undefined'
+
+          check_valid_connection_sql:
+            description:
+              - Datasource SQL query for checking a valid connection.
+            type: str
+            default: 'undefined'
+
+          exception_sorter_class_name:
+            description:
+              - Datasource .
+            type: str
+            default: 'undefined'
+          
+          same_rm_override:
+            description:
+              - .
+            type: bool
+            default: 'undefined'
+            
+          background_validation_millis:
+            description:
+              - .
+            type: int
+            default: 'undefined'
 
       system_properties:
         description:
@@ -1216,6 +1321,35 @@ def main():
                                     check_valid_connection_sql=dict(
                                         type='str', default='undefined'),
                                     validate_on_match=dict(type='str', default='undefined'))),
+                            xadatasources=dict(
+                                type='list', required=False, elements='dict',
+                                options=dict(
+                                    name=dict(type='str', required=True),
+                                    pool_name=dict(type='str', required=False),
+                                    jndi_name=dict(type='str', required=True),
+                                    use_java_context=dict(
+                                        type='str', default='true'),
+                                    xa_datasource_properties=dict(
+                                        type='str', required=True),
+                                    driver_name=dict(
+                                        type='str', required=True),
+                                    enabled=dict(type='str', default='true'),
+                                    password=dict(type='str', required=False),
+                                    user_name=dict(type='str', required=False),
+                                    no_recovery=dict(
+                                        type='bool', default='undefined'),
+                                    validate_on_match=dict(type='str', default='undefined'),
+                                    background_validation=dict(
+                                        type='bool', default='undefined'),
+                                    valid_connection_checker_class=dict(
+                                        type='str', default='undefined'),
+                                    exception_sorter_class_name=dict(
+                                        type='str', default='undefined'),
+                                    check_valid_connection_sql=dict(
+                                        type='str', default='undefined'),
+                                    same_rm_override=dict(type='bool', default='undefined'),
+                                    background_validation_millis=dict(type='int', default='undefined'),
+                                    )),
                             system_properties=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),
