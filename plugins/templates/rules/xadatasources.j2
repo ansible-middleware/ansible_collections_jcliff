@@ -1,0 +1,21 @@
+{ "xadatasource" => {
+  "{{ values['name'] }}" => {
+    {% if 'pool_name' in values %} "pool-name" => "{{ values['pool_name'] }}", {% endif %}
+    "xa-datasource-properties" => "{{ values['connection_url'] }}",
+    "driver-name" => "{{ values['driver_name'] }}",
+    "jndi-name" => "{{ values['jndi_name'] }}",
+    {% if 'password' in values %} "password" => "{{ values['password'] }}", {% endif %}
+    {% if 'user_name' in values %} "user-name" => "{{ values['user_name'] }}", {% endif %}
+    {% if 'enabled' in values %} "enabled" => "{{ values['enabled'] }}", {% endif %}
+    {% if 'no_recovery' in values %} "no-recovery" => "{{ values['no_recovery'] }}", {% endif %}
+    {% if 'validate_on_match' in values %} "validate-on-match" => "{{ values['validate_on_match'] }}", {% endif %}
+    {% if 'background_validation' in values %} "background-validation" => "{{ values['background_validation'] }}", {% endif %}
+    {% if 'valid_connection_checker_class_name' in values %} "valid-connection-checker-class-name" => "{{ values['valid_connection_checker_class_name'] }}", {% endif %}
+    {% if 'exception_sorter_class_name' in values %} "exception-sorter-class-name" => "{{ values['exception_sorter_class_name'] }}", {% endif %}
+    {% if 'same_rm_override' in values %} "same-rm-override" => "{{ values['same_rm_override'] }}", {% endif %}
+    {% if 'background_validation_millis' in values %} "background-validation-millis" => "{{ values['background_validation_millis'] }}", {% endif %}
+    {% if 'check_valid_connection_sql' in values %} "check-valid-connection-sql" => "{{ values['check_valid_connection_sql'] }}", {% endif %}
+    {% if 'use_java_context' in values %} "use-java-context" => "{{ values['use_java_context'] }}" {% endif %}
+   }
+ }
+}
