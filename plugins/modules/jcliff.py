@@ -1330,7 +1330,9 @@ def main():
                                     use_java_context=dict(
                                         type='str', default='true'),
                                     xa_datasource_properties=dict(
-                                        type='str', required=True),
+                                        type='dict', required=True options=dict(
+                                          url=dict(type='str' required=False)
+                                        )),
                                     driver_name=dict(
                                         type='str', required=True),
                                     enabled=dict(type='str', default='true'),
