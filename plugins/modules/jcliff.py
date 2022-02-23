@@ -319,13 +319,13 @@ options:
             type: bool
             default: 'undefined'
 
-          background-validation:
+          background_validation:
             description:
               - 
             type: bool
             default: 'undefined'
 
-          valid_connection_checker_class:
+          valid_connection_checker_class_name:
             description:
               - .
             type: str
@@ -1341,7 +1341,7 @@ def main():
                                     validate_on_match=dict(type='str', default='undefined'),
                                     background_validation=dict(
                                         type='bool', default='undefined'),
-                                    valid_connection_checker_class=dict(
+                                    valid_connection_checker_class_name=dict(
                                         type='str', default='undefined'),
                                     exception_sorter_class_name=dict(
                                         type='str', default='undefined'),
