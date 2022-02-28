@@ -1,8 +1,8 @@
 { "messaging-activemq" => {
     "server" => {
         "default" => {
-            {% if 'properties' in values %}
-                {% for item in values['properties'] %}
+            {% if 'server_property' in values %}
+                {% for item in values['server_property'] %}
                     "{{ item['name'] }}" => "{{ item['value'] }}",
                 {% endfor %}
             {% endif %}
