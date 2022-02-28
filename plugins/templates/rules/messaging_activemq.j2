@@ -1,6 +1,12 @@
 { "messaging-activemq" => {
     "server" => {
         "default" => {
+            {% if 'properties' in values %}
+                {% for item in values['properties'] %}
+                    "{{ item['name'] }}" => "{{ item['value'] }}",
+                {% endfor %}
+            {% endif %}
+        
             {% if 'jms_queue' in values %}
                 "jms-queue" => {
                     {% for item in values['jms_queue'] %}
