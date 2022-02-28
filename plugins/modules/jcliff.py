@@ -1457,6 +1457,10 @@ def main():
                                         )))),
                             messaging_activemq=dict(
                                 type='dict', required=False, options=dict(
+                                    server_property=dict(
+                                        type='list' required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            value=dict(type='str', required=True))),
                                     jms_queue=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
