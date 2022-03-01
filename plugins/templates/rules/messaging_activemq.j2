@@ -69,8 +69,13 @@
 
             {% if 'address_setting' in values %}
                 "address-setting" => {
-                    {% for item in values %}
-                        "{{ item.name }}" => "{{ item.value }}",
+                    {% for item in values['address_setting'] %}
+                        "{{ item.name }}" => {
+                            "dead-letter-address" => "{{ item.dead_letter_address }}",
+                            "expiry-address" => "{{ item.expiry_address }}",
+                            "redelivery-delay" => "{{ item.redelivery_delay }}",
+                            "max-delivery-attempts" => "{{ item.max_delivery_attempts }}"
+                        }{{ "," if not loop.last else "" }}
                     {% endfor %}
                 },
             {% endif %}
