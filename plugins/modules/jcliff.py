@@ -1499,6 +1499,10 @@ def main():
                                     address_setting=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
+                                            dead_letter_address=dict(type='str', required=False),
+                                            expiry_address=dict(type='str', required=False),
+                                            redelivery_delay=dict(type='int', required=False),
+                                            max_delivery_attempts=dict(type='int', required=False)
                                         )),
                                     security_setting=dict(
                                         type='list', required=False, elements='dict', options=dict(
@@ -1514,10 +1518,6 @@ def main():
                                     remote_acceptor=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
-                                            dead_letter_address=dict(type='str', required=True),
-                                            expiry_address=dict(type='str', required=True),
-                                            redelivery_delay=dict(type='int', required=True),
-                                            max_delivery_attempts=dict(type='int', required=True)
                                         )),
                                     remote_connector=dict(
                                         type='list', required=False, elements='dict', options=dict(
