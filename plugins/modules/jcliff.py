@@ -1481,7 +1481,7 @@ def main():
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             entries=dict(type='list', required=True),
-                                            connectors=dict(type='str', required=False),
+                                            connectors=dict(type='list', required=False),
                                             discovery_group=dict(type='str', required=False),
                                         )),
                                     connector=dict(
