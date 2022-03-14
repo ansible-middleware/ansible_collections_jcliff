@@ -1,6 +1,12 @@
 { "messaging-activemq" => {
     "server" => {
         "default" => {
+            {% if 'server_property' in values %}
+                {% for item in values['server_property'] %}
+                    "{{ item['name'] }}" => "{{ item['value'] }}",
+                {% endfor %}
+            {% endif %}
+        
             {% if 'jms_queue' in values %}
                 "jms-queue" => {
                     {% for item in values['jms_queue'] %}
@@ -32,7 +38,7 @@
                     {% for item in values['connection_factory'] %}
                         "{{ item['name'] }}" => {
                             "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
-                            {% if 'connectors' in item %} "connectors" => "{{ item['connectors'] }}", {% endif %}
+                            {% if 'connectors' in item %} "connectors" => [{% for conn in item['connectors'] %}"{{ conn }}"{{ "," if not loop.last else ""}}{% endfor %}], {% endif %}
                             {% if 'discovery_group' in item %} "discovery-group" => "{{ item['discovery_group'] }}", {% endif %}
                         },
                     {% endfor %}
@@ -63,8 +69,13 @@
 
             {% if 'address_setting' in values %}
                 "address-setting" => {
-                    {% for item in values %}
-                        "{{ item.name }}" => "{{ item.value }}",
+                    {% for item in values['address_setting'] %}
+                        "{{ item.name }}" => {
+                            {% if 'dead_letter_address' in item %} "dead-letter-address" => "{{ item.dead_letter_address }}", {% endif %}
+                            {% if 'expiry_address' in item %} "expiry-address" => "{{ item.expiry_address }}", {% endif %}
+                            {% if 'redelivery_delay' in item %} "redelivery-delay" => "{{ item.redelivery_delay }}", {% endif %}
+                            {% if 'max_delivery_attempts' in item %} "max-delivery-attempts" => "{{ item.max_delivery_attempts }}" {% endif %}
+                        }{{ "," if not loop.last else "" }}
                     {% endfor %}
                 },
             {% endif %}

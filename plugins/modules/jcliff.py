@@ -249,63 +249,76 @@ options:
               - Datasource validate on match.
             type: str
             default: 'undefined'
+
       xadatasources:
         description:
           - XA Datasource configurations.
         type: list
         suboptions:
+
           name:
             description:
               - Datasource name.
             type: str
             required: True
+
           pool_name:
             description:
               - Name of the datasource pool.
             type: str
+
           jndi_name:
             description:
               - JNDI name.
             type: str
             required: True
+
           use_java_context:
             description:
               - Use the Java context.
             type: str
             default: 'true'
+
           xa_datasource_properties:
             description:
               - Properties for XA datasource
             type: str
             required: True
+
           driver_name:
             description:
               - Name of the driver.
             type: str
             required: True
+
           enabled:
             description:
               - Whether the datasource is enabled.
             type: str
             default: 'true'
+
           password:
             description:
               - Datasource password.
             type: str
+
           user_name:
             description:
               - Datasource user name.
             type: str
+
           no_recovery:
             description:
               - Should datasource attempt recovery.
             type: bool
             default: 'undefined'
+
           validate_on_match:
             description:
               - 
             type: bool
             default: 'undefined'
+
           background_validation:
             description:
               - The validate-on-match element indicates whether or not 
@@ -313,6 +326,7 @@ options:
                 factory attempts to match a managed connection for a given set.
             type: bool
             default: 'undefined'
+            
           valid_connection_checker_class_name:
             description:
               - An org.jboss.jca.adapters.jdbc.ValidConnectionChecker that 
@@ -320,6 +334,7 @@ options:
                 to validate is a connection is valid.
             type: str
             default: 'undefined'
+
           check_valid_connection_sql:
             description:
               - Datasource SQL query for checking a valid connection.
@@ -1314,7 +1329,7 @@ def main():
                                     check_valid_connection_sql=dict(
                                         type='str', default='undefined'),
                                     validate_on_match=dict(type='str', default='undefined'))),
-                              xadatasources=dict(
+                            xadatasources=dict(
                                 type='list', required=False, elements='dict',
                                 options=dict(
                                     name=dict(type='str', required=True),
@@ -1450,6 +1465,10 @@ def main():
                                         )))),
                             messaging_activemq=dict(
                                 type='dict', required=False, options=dict(
+                                    server_property=dict(
+                                        type='list' required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            value=dict(type='str', required=True))),
                                     jms_queue=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
@@ -1470,7 +1489,7 @@ def main():
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             entries=dict(type='list', required=True),
-                                            connectors=dict(type='str', required=False),
+                                            connectors=dict(type='list', required=False),
                                             discovery_group=dict(type='str', required=False),
                                         )),
                                     connector=dict(
@@ -1488,6 +1507,10 @@ def main():
                                     address_setting=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
+                                            dead_letter_address=dict(type='str', required=False),
+                                            expiry_address=dict(type='str', required=False),
+                                            redelivery_delay=dict(type='int', required=False),
+                                            max_delivery_attempts=dict(type='int', required=False)
                                         )),
                                     security_setting=dict(
                                         type='list', required=False, elements='dict', options=dict(
