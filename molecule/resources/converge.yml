@@ -28,7 +28,6 @@
 
     - include_role:
         name: wildfly_driver
-        tasks_from: jdbc_driver.yml
       vars:
         wildfly_user: wildfly
         jdbc_driver_module_dir: "{{ wildfly_home }}//modules/org/postgresql/main"

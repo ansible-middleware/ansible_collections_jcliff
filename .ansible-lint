@@ -1,0 +1,32 @@
+# .ansible-lint
+exclude_paths:
+  - .cache/
+  - .github/
+  - molecule/
+  - docs/
+  - .ansible-lint
+  - .yamllint
+
+rulesdir:
+   - ../../ansible-lint-custom-rules/rules/
+
+enable_list:
+  - fqcn-builtins  # opt-in
+  - no-log-password  # opt-in
+
+skip_list:
+  - file_is_small_enough
+
+warn_list:
+  - role_vars_start_with_role_name
+  - vars_in_vars_files_have_valid_names
+  - vars_should_not_be_used
+  - experimental
+  - fqcn-builtins
+  - ignore-errors
+  - no-handler
+  - no-log-password
+  - unnamed-task
+
+use_default_rules: true
+parseable: true
