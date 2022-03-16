@@ -4,14 +4,14 @@
     <title>jcliff Ansible Collection documentation index</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://ansible-middleware.github.io/jcliff/main/_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="https://ansible-middleware.github.io/jcliff/main/_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="https://ansible-middleware.github.io/jcliff/main/_static/ansible-basic-sphinx-ext.css" type="text/css" />
-    <script data-url_root="./" id="documentation_options" src="https://ansible-middleware.github.io/jcliff/main/_static/documentation_options.js"></script>
-    <script src="https://ansible-middleware.github.io/jcliff/main/_static/jquery.js"></script>
-    <script src="https://ansible-middleware.github.io/jcliff/main/_static/underscore.js"></script>
-    <script src="https://ansible-middleware.github.io/jcliff/main/_static/doctools.js"></script>
-    <script src="https://ansible-middleware.github.io/jcliff/main/_static/js/theme.js"></script>
+    <link rel="stylesheet" href="master/_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="master/_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="master/_static/ansible-basic-sphinx-ext.css" type="text/css" />
+    <script data-url_root="./" id="documentation_options" src="master/_static/documentation_options.js"></script>
+    <script src="master/_static/jquery.js"></script>
+    <script src="master/_static/underscore.js"></script>
+    <script src="master/_static/doctools.js"></script>
+    <script src="master/_static/js/theme.js"></script>
   </head>
 
 <body class="wy-body-for-nav">
