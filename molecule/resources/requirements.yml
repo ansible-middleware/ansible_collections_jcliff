@@ -1,3 +1,5 @@
 ---
 collections:
-  - middleware_automation.wildfly
+  - name: middleware_automation.wildfly
+  - name: community.docker
+    version: ">=1.9.1"
