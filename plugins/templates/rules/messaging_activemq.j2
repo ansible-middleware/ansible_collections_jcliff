@@ -89,7 +89,7 @@
 
             {% if 'remote_acceptor' in values %}
                 "remote-acceptor" => {
-                    {% for item in values %}
+                    {% for item in values['remote_acceptor'] %}
                         "{{ item.name }}" => "{{ item.value }}",
                     {% endfor %}
                 },
@@ -97,7 +97,7 @@
 
             {% if 'remote_connector' in values %}
                 "remote-connector" => {
-                    {% for item in values['connector'] %}
+                    {% for item in values['remote_connector'] %}
                         "{{ item['name'] }}" => {
                             {% if 'socket_binding' in item %} "socket-binding" => "{{ item['socket_binding'] }}", {% endif %}
                         },
@@ -107,7 +107,7 @@
 
             {% if 'in_vm_acceptor' in values %}
                 "in-vm-acceptor" => {
-                    {% for item in values['in-vm-acceptor'] %}
+                    {% for item in values['in_vm_acceptor'] %}
                         "{{ item['name'] }}" => {
                             {% if 'server_id' in item %} "server-id" => "{{ item['server_id'] }}", {% endif %}
                         },
