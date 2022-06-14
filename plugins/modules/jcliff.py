@@ -60,6 +60,7 @@ options:
       - Home directory for the Wildfly or JBoss EAP server.
     type: str
     aliases: ['jboss_home']
+    required: True
 
   management_host:
     description:
@@ -100,6 +101,12 @@ options:
     type: int
     default: 30000
 
+  reconnect_delay:
+    description:
+      - Set jcliff reconnect delay
+    type: int
+    default: 30000
+
   state:
     description:
       - If 'present', configurations will be applied to the Wildfly/JBoss EAP server.
@@ -112,45 +119,40 @@ options:
     description:
       - Wildfly or JBoss EAP Subsystems or configuration component
     type: list
+    elements: dict
     aliases: ['subsystems']
     suboptions:
-
       drivers:
         description:
           - JDBC driver configurations.
         type: list
+        elements: dict
         suboptions:
-
           driver_name:
             description:
               - Name of the driver.
             type: str
             required: True
-
           driver_module_name:
             description:
               - Name of the driver module.
             type: str
             required: True
-
           driver_xa_datasource_class_name:
             description:
               - Class name for the XA datasource.
             type: str
             default: 'undefined'
-
           driver_class_name:
             description:
               - Driver class name.
             type: str
             default: 'undefined'
-
           driver_datasource_class_name:
             description:
               - Class name for the datasource.
             type: str
             default: 'undefined'
-
           module_slot:
             description:
               - Name of the module slot.
@@ -161,89 +163,75 @@ options:
         description:
           - Datasource configurations.
         type: list
+        elements: dict
         suboptions:
-
           name:
             description:
               - Datasource name.
             type: str
             required: True
-
           pool_name:
             description:
               - Name of the datasource pool.
             type: str
-
           jndi_name:
             description:
               - JNDI name.
             type: str
             required: True
-
           use_java_context:
             description:
               - Use the Java context.
             type: str
             default: 'true'
-
           connection_url:
             description:
               - Connection URL.
             type: str
             required: True
-
           driver_name:
             description:
               - Name of the driver.
             type: str
             required: True
-
           enabled:
             description:
               - Whether the datasource is enabled.
             type: str
             default: 'true'
-
           password:
             description:
               - Datasource password.
             type: str
-
           user_name:
             description:
               - Datasource user name.
             type: str
-
           max_pool_size:
             description:
               - Datasource maximum pool size.
             type: str
             default: 'undefined'
-
           min_pool_size:
             description:
               - Datasource minimum pool size.
             type: str
             default: 'undefined'
-
           idle_timeout_minutes:
             description:
               - Datasource idle timeout minutes.
             type: str
             default: 'undefined'
-
           query_timeout:
             description:
               - Datasource query timeout.
             type: str
             default: 'undefined'
-
           check_valid_connection_sql:
             description:
               - Datasource SQL query for checking a valid connection.
             type: str
             default: 'undefined'
-
           validate_on_match:
             description:
               - Datasource validate on match.
@@ -254,13 +242,12 @@ options:
         description:
           - System properties.
         type: list
+        elements: dict
         suboptions:
-
           name:
             description:
               - System property name.
             type: str
-
           value:
             description:
               - System property value.
@@ -270,43 +257,38 @@ options:
         description:
           - Deployments.
         type: list
+        elements: dict
         suboptions:
-
           name:
             description:
               - Name of the deployment.
             type: str
-
+            required: True
           path:
             description:
               - Path to the deployment.
             type: str
             required: True
-
           disabled:
             description:
               - Adds to the repository in a disabled state.
             type: bool
             required: False
-
           runtime_name:
             description:
               - Runtime of the deployment.
             type: str
             required: False
-
           replace_name_regex:
             description:
               - Regex pattern to replace the deployment if the value matches the name.
             type: str
             required: False
-
           replace_runtime_name_regex:
             description:
               - Regex pattern to replace the deployment if the value matches the runtime name.
             type: str
             required: False
-
           unmanaged:
             description:
               - Specifies whether the deployment should be managed.
@@ -317,6 +299,7 @@ options:
         description:
           - Interface.
         type: list
+        elements: dict
         suboptions:
           name:
             description:
@@ -403,12 +386,14 @@ options:
         description:
           - Keycloak.
         type: list
+        elements: dict
         suboptions:
 
           secure_deployment:
             description:
               - List of applications to secure using Keycloak.
             type: list
+            elements: dict
             suboptions:
 
               deployment_name:
@@ -459,14 +444,15 @@ options:
                   - Should only be used during development and NEVER in production as it will disable verification of SSL certificates. Default false.
                 type: bool
 
-              enable_cors:
-                description:
-                  - Enables CORS support. It will handle CORS preflight requests and look into the access token to determine valid origins. Default false.
-                type: bool
+              # enable_cors:
+              #   description:
+              #     - Enables CORS support. It will handle CORS preflight requests and look into the access token to determine valid origins. Default false.
+              #   type: bool
       logging:
         description:
           - logger.
         type: list
+        elements: dict
         suboptions:
           name:
             description:
@@ -482,6 +468,7 @@ options:
         description:
           - mail.
         type: list
+        elements: dict
         suboptions:
           name:
             description:
@@ -497,17 +484,18 @@ options:
             description:
               - Set jndi_name, for ex. java:jboss/mail/testSession
             type: str
-            required: False
+            required: True
           outbound_socket_binding_ref:
             description:
               - Set outbound_socket_binding_ref, for ex. mail-smtp
             type: str
-            required: False
+            required: True
           ssl:
             description:
               - Set ssl
             type: bool
             required: False
+
       modcluster:
         description:
           - Manage Modcluster.
@@ -517,6 +505,7 @@ options:
             description:
               - Modcluster proxy.
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -664,11 +653,13 @@ options:
                   - Number of seconds to wait for a worker to become available to handle a request.
                 type: int
                 required: False
+
       scanner:
         description:
           - The deployment scanner is only used in standalone mode.
           - It can be found in standalone.xml.
         type: list
+        elements: dict
         suboptions:
           name:
             description:
@@ -685,10 +676,12 @@ options:
                 https://docs.jboss.org/infinispan/9.4/serverconfigdocs/jboss-as-deployment-scanner_2_0.html
             type: str
             required: False
+
       transactions:
         description:
           - Setting node-identifier
         type: list
+        elements: dict
         suboptions:
           name:
             description:
@@ -700,6 +693,7 @@ options:
               - enter the respective value, corresponding to name.
             type: str
             required: True
+
       standard_sockets:
         description:
           - Create Socket bindings.
@@ -709,6 +703,7 @@ options:
             description:
               - Socket bindings.
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -739,6 +734,7 @@ options:
             description:
               - Remote destination outbound socket binding.
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -760,7 +756,6 @@ options:
                   - Whether the port value should remain fixed even if numeric offsets are applied to the other outbound sockets in the socket group.
                 type: bool
                 required: False
-                default: 'false'
               source_interface:
                 description:
                   - The name of the interface which will be used for the source address of the outbound socket.
@@ -771,6 +766,7 @@ options:
                   - The port number which will be used as the source port of the outbound socket.
                 type: int
                 required: False
+
       messaging_activemq:
         description:
           - Create messaging activemq.
@@ -795,6 +791,7 @@ options:
             description:
               - Create JMS queue
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -805,6 +802,7 @@ options:
                 description:
                   - Enter the required entries.
                 type: list
+                elements: str
                 required: True
               durable:
                 description:
@@ -830,6 +828,7 @@ options:
             description:
               - Configure jms topic.
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -840,6 +839,7 @@ options:
                 description:
                   - Enter the required entries.
                 type: list
+                elements: str
                 required: True
               legacy_entries:
                 description:
@@ -855,6 +855,7 @@ options:
             description:
               - Configure connection factory.
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -865,6 +866,7 @@ options:
                 description:
                   - Enter the required entries
                 type: list
+                elements: str
                 required: True
               connectors:
                 description:
@@ -880,6 +882,7 @@ options:
             description:
               - Configure connector.
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -890,11 +893,12 @@ options:
                 description:
                   - factory class
                 type: str
-                required: False
+                required: True
           bridge:
             description:
               - Configure bridge
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -905,21 +909,22 @@ options:
                 description:
                   - static connectors
                 type: str
-                required: False
+                required: True
               queue_name:
                 description:
                   - queue name
                 type: str
-                required: False
+                required: True
               discovery_group:
                 description:
                   - discovery group
                 type: str
-                required: False
+                required: True
           address_setting:
             description:
               - Configure address setting
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -950,6 +955,7 @@ options:
             description:
               - Configure security setting
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -995,6 +1001,7 @@ options:
             description:
               - Configure remote acceptor
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -1005,6 +1012,7 @@ options:
             description:
               - Configure remote connector
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -1020,6 +1028,7 @@ options:
             description:
               - Configure in vm acceptor
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -1035,6 +1044,7 @@ options:
             description:
               - Configure pooled connection factory
             type: list
+            elements: dict
             suboptions:
               name:
                 description:
@@ -1049,13 +1059,14 @@ options:
               entries:
                 description:
                   - Enter entries.
-                type: str
+                type: list
+                elements: str
                 required: True
               discovery:
                 description:
                   - Enter the details of discovery.
                 type: str
-                required: True
+                required: False
 '''
 
 EXAMPLES = '''
@@ -1238,7 +1249,7 @@ def main():
                                     driver_name=dict(
                                         type='str', required=True),
                                     enabled=dict(type='str', default='true'),
-                                    password=dict(type='str', required=False),
+                                    password=dict(type='str', required=False, no_log=True),
                                     user_name=dict(type='str', required=False),
                                     max_pool_size=dict(
                                         type='str', default='undefined'),
@@ -1300,7 +1311,7 @@ def main():
                                             name=dict(type='str', required=True),
                                             listener=dict(type='str', required=False),
                                             advertise=dict(type='bool', required=False),
-                                            advertise_security_key=dict(type='str', required=False),
+                                            advertise_security_key=dict(type='str', required=False, no_log=True),
                                             advertise_socket=dict(type='str', required=False),
                                             auto_enable_contexts=dict(type='bool', required=False),
                                             balancer=dict(type='str', required=False),
@@ -1333,8 +1344,8 @@ def main():
                                     value=dict(type='str', required=False))),
                             transactions=dict(
                                 type='list', required=False, elements='dict', options=dict(
-                                    name=dict(type='str', required=False),
-                                    value=dict(type='str', required=False))),
+                                    name=dict(type='str', required=True),
+                                    value=dict(type='str', required=True))),
                             standard_sockets=dict(
                                 type='dict', required=False, options=dict(
                                     socket_binding=dict(
@@ -1363,7 +1374,7 @@ def main():
                                     jms_queue=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
-                                            entries=dict(type='list', required=True),
+                                            entries=dict(type='list', required=True, elements='str'),
                                             durable=dict(type='str', required=False),
                                             legacy_entries=dict(type='str', required=False),
                                             headers=dict(type='str', required=False),
@@ -1372,15 +1383,15 @@ def main():
                                     jms_topic=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
-                                            entries=dict(type='list', required=True),
+                                            entries=dict(type='list', required=True, elements='str'),
                                             legacy_entries=dict(type='str', required=False),
                                             headers=dict(type='str', required=False),
                                         )),
                                     connection_factory=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
-                                            entries=dict(type='list', required=True),
-                                            connectors=dict(type='list', required=False),
+                                            entries=dict(type='list', required=True, elements='str'),
+                                            connectors=dict(type='str', required=False),
                                             discovery_group=dict(type='str', required=False),
                                         )),
                                     connector=dict(
@@ -1432,11 +1443,11 @@ def main():
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             connector=dict(type='str', required=True),
-                                            entries=dict(type='str', required=True),
-                                            discovery=dict(type='str', required=True),
+                                            entries=dict(type='list', required=True, elements='str'),
+                                            discovery=dict(type='str', required=False),
                                         )))),
                             keycloak=dict(
-                                type='list', required=False, elements='dict', options=dict(
+                                no_log=True, type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             deployment_name=dict(type='str', required=True),
