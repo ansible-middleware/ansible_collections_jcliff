@@ -7,8 +7,8 @@
 
 Function Check_If_Folder_Exists {
     Param(
-        [Parameter(Mandatory=$true)][Ansible.Basic.AnsibleModule]$module,
-        [Parameter(Mandatory=$true)][String]$key
+        [Parameter(Mandatory = $true)][Ansible.Basic.AnsibleModule]$module,
+        [Parameter(Mandatory = $true)][String]$key
     )
 
     $folder = $module.Params[$key]
@@ -20,7 +20,7 @@ Function Check_If_Folder_Exists {
 
 Function JCliff_Present {
     Param (
-        [Parameter(Mandatory=$true)][Ansible.Basic.AnsibleModule]$module
+        [Parameter(Mandatory = $true)][Ansible.Basic.AnsibleModule]$module
     )
 
     Execute_Rules_With_Jcliff $module
@@ -31,7 +31,7 @@ Function JCliff_Present {
 
 Function JCliff_Absent {
     Param (
-        [Parameter(Mandatory=$true)][Ansible.Basic.AnsibleModule]$module
+        [Parameter(Mandatory = $true)][Ansible.Basic.AnsibleModule]$module
     )
 
     $module.Result.absent = "not yet implemented"
@@ -41,7 +41,7 @@ Function JCliff_Absent {
 
 Function List_Rule_files {
     Param (
-        [Parameter(Mandatory=$true)][String]$rules_dir
+        [Parameter(Mandatory = $true)][String]$rules_dir
     )
 
     $rule_files = @()
@@ -55,12 +55,13 @@ Function List_Rule_files {
 
 Function Execute_Rules_With_Jcliff {
     Param (
-        [Parameter(Mandatory=$true)][Ansible.Basic.AnsibleModule]$module
+        [Parameter(Mandatory = $true)][Ansible.Basic.AnsibleModule]$module
     )
 
     $jboss_cli_path = Join-Path -Path $(Resolve-Path -LiteralPath $module.Params.wfly_home) -ChildPath "bin/jboss-cli.bat"
 
-    $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$(Resolve-Path -LiteralPath $module.Params.rules_dir)", "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
+    $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$(Resolve-Path -LiteralPath $module.Params.rules_dir)",
+            "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
 
     if ($module.Params.management_username) {
         $jcliff_command_line_args += "--user=$($module.Params.management_username)"
@@ -97,10 +98,9 @@ Function Execute_Rules_With_Jcliff {
     $module.Result.rc = $process.ExitCode
 
     if ($process.ExitCode -eq 0) {
-        if($output -like '*Server configuration changed: true*') {
+        if ($output -like '*Server configuration changed: true*') {
             $module.Result.jcliff = $jcliff_command_line_args
             $module.Result.changed = $true
-
         } else {
             $module.Result.changed = $false
         }
@@ -108,7 +108,6 @@ Function Execute_Rules_With_Jcliff {
     } else {
         $module.Result.jcliff_cli = "$(Resolve-Path -LiteralPath $module.Params.jcliff) $($jcliff_command_line_args)"
         $module.FailJson("Failed to execute jcliff module", $output)
-
     }
 }
 
@@ -136,12 +135,12 @@ $spec = @{
             options = @{
                 drivers = @{ type = "list"; elements = "dict";
                     options = @{
-                        driver_name = @{ type = "str"; required = $true}
-                        driver_module_name = @{ type = "str"; required = $true}
-                        driver_xa_datasource_class_name = @{ type = "str"; default = "undefined"}
-                        driver_class_name = @{ type = "str"; default = "undefined"}
-                        driver_datasource_class_name = @{ type = "str"; default = "undefined"}
-                        module_slot = @{ type = "str"; default = "undefined"}
+                        driver_name = @{ type = "str"; required = $true }
+                        driver_module_name = @{ type = "str"; required = $true }
+                        driver_xa_datasource_class_name = @{ type = "str"; default = "undefined" }
+                        driver_class_name = @{ type = "str"; default = "undefined" }
+                        driver_datasource_class_name = @{ type = "str"; default = "undefined" }
+                        module_slot = @{ type = "str"; default = "undefined" }
                     }
                 }
                 datasources = @{ type = "list"; elements = "dict";
@@ -155,12 +154,12 @@ $spec = @{
                         enabled = @{ type = "str"; default = "true" }
                         password = @{ type = "str" }
                         user_name = @{ type = "str" }
-                        max_pool_size = @{ type = "str"; default = "undefined"}
-                        min_pool_size = @{ type = "str"; default = "undefined"}
-                        idle_timeout_minutes = @{ type = "str"; default = "undefined"}
-                        query_timeout = @{ type = "str"; default = "undefined"}
-                        check_valid_connection_sql = @{ type = "str"; default = "undefined"}
-                        validate_on_match = @{ type = "str"; default = "undefined"}
+                        max_pool_size = @{ type = "str"; default = "undefined" }
+                        min_pool_size = @{ type = "str"; default = "undefined" }
+                        idle_timeout_minutes = @{ type = "str"; default = "undefined" }
+                        query_timeout = @{ type = "str"; default = "undefined" }
+                        check_valid_connection_sql = @{ type = "str"; default = "undefined" }
+                        validate_on_match = @{ type = "str"; default = "undefined" }
                     }
                 }
                 deployments = @{ type = "list"; elements = "dict";
@@ -193,8 +192,8 @@ $spec = @{
                 }
                 system_properties = @{ type = "list"; elements = "dict";
                     options = @{
-                        name = @{ type = "str"}
-                        value = @{ type = "str"}
+                        name = @{ type = "str" }
+                        value = @{ type = "str" }
                     }
                 }
                 logging = @{ type = "list"; required = $false ; elements = "dict";
@@ -202,10 +201,10 @@ $spec = @{
                         name = @{ type = "str" ; required = $true }
                         level = @{ type = "str"; required = $false }
                     }
-               }
+                }
             }
         }
-        state = @{ type = "str"; choices = "absent", "present"; default = "present"  }
+        state = @{ type = "str"; choices = "absent", "present"; default = "present" }
     }
     supports_check_mode = $false
 }
@@ -217,7 +216,7 @@ if (Test-Path -LiteralPath env:JCLIFF_HOME) {
 }
 
 if ($module.Params.jcliff -eq $default_jcliff) {
-    $module.Params.jcliff =Join-Path -Path $module.Params.jcliff_home -ChildPath "jcliff.bat"
+    $module.Params.jcliff = Join-Path -Path $module.Params.jcliff_home -ChildPath "jcliff.bat"
 }
 
 if ($module.Params.rules_dir -eq $default_rules_dir) {
