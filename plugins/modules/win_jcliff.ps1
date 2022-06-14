@@ -61,7 +61,7 @@ Function Execute_Rules_With_Jcliff {
     $jboss_cli_path = Join-Path -Path $(Resolve-Path -LiteralPath $module.Params.wfly_home) -ChildPath "bin/jboss-cli.bat"
 
     $jcliff_command_line_args = @("--cli=$jboss_cli_path", "--ruledir=$(Resolve-Path -LiteralPath $module.Params.rules_dir)",
-            "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
+        "--controller=$($module.Params.management_host):$($module.Params.management_port)", "-v")
 
     if ($module.Params.management_username) {
         $jcliff_command_line_args += "--user=$($module.Params.management_username)"
@@ -101,11 +101,13 @@ Function Execute_Rules_With_Jcliff {
         if ($output -like '*Server configuration changed: true*') {
             $module.Result.jcliff = $jcliff_command_line_args
             $module.Result.changed = $true
-        } else {
+        }
+        else {
             $module.Result.changed = $false
         }
         $module.Result.present = $output
-    } else {
+    }
+    else {
         $module.Result.jcliff_cli = "$(Resolve-Path -LiteralPath $module.Params.jcliff) $($jcliff_command_line_args)"
         $module.FailJson("Failed to execute jcliff module", $output)
     }
@@ -122,11 +124,11 @@ $spec = @{
         jcliff = @{ type = "str"; default = $default_jcliff }
         management_username = @{ type = "str"; }
         management_password = @{ type = "str"; no_log = $true }
-        rules_dir = @{ type = "str"; default = $default_rules_dir  }
+        rules_dir = @{ type = "str"; default = $default_rules_dir }
         wfly_home = @{ type = "str" ; required = $true ; aliases = @("jboss_home") }
         management_host = @{ type = "str" ; default = "localhost" }
         management_port = @{ type = "str" ; default = "9990" }
-        jcliff_jvm = @{ type = "str" ; default = $env:JAVA_HOME  }
+        jcliff_jvm = @{ type = "str" ; default = $env:JAVA_HOME }
         rule_file = @{ type = "str" }
         remote_rulesdir = @{ type = "str" }
         debug_mode = @{ type = "bool"; default = $false }
@@ -232,7 +234,8 @@ if (!$module.Params.jcliff_jvm) {
 
 if ($module.Params.state -eq "present") {
     JCliff_Present $module
-} elseif ($state -eq "absent") {
+}
+elseif ($state -eq "absent") {
     JCliff_Absent $module
 }
 
