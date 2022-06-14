@@ -76,11 +76,13 @@ class ActionModule(ActionBase):
 
         if components is not None:
             for component in components:
-                display.vvvv(u"Component ID: %s" % component)
+                display.vvvv(u"Component: %s" % component)
                 for key in component.keys():
+                    display.vvvv(u"Component ID: %s" % key)
                     if key in self.components_with_items:
                         display.vvvv("Components has items:")
                         for index, component_values in enumerate(component[key]):
+                            display.vvvv("%s" % component_values)
                             self._transfer_file(
                                 self._template_from_jinja_to_yml(
                                     self._lookup_component_template(key),
@@ -89,6 +91,7 @@ class ActionModule(ActionBase):
                                 str(index) + self.TARGET_FILENAME_SUFFIX)
                     if key in self.components:
                         display.vvvv("Components:")
+                        display.vvvv("%s" % component[key])
                         self._transfer_file(self._template_from_jinja_to_yml(
                             self._lookup_component_template(key), {"values": component[key]}),
                             tmp_remote_src + key + self.TARGET_FILENAME_SUFFIX)

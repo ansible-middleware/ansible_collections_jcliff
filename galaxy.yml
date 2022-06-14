@@ -1,6 +1,6 @@
 namespace: middleware_automation
 name: jcliff
-version: "0.0.21"
+version: "0.0.22"
 readme: README.md
 authors:
   - Romain Pelisse <belaran@redhat.com>
@@ -15,8 +15,14 @@ tags:
   - cli
   - server
 dependencies:
-  middleware_automation.wildfly: '>=0.0.4'
+  middleware_automation.wildfly: '>=1.0.0'
 repository: https://github.com/ansible-middleware/ansible_collections_jcliff
 documentation: https://github.com/ansible-middleware/ansible_collections_jcliff
 homepage: https://github.com/ansible-middleware/ansible_collections_jcliff
 issues: https://github.com/ansible-middleware/ansible_collections_jcliff/issues
+build_ignore:
+  - molecule
+  - .github
+  - '*.tar.gz'
+  - '*.zip'
+  - changelogs/fragments/.gitignore
