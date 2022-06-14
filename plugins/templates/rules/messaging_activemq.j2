@@ -95,7 +95,7 @@
                 },
             {% endif %}
 
-            {% if 'remote-connector' in values %}
+            {% if 'remote_connector' in values %}
                 "remote-connector" => {
                     {% for item in values['connector'] %}
                         "{{ item['name'] }}" => {

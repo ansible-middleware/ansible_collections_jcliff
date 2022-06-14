@@ -1020,7 +1020,7 @@ options:
                 description:
                   - Enter the details of discovery.
                 type: str
-                required: True
+                required: False
 '''
 
 EXAMPLES = '''
@@ -1390,7 +1390,7 @@ def main():
                                             name=dict(type='str', required=True),
                                             connector=dict(type='str', required=True),
                                             entries=dict(type='str', required=True),
-                                            discovery=dict(type='str', required=True),
+                                            discovery=dict(type='str', required=False),
                                         )))),
                             keycloak=dict(
                                 type='list', required=False, elements='dict', options=dict(
