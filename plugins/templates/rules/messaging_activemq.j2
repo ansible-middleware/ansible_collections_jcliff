@@ -120,7 +120,7 @@
                     {% for item in values['pooled_connection_factory'] %}
                         "{{ item['name'] }}" => {
                             {% if 'connector' in item %} "connector" => "{{ item['connector'] }}", {% endif %}
-                            {% if 'entries' in item %} "entries" => "{{ item['entries'] }}", {% endif %}
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
                             {% if 'discovery' in item %} "discovery" => "{{ item['discovery'] }}", {% endif %}
                         },
                     {% endfor %}
