@@ -1,6 +1,6 @@
 namespace: middleware_automation
 name: jcliff
-version: "0.0.22"
+version: "0.0.23"
 readme: README.md
 authors:
   - Romain Pelisse <belaran@redhat.com>
