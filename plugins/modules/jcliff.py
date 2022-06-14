@@ -872,6 +872,7 @@ options:
                 description:
                   - Legacy entries
                 type: list
+                elements: str
                 required: False
               discovery_group:
                 description:
@@ -1391,7 +1392,7 @@ def main():
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             entries=dict(type='list', required=True, elements='str'),
-                                            connectors=dict(type='str', required=False),
+                                            connectors=dict(type='list', required=False, elements='str'),
                                             discovery_group=dict(type='str', required=False),
                                         )),
                                     connector=dict(
