@@ -40,7 +40,7 @@ jobs:
           ln -s /home/runner/work/ansible_collections_jcliff/ansible_collections_jcliff /home/runner/.ansible/collections
 
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }} --exclude changelogs/fragments/.gitignore
+        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }} --exclude changelogs/fragments/.gitignore --exclude plugins/modules/win_jcliff.ps1
         working-directory: ./ansible_collections/middleware_automation/jcliff
 
       - name: Install requirements.yml
