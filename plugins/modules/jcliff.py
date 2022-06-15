@@ -315,16 +315,16 @@ options:
 
           background_validation:
             description:
-              - The validate-on-match element indicates whether or not 
+              - 'The validate-on-match element indicates whether or not 
                 connection level validation should be done when a connection 
-                factory attempts to match a managed connection for a given set.
+                factory attempts to match a managed connection for a given set.'
             type: bool
             
           valid_connection_checker_class_name:
             description:
-              - An org.jboss.jca.adapters.jdbc.ValidConnectionChecker that 
+              - 'An org.jboss.jca.adapters.jdbc.ValidConnectionChecker that 
                 provides a SQLException isValidConnection(Connection e) method 
-                to validate is a connection is valid.
+                to validate is a connection is valid.'
             type: str
             default: 'undefined'
 
@@ -342,16 +342,16 @@ options:
           
           same_rm_override:
             description:
-              - The same-rm-override element allows one to unconditionally set 
+              - 'The same-rm-override element allows one to unconditionally set 
                 whether the javax.transaction.xa.XAResource.isSameRM(XAResource) 
-                returns true or false.
+                returns true or false.'
             type: bool
             
           background_validation_millis:
             description:
-              - The background-validation-millis element specifies the amount of 
+              - 'The background-validation-millis element specifies the amount of 
                 time, in milliseconds, that background validation will run. 
-                Changing this value require a server restart.
+                Changing this value require a server restart.'
             type: int
 
       system_properties:
@@ -1390,7 +1390,7 @@ def main():
                                         type='str', default='true'),
                                     xa_datasource_properties=dict(
                                         type='dict', required=True, options=dict(
-                                          url=dict(type='str', required=False)
+                                          url=dict(type='str', required=True)
                                         )),
                                     driver_name=dict(
                                         type='str', required=True),
@@ -1398,18 +1398,18 @@ def main():
                                     password=dict(type='str', required=False, no_log=True),
                                     user_name=dict(type='str', required=False),
                                     no_recovery=dict(
-                                        type='bool', default='undefined'),
+                                        type='bool'),
                                     validate_on_match=dict(type='str', default='undefined'),
                                     background_validation=dict(
-                                        type='bool', default='undefined'),
+                                        type='bool'),
                                     valid_connection_checker_class_name=dict(
                                         type='str', default='undefined'),
                                     exception_sorter_class_name=dict(
                                         type='str', default='undefined'),
                                     check_valid_connection_sql=dict(
                                         type='str', default='undefined'),
-                                    same_rm_override=dict(type='bool', default='undefined'),
-                                    background_validation_millis=dict(type='int', default='undefined'),
+                                    same_rm_override=dict(type='bool'),
+                                    background_validation_millis=dict(type='int'),
                                     )),
                             system_properties=dict(
                                 type='list', required=False, elements='dict', options=dict(
