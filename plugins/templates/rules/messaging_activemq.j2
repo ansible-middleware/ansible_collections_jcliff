@@ -100,15 +100,15 @@
 
             {% if 'remote_acceptor' in values %}
                 "remote-acceptor" => {
-                    {% for item in values %}
+                    {% for item in values['remote_acceptor'] %}
                         "{{ item.name }}" => "{{ item.value }}",
                     {% endfor %}
                 },
             {% endif %}
 
-            {% if 'remote-connector' in values %}
+            {% if 'remote_connector' in values %}
                 "remote-connector" => {
-                    {% for item in values['connector'] %}
+                    {% for item in values['remote_connector'] %}
                         "{{ item['name'] }}" => {
                             {% if 'socket_binding' in item %} "socket-binding" => "{{ item['socket_binding'] }}", {% endif %}
                         },
@@ -118,7 +118,7 @@
 
             {% if 'in_vm_acceptor' in values %}
                 "in-vm-acceptor" => {
-                    {% for item in values['in-vm-acceptor'] %}
+                    {% for item in values['in_vm_acceptor'] %}
                         "{{ item['name'] }}" => {
                             {% if 'server_id' in item %} "server-id" => "{{ item['server_id'] }}", {% endif %}
                         },
@@ -131,7 +131,7 @@
                     {% for item in values['pooled_connection_factory'] %}
                         "{{ item['name'] }}" => {
                             {% if 'connector' in item %} "connector" => "{{ item['connector'] }}", {% endif %}
-                            {% if 'entries' in item %} "entries" => "{{ item['entries'] }}", {% endif %}
+                            "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
                             {% if 'discovery' in item %} "discovery" => "{{ item['discovery'] }}", {% endif %}
                         },
                     {% endfor %}

@@ -4,7 +4,13 @@ name: CI
   push:
     branches:
       - master
+      - main
   pull_request:
+
+env:
+  COLORTERM: 'yes'
+  TERM: 'xterm-256color'
+  PYTEST_ADDOPTS: '--color=yes'
 
 jobs:
   molecule:
@@ -34,7 +40,7 @@ jobs:
           ln -s /home/runner/work/ansible_collections_jcliff/ansible_collections_jcliff /home/runner/.ansible/collections
 
       - name: Run sanity tests
-        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }}
+        run: ansible-test sanity --docker -v --color --python ${{ matrix.python_version }} --exclude changelogs/fragments/.gitignore --exclude plugins/modules/win_jcliff.ps1
         working-directory: ./ansible_collections/middleware_automation/jcliff
 
       - name: Install requirements.yml
@@ -44,3 +50,6 @@ jobs:
       - name: Run molecule test
         run: molecule test --all
         working-directory: ./ansible_collections/middleware_automation/jcliff
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
