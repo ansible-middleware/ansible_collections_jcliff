@@ -775,18 +775,19 @@ options:
           server_property:
             description:
               - Creates and sets messaging-activemq server properties.
-              type: list
-              suboptions:
-                name:
-                  description:
-                    - Name of property.
-                  type: str
-                  required: True
-                value:
-                  description:
-                    - Value of property.
-                  type: str
-                  required: True
+            type: list
+            elements: dict
+            suboptions:
+              name:
+                description:
+                  - Name of property.
+                type: str
+                required: True
+              value:
+                description:
+                  - Value of property.
+                type: str
+                required: True
           jms_queue:
             description:
               - Create JMS queue
