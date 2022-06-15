@@ -1,6 +1,6 @@
 # Ansible Collection - middleware_automation.jcliff
 
-[![Build Status](https://github.com/ansible-middleware/ansible_collections_jcliff/workflows/CI/badge.svg?branch=master)](https://github.com/ansible-middleware/ansible_collections_jcliff/actions/workflows/ci.yml)
+[![Build Status](https://github.com/ansible-middleware/ansible_collections_jcliff/workflows/CI/badge.svg?branch=main)](https://github.com/ansible-middleware/ansible_collections_jcliff/actions/workflows/ci.yml)
 
 ## About
 

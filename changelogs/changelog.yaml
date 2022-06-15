@@ -1,2 +1,11 @@
 ancestor: 0.0.21
 releases:
+  0.0.22:
+    changes:
+      bugfixes:
+      - 'Fix jms component templating `#81 <https://github.com/ansible-middleware/ansible_collections_jcliff/pull/81>`_
+
+        '
+    fragments:
+    - 81.yaml
+    release_date: '2022-06-14'

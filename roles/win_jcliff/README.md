@@ -1,5 +1,5 @@
-jcliff
-=========
+win_jcliff
+==========
 
 Installs [jcliff](https://github.com/bserdar/jcliff) to manage Wildfly/JBoss EAP instances
 
@@ -45,7 +45,7 @@ The following is an example playbook that makes use of the role
     tasks:
       - name: Include Jcliff role for windows
         include_role:
-          name: win-jcliff
+          name: win_jcliff
 ```
 
 License
