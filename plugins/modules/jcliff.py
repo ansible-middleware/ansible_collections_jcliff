@@ -244,30 +244,25 @@ options:
         type: list
         elements: dict
         suboptions:
-
           name:
             description:
               - Datasource name.
             type: str
             required: True
-
           pool_name:
             description:
               - Name of the datasource pool.
             type: str
-
           jndi_name:
             description:
               - JNDI name.
             type: str
             required: True
-
           use_java_context:
             description:
               - Use the Java context.
             type: str
             default: 'true'
-
           xa_datasource_properties:
             description:
               - Properties for XA datasource
@@ -279,79 +274,67 @@ options:
                 type: str
                 required: True
             required: True
-
           driver_name:
             description:
               - Name of the driver.
             type: str
             required: True
-
           enabled:
             description:
               - Whether the datasource is enabled.
             type: str
             default: 'true'
-
           password:
             description:
               - Datasource password.
             type: str
-
           user_name:
             description:
               - Datasource user name.
             type: str
-
           no_recovery:
             description:
               - Should datasource attempt recovery.
             type: bool
-
           validate_on_match:
             description:
               - 
             type: str
             default: 'undefined'
-
           background_validation:
             description:
-              - 'The validate-on-match element indicates whether or not 
-                connection level validation should be done when a connection 
-                factory attempts to match a managed connection for a given set.'
+              - The validate-on-match element indicates whether or not
+              - connection level validation should be done when a connection
+              - factory attempts to match a managed connection for a given set.
             type: bool
-            
           valid_connection_checker_class_name:
             description:
-              - 'An org.jboss.jca.adapters.jdbc.ValidConnectionChecker that 
-                provides a SQLException isValidConnection(Connection e) method 
-                to validate is a connection is valid.'
+              - An org.jboss.jca.adapters.jdbc.ValidConnectionChecker that
+              - provides a SQLException isValidConnection(Connection e) method
+              - to validate is a connection is valid.
             type: str
             default: 'undefined'
-
           check_valid_connection_sql:
             description:
               - Datasource SQL query for checking a valid connection.
             type: str
             default: 'undefined'
-
           exception_sorter_class_name:
             description:
               - Which exception sorter class should be used.
             type: str
             default: 'undefined'
-          
           same_rm_override:
             description:
-              - 'The same-rm-override element allows one to unconditionally set 
-                whether the javax.transaction.xa.XAResource.isSameRM(XAResource) 
-                returns true or false.'
-            type: bool
-            
+              - The same-rm-override element allows one to unconditionally set
+              - whether the javax.transaction.xa.XAResource.isSameRM(XAResource)
+              - returns true or false.
+            type: bool 
           background_validation_millis:
             description:
-              - 'The background-validation-millis element specifies the amount of 
-                time, in milliseconds, that background validation will run. 
-                Changing this value require a server restart.'
+              - The background-validation-millis element specifies the amount of
+              - time, in milliseconds, that background validation will run.
+              - Changing this value require a server restart.
             type: int
 
       system_properties:
@@ -1410,7 +1393,7 @@ def main():
                                         type='str', default='undefined'),
                                     same_rm_override=dict(type='bool'),
                                     background_validation_millis=dict(type='int'),
-                                    )),
+                                )),
                             system_properties=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),
