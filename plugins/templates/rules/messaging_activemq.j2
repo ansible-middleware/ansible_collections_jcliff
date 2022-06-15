@@ -32,7 +32,7 @@
                     {% for item in values['connection_factory'] %}
                         "{{ item['name'] }}" => {
                             "entries" => [{% for entry in item['entries'] %}"{{ entry }}"{{ "," if not loop.last else "" }}{% endfor %}],
-                            {% if 'connectors' in item %} "connectors" => "{{ item['connectors'] }}", {% endif %}
+                            {% if 'connectors' in item %} "connectors" => ["{{ item['connectors'] }}"], {% endif %}
                             {% if 'discovery_group' in item %} "discovery-group" => "{{ item['discovery_group'] }}", {% endif %}
                         },
                     {% endfor %}
