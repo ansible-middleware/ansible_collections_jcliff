@@ -9,6 +9,11 @@ This changelog describes changes after version 0.0.21.
 v0.0.23-devel
 =============
 
+Minor Changes
+-------------
+
+- Extended support for messaging-activemq `#79 <https://github.com/ansible-middleware/ansible_collections_jcliff/pull/79>`_
+
 Bugfixes
 --------
 
