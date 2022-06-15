@@ -885,6 +885,22 @@ options:
           - Create messaging activemq.
         type: dict
         suboptions:
+          server_property:
+            description:
+              - Creates and sets messaging-activemq server properties.
+            type: list
+            elements: dict
+            suboptions:
+              name:
+                description:
+                  - Name of property.
+                type: str
+                required: True
+              value:
+                description:
+                  - Value of property.
+                type: str
+                required: True
           jms_queue:
             description:
               - Create JMS queue
@@ -969,7 +985,8 @@ options:
               connectors:
                 description:
                   - Legacy entries
-                type: str
+                type: list
+                elements: str
                 required: False
               discovery_group:
                 description:
@@ -1029,6 +1046,26 @@ options:
                   - Enter the details of address setting.
                 type: str
                 required: True
+              dead_letter_address:
+                description:
+                  - Sets the dead-letter-address.
+                type: str
+                required: False
+              expiry_address:
+                description:
+                  - Sets the expiry-address.
+                type: str
+                required: False
+              redelivery_delay:
+                description:
+                  - Sets the redelivery-delay.
+                type: int
+                required: False
+              max_delivery_attempts:
+                description:
+                  - Sets max number of delivery attempts.
+                type: int
+                required: False
           security_setting:
             description:
               - Configure security setting
@@ -1477,7 +1514,7 @@ def main():
                             messaging_activemq=dict(
                                 type='dict', required=False, options=dict(
                                     server_property=dict(
-                                        type='list' required=False, elements='dict', options=dict(
+                                        type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             value=dict(type='str', required=True))),
                                     jms_queue=dict(
@@ -1500,7 +1537,7 @@ def main():
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             entries=dict(type='list', required=True, elements='str'),
-                                            connectors=dict(type='str', required=False),
+                                            connectors=dict(type='list', required=False, elements='str'),
                                             discovery_group=dict(type='str', required=False),
                                         )),
                                     connector=dict(
