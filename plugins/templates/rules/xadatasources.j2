@@ -2,7 +2,7 @@
   "{{ values['name'] }}" => {
     {% if 'pool_name' in values %} "pool-name" => "{{ values['pool_name'] }}", {% endif %}
     "xa-datasource-properties" => {
-      {% if 'url' in values['xa-datasource_properties'] %} "URL" => { "value" => "{{ values['xa_datasource_properties']['url'] }}" } {% endif %}
+      {% if 'url' in values['xa_datasource_properties'] %} "URL" => { "value" => "{{ values['xa_datasource_properties']['url'] }}" } {% endif %}
     },
     "driver-name" => "{{ values['driver_name'] }}",
     "jndi-name" => "{{ values['jndi_name'] }}",
