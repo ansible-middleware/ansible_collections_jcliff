@@ -305,8 +305,8 @@ options:
             default: 'undefined'
           background_validation:
             description:
-              - Specifies that connections are validated on a background thread, 
-              - rather than being validated prior to use. 
+              - Specifies that connections are validated on a background thread,
+              - rather than being validated prior to use.
               - Mutually exclusive to validate-on-match.
             type: bool
           valid_connection_checker_class_name:
@@ -1375,7 +1375,7 @@ def main():
                                         type='str', default='true'),
                                     xa_datasource_properties=dict(
                                         type='dict', required=True, options=dict(
-                                          url=dict(type='str', required=True))),
+                                            url=dict(type='str', required=True))),
                                     driver_name=dict(
                                         type='str', required=True),
                                     enabled=dict(type='str', default='true'),
