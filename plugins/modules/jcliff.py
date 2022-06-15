@@ -242,6 +242,7 @@ options:
         description:
           - XA Datasource configurations.
         type: list
+        elements: dict
         suboptions:
 
           name:
@@ -270,7 +271,13 @@ options:
           xa_datasource_properties:
             description:
               - Properties for XA datasource
-            type: str
+            type: dict
+            suboptions:
+              url:
+                description:
+                  - url for this datasource
+                type: str
+                required: True
             required: True
 
           driver_name:
@@ -299,12 +306,11 @@ options:
             description:
               - Should datasource attempt recovery.
             type: bool
-            default: 'undefined'
 
           validate_on_match:
             description:
               - 
-            type: bool
+            type: str
             default: 'undefined'
 
           background_validation:
@@ -313,7 +319,6 @@ options:
                 connection level validation should be done when a connection 
                 factory attempts to match a managed connection for a given set.
             type: bool
-            default: 'undefined'
             
           valid_connection_checker_class_name:
             description:
@@ -341,7 +346,6 @@ options:
                 whether the javax.transaction.xa.XAResource.isSameRM(XAResource) 
                 returns true or false.
             type: bool
-            default: 'undefined'
             
           background_validation_millis:
             description:
@@ -349,7 +353,6 @@ options:
                 time, in milliseconds, that background validation will run. 
                 Changing this value require a server restart.
             type: int
-            default: 'undefined'
 
       system_properties:
         description:
@@ -1355,7 +1358,7 @@ def main():
                                     driver_name=dict(
                                         type='str', required=True),
                                     enabled=dict(type='str', default='true'),
-                                    password=dict(type='str', required=False),
+                                    password=dict(type='str', required=False, no_log=True),
                                     user_name=dict(type='str', required=False),
                                     no_recovery=dict(
                                         type='bool', default='undefined'),
@@ -1477,9 +1480,10 @@ def main():
                             messaging_activemq=dict(
                                 type='dict', required=False, options=dict(
                                     server_property=dict(
-                                        type='list' required=False, elements='dict', options=dict(
+                                        type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
-                                            value=dict(type='str', required=True))),
+                                            value=dict(type='str', required=True),
+                                        )),
                                     jms_queue=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
@@ -1554,7 +1558,8 @@ def main():
                                             connector=dict(type='str', required=True),
                                             entries=dict(type='list', required=True, elements='str'),
                                             discovery=dict(type='str', required=False),
-                                        )))),
+                                        )),
+                                      )),
                             keycloak=dict(
                                 no_log=True, type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
