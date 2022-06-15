@@ -298,14 +298,16 @@ options:
             type: bool
           validate_on_match:
             description:
-              - 
+              - The validate-on-match element indicates whether or not
+              - connection level validation should be done when a connection
+              - factory attempts to match a managed connection for a given set.
             type: str
             default: 'undefined'
           background_validation:
             description:
-              - The validate-on-match element indicates whether or not
-              - connection level validation should be done when a connection
-              - factory attempts to match a managed connection for a given set.
+              - Specifies that connections are validated on a background thread, 
+              - rather than being validated prior to use. 
+              - Mutually exclusive to validate-on-match.
             type: bool
           valid_connection_checker_class_name:
             description:
@@ -329,7 +331,7 @@ options:
               - The same-rm-override element allows one to unconditionally set
               - whether the javax.transaction.xa.XAResource.isSameRM(XAResource)
               - returns true or false.
-            type: bool 
+            type: bool
           background_validation_millis:
             description:
               - The background-validation-millis element specifies the amount of
@@ -1373,8 +1375,7 @@ def main():
                                         type='str', default='true'),
                                     xa_datasource_properties=dict(
                                         type='dict', required=True, options=dict(
-                                          url=dict(type='str', required=True)
-                                        )),
+                                          url=dict(type='str', required=True))),
                                     driver_name=dict(
                                         type='str', required=True),
                                     enabled=dict(type='str', default='true'),
@@ -1578,8 +1579,7 @@ def main():
                                             connector=dict(type='str', required=True),
                                             entries=dict(type='list', required=True, elements='str'),
                                             discovery=dict(type='str', required=False),
-                                        )),
-                                      )),
+                                        )))),
                             keycloak=dict(
                                 no_log=True, type='list', required=False, elements='dict', options=dict(
                                     secure_deployment=dict(
