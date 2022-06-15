@@ -9,6 +9,11 @@ This changelog describes changes after version 0.0.21.
 v0.0.23-devel
 =============
 
+Bugfixes
+--------
+
+- ActiveMQ connection-factory connectors requires a list, not string `#82 <https://github.com/ansible-middleware/ansible_collections_jcliff/pull/82>`_
+
 v0.0.22
 =======
 
