@@ -919,7 +919,7 @@ options:
                         elements: dict
                         suboptions:
                           predicate:
-                            description
+                            description:
                               - Predicate describing relevant requests for filtering
                             type: str
                             required: True
