@@ -238,6 +238,107 @@ options:
             type: str
             default: 'undefined'
 
+      xadatasources:
+        description:
+          - XA Datasource configurations.
+        type: list
+        elements: dict
+        suboptions:
+          name:
+            description:
+              - Datasource name.
+            type: str
+            required: True
+          pool_name:
+            description:
+              - Name of the datasource pool.
+            type: str
+          jndi_name:
+            description:
+              - JNDI name.
+            type: str
+            required: True
+          use_java_context:
+            description:
+              - Use the Java context.
+            type: str
+            default: 'true'
+          xa_datasource_properties:
+            description:
+              - Properties for XA datasource
+            type: dict
+            suboptions:
+              url:
+                description:
+                  - url for this datasource
+                type: str
+                required: True
+            required: True
+          driver_name:
+            description:
+              - Name of the driver.
+            type: str
+            required: True
+          enabled:
+            description:
+              - Whether the datasource is enabled.
+            type: str
+            default: 'true'
+          password:
+            description:
+              - Datasource password.
+            type: str
+          user_name:
+            description:
+              - Datasource user name.
+            type: str
+          no_recovery:
+            description:
+              - Should datasource attempt recovery.
+            type: bool
+          validate_on_match:
+            description:
+              - The validate-on-match element indicates whether or not
+              - connection level validation should be done when a connection
+              - factory attempts to match a managed connection for a given set.
+            type: str
+            default: 'undefined'
+          background_validation:
+            description:
+              - Specifies that connections are validated on a background thread,
+              - rather than being validated prior to use.
+              - Mutually exclusive to validate-on-match.
+            type: bool
+          valid_connection_checker_class_name:
+            description:
+              - An org.jboss.jca.adapters.jdbc.ValidConnectionChecker that
+              - provides a SQLException isValidConnection(Connection e) method
+              - to validate is a connection is valid.
+            type: str
+            default: 'undefined'
+          check_valid_connection_sql:
+            description:
+              - Datasource SQL query for checking a valid connection.
+            type: str
+            default: 'undefined'
+          exception_sorter_class_name:
+            description:
+              - Which exception sorter class should be used.
+            type: str
+            default: 'undefined'
+          same_rm_override:
+            description:
+              - The same-rm-override element allows one to unconditionally set
+              - whether the javax.transaction.xa.XAResource.isSameRM(XAResource)
+              - returns true or false.
+            type: bool
+          background_validation_millis:
+            description:
+              - The background-validation-millis element specifies the amount of
+              - time, in milliseconds, that background validation will run.
+              - Changing this value require a server restart.
+            type: int
+
       system_properties:
         description:
           - System properties.
@@ -772,6 +873,22 @@ options:
           - Create messaging activemq.
         type: dict
         suboptions:
+          server_property:
+            description:
+              - Creates and sets messaging-activemq server properties.
+            type: list
+            elements: dict
+            suboptions:
+              name:
+                description:
+                  - Name of property.
+                type: str
+                required: True
+              value:
+                description:
+                  - Value of property.
+                type: str
+                required: True
           jms_queue:
             description:
               - Create JMS queue
@@ -856,7 +973,8 @@ options:
               connectors:
                 description:
                   - Legacy entries
-                type: str
+                type: list
+                elements: str
                 required: False
               discovery_group:
                 description:
@@ -916,6 +1034,26 @@ options:
                   - Enter the details of address setting.
                 type: str
                 required: True
+              dead_letter_address:
+                description:
+                  - Sets the dead-letter-address.
+                type: str
+                required: False
+              expiry_address:
+                description:
+                  - Sets the expiry-address.
+                type: str
+                required: False
+              redelivery_delay:
+                description:
+                  - Sets the redelivery-delay.
+                type: int
+                required: False
+              max_delivery_attempts:
+                description:
+                  - Sets max number of delivery attempts.
+                type: int
+                required: False
           security_setting:
             description:
               - Configure security setting
@@ -1227,6 +1365,36 @@ def main():
                                     check_valid_connection_sql=dict(
                                         type='str', default='undefined'),
                                     validate_on_match=dict(type='str', default='undefined'))),
+                            xadatasources=dict(
+                                type='list', required=False, elements='dict',
+                                options=dict(
+                                    name=dict(type='str', required=True),
+                                    pool_name=dict(type='str', required=False),
+                                    jndi_name=dict(type='str', required=True),
+                                    use_java_context=dict(
+                                        type='str', default='true'),
+                                    xa_datasource_properties=dict(
+                                        type='dict', required=True, options=dict(
+                                            url=dict(type='str', required=True))),
+                                    driver_name=dict(
+                                        type='str', required=True),
+                                    enabled=dict(type='str', default='true'),
+                                    password=dict(type='str', required=False, no_log=True),
+                                    user_name=dict(type='str', required=False),
+                                    no_recovery=dict(
+                                        type='bool'),
+                                    validate_on_match=dict(type='str', default='undefined'),
+                                    background_validation=dict(
+                                        type='bool'),
+                                    valid_connection_checker_class_name=dict(
+                                        type='str', default='undefined'),
+                                    exception_sorter_class_name=dict(
+                                        type='str', default='undefined'),
+                                    check_valid_connection_sql=dict(
+                                        type='str', default='undefined'),
+                                    same_rm_override=dict(type='bool'),
+                                    background_validation_millis=dict(type='int'),
+                                )),
                             system_properties=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=False),
@@ -1332,6 +1500,11 @@ def main():
                                         )))),
                             messaging_activemq=dict(
                                 type='dict', required=False, options=dict(
+                                    server_property=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            value=dict(type='str', required=True),
+                                        )),
                                     jms_queue=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
@@ -1352,7 +1525,7 @@ def main():
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
                                             entries=dict(type='list', required=True, elements='str'),
-                                            connectors=dict(type='str', required=False),
+                                            connectors=dict(type='list', required=False, elements='str'),
                                             discovery_group=dict(type='str', required=False),
                                         )),
                                     connector=dict(
@@ -1370,6 +1543,10 @@ def main():
                                     address_setting=dict(
                                         type='list', required=False, elements='dict', options=dict(
                                             name=dict(type='str', required=True),
+                                            dead_letter_address=dict(type='str', required=False),
+                                            expiry_address=dict(type='str', required=False),
+                                            redelivery_delay=dict(type='int', required=False),
+                                            max_delivery_attempts=dict(type='int', required=False)
                                         )),
                                     security_setting=dict(
                                         type='list', required=False, elements='dict', options=dict(
