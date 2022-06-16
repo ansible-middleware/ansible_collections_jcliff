@@ -5,6 +5,7 @@ name: CI
     branches:
       - master
       - main
+      - undertow
   pull_request:
 
 env:

@@ -1417,6 +1417,24 @@ def main():
                                             use_resource_role_mappings=dict(type='bool', required=False),
                                             disable_trust_manager=dict(type='bool', required=False),
                                         )))))),
+                            undertow=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    configuration=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            filter=dict(type='str', required=False)
+                                        )),
+                                    server=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            host=dict(
+                                                type='list', required=False, elements='dict', options=dict(
+                                                    name=dict(type='str', required=True),
+                                                    filter_ref=dict(
+                                                        type='list', required=False, elements='dict', options=dict(
+                                                            gzipfilter=dict(
+                                                                type='list', required=False, elements='dict', options=dict(
+                                                                    predicate=dict(type='str',required=True)
+                                                                )))))))))),
         state=dict(default="present", choices=[
                    'present', 'absent'], type='str')
     )
