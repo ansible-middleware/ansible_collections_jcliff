@@ -9,3 +9,21 @@ releases:
     fragments:
     - 81.yaml
     release_date: '2022-06-14'
+  0.0.23:
+    changes:
+      bugfixes:
+      - 'ActiveMQ connection-factory connectors requires a list, not string `#82 <https://github.com/ansible-middleware/ansible_collections_jcliff/pull/82>`_
+
+        '
+      minor_changes:
+      - 'Add xadatasource support `#78 <https://github.com/ansible-middleware/ansible_collections_jcliff/pull/78>`_
+
+        '
+      - 'Extended support for messaging-activemq `#79 <https://github.com/ansible-middleware/ansible_collections_jcliff/pull/79>`_
+
+        '
+    fragments:
+    - 78.yaml
+    - 79.yaml
+    - 82.yaml
+    release_date: '2022-06-16'
