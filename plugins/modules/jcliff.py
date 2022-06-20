@@ -340,7 +340,7 @@ options:
             type: int
           min_pool_size:
             description:
-              - The min-pool-size element specifies the minimum number of 
+              - The min-pool-size element specifies the minimum number of
               - connections for a pool.
             type: int
           max_pool_size:
