@@ -17,7 +17,9 @@
     {% if 'same_rm_override' in values %} "same-rm-override" => "{{ values['same_rm_override'] }}", {% endif %}
     {% if 'background_validation_millis' in values %} "background-validation-millis" => "{{ values['background_validation_millis'] }}", {% endif %}
     {% if 'check_valid_connection_sql' in values %} "check-valid-connection-sql" => "{{ values['check_valid_connection_sql'] }}", {% endif %}
-    {% if 'use_java_context' in values %} "use-java-context" => "{{ values['use_java_context'] }}" {% endif %}
+    {% if 'use_java_context' in values %} "use-java-context" => "{{ values['use_java_context'] }}", {% endif %}
+    {% if 'min_pool_size' in values %} "min-pool-size" => "{{ values['min_pool_size'] }}", {% endif %}
+    {% if 'max_pool_size' in values %} "max-pool-size" => "{{ values['max_pool_size'] }}" {% endif %}
    }
  }
 }
