@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
   options:
-    requirements-file: molecule/resources/requirements.yml
+    requirements-file: molecurequirements.yml
 driver:
   name: docker
 platforms:
@@ -18,9 +18,9 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../resources/converge.yml
-    prepare: ../resources/prepare.yml
-    verify: ../resources/verify.yml
+    converge: converge.yml
+    prepare: prepare.yml
+    verify: verify.yml
   inventory:
     group_vars:
       all:

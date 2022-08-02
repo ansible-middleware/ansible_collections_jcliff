@@ -18,9 +18,9 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../resources/converge.yml
-    prepare: ../resources/prepare.yml
-    verify: ../resources/verify.yml
+    converge: ../standalone/converge.yml
+    prepare: ../standalone/prepare.yml
+    verify: ../standalone/verify.yml
   inventory:
     host_vars:
       localhost:
