@@ -10,10 +10,12 @@
   collections:
     - middleware_automation.wildfly
     - middleware_automation.jcliff
-  roles:
-    - wildfly_install
-    - wildfly_systemd
   tasks:
+
+    - include_role:
+        name: wildfly_install
+    - include_role:
+        name: wildfly_systemd
 
     - include_role:
         name: ../../roles/jcliff
