@@ -5,6 +5,7 @@
       {% if 'url' in values['xa_datasource_properties'] %} "URL" => { "value" => "{{ values['xa_datasource_properties']['url'] }}" } {% endif %}
     },
     "driver-name" => "{{ values['driver_name'] }}",
+    {% if 'xa_datasource_class' in values %} "xa-datasource-class" => "{{ values['xa_datasource_class'] }}", {% endif %}
     "jndi-name" => "{{ values['jndi_name'] }}",
     {% if 'password' in values %} "password" => "{{ values['password'] }}", {% endif %}
     {% if 'user_name' in values %} "user-name" => "{{ values['user_name'] }}", {% endif %}

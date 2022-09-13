@@ -279,6 +279,10 @@ options:
               - Name of the driver.
             type: str
             required: True
+          xa_datasource_class:
+            description:
+              - The fully qualified name of the javax.sql.XADataSource implementation
+            type: str
           enabled:
             description:
               - Whether the datasource is enabled.
@@ -1389,6 +1393,7 @@ def main():
                                             url=dict(type='str', required=True))),
                                     driver_name=dict(
                                         type='str', required=True),
+                                    xa_datasource_class=dict(type='str', required=False),
                                     enabled=dict(type='str', default='true'),
                                     password=dict(type='str', required=False, no_log=True),
                                     user_name=dict(type='str', required=False),
