@@ -43,7 +43,7 @@ jobs:
         working-directory: ./ansible_collections/middleware_automation/jcliff
 
       - name: Install requirements.yml
-        run: ansible-galaxy collection install -r molecule/resources/requirements.yml
+        run: ansible-galaxy collection install -r molecule/standalone/requirements.yml
         working-directory: ./ansible_collections/middleware_automation/jcliff
 
       - name: Run molecule test
