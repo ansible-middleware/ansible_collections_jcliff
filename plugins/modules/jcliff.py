@@ -868,6 +868,62 @@ options:
                 type: int
                 required: False
 
+      undertow:
+        description:
+          - Undertow configuration
+        type: list
+        elements: dict
+        suboptions:
+          configuration:
+            description:
+              - Configuration
+            type: list
+            elements: dict
+            suboptions:
+              filter:
+                description:
+                  - The type of filter to use
+                type: str
+          server:
+            description:
+              - List of servers to setup using Undertow
+            type: list
+            elements: dict
+            suboptions:
+              name:
+                description:
+                  - Server name.
+                type: str
+                required: True
+              host:
+                description:
+                  - List of hosts for this server
+                type: list
+                elements: dict
+                suboptions:
+                  name:
+                    description:
+                      - Server name.
+                    type: str
+                    required: True
+                  filter_ref:
+                    description:
+                      - Reference to the filtertype
+                    type: list
+                    elements: dict
+                    suboptions:
+                      gzipfilter:
+                        description:
+                          - Gzip filter
+                        type: list
+                        elements: dict
+                        suboptions:
+                          predicate:
+                            description:
+                              - Predicate describing relevant requests for filtering
+                            type: str
+                            required: True
+
       messaging_activemq:
         description:
           - Create messaging activemq.
@@ -1593,7 +1649,25 @@ def main():
                                             credential=dict(type='str', required=False),
                                             use_resource_role_mappings=dict(type='bool', required=False),
                                             disable_trust_manager=dict(type='bool', required=False),
-                                        )))))),
+                                        )))),
+                            undertow=dict(
+                                type='list', required=False, elements='dict', options=dict(
+                                    configuration=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            filter=dict(type='str', required=False)
+                                        )),
+                                    server=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            host=dict(
+                                                type='list', required=False, elements='dict', options=dict(
+                                                    name=dict(type='str', required=True),
+                                                    filter_ref=dict(
+                                                        type='list', required=False, elements='dict', options=dict(
+                                                            gzipfilter=dict(
+                                                                type='list', required=False, elements='dict', options=dict(
+                                                                    predicate=dict(type='str', required=True)
+                                                                )))))))))))),
         state=dict(default="present", choices=[
                    'present', 'absent'], type='str')
     )
