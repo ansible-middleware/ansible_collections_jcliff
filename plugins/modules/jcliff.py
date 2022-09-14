@@ -279,6 +279,10 @@ options:
               - Name of the driver.
             type: str
             required: True
+          xa_datasource_class:
+            description:
+              - The fully qualified name of the javax.sql.XADataSource implementation
+            type: str
           enabled:
             description:
               - Whether the datasource is enabled.
@@ -337,6 +341,17 @@ options:
               - The background-validation-millis element specifies the amount of
               - time, in milliseconds, that background validation will run.
               - Changing this value require a server restart.
+            type: int
+          min_pool_size:
+            description:
+              - The min-pool-size element specifies the minimum number of
+              - connections for a pool.
+            type: int
+          max_pool_size:
+            description:
+              - The max-pool-size element specifies the maximum number of
+              - connections for a pool. No more connections will be created
+              - in each sub-pool
             type: int
 
       system_properties:
@@ -1434,6 +1449,7 @@ def main():
                                             url=dict(type='str', required=True))),
                                     driver_name=dict(
                                         type='str', required=True),
+                                    xa_datasource_class=dict(type='str', required=False),
                                     enabled=dict(type='str', default='true'),
                                     password=dict(type='str', required=False, no_log=True),
                                     user_name=dict(type='str', required=False),
@@ -1450,6 +1466,8 @@ def main():
                                         type='str', default='undefined'),
                                     same_rm_override=dict(type='bool'),
                                     background_validation_millis=dict(type='int'),
+                                    min_pool_size=dict(type='int'),
+                                    max_pool_size=dict(type='int'),
                                 )),
                             system_properties=dict(
                                 type='list', required=False, elements='dict', options=dict(
