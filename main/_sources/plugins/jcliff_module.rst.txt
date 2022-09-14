@@ -1,3 +1,4 @@
+
 .. Document meta
 
 :orphan:
@@ -44,11 +45,7 @@ middleware_automation.jcliff.jcliff module -- Manages the configuration of Wildf
 .. note::
     This module is part of the `middleware_automation.jcliff collection <https://galaxy.ansible.com/middleware_automation/jcliff>`_ (version 0.0.23).
 
-    You might already have this collection installed if you are using the ``ansible`` package.
-    It is not included in ``ansible-core``.
-    To check whether it is installed, run :code:`ansible-galaxy collection list`.
-
-    To install it, use: :code:`ansible-galaxy collection install middleware_automation.jcliff`.
+    To install it, use: :code:`ansible-galaxy collection install middleware\_automation.jcliff`.
 
     To use it in a playbook, specify: :code:`middleware_automation.jcliff.jcliff`.
 
@@ -819,8 +816,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1042,8 +1039,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1391,8 +1388,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1470,8 +1467,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1513,8 +1510,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1592,8 +1589,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1743,8 +1740,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1786,8 +1783,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1865,8 +1862,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1944,8 +1941,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -1987,8 +1984,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -2211,8 +2208,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -2362,8 +2359,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -2405,8 +2402,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -2588,7 +2585,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Replace from_email with email id.
+      Replace from\_email with email id.
 
 
       .. raw:: html
@@ -2624,7 +2621,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Set jndi_name, for ex. java:jboss/mail/testSession
+      Set jndi\_name, for ex. java:jboss/mail/testSession
 
 
       .. raw:: html
@@ -2696,7 +2693,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Set outbound_socket_binding_ref, for ex. mail-smtp
+      Set outbound\_socket\_binding\_ref, for ex. mail-smtp
 
 
       .. raw:: html
@@ -2739,8 +2736,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -4478,7 +4475,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      create_durable_queue
+      create\_durable\_queue
 
 
       .. raw:: html
@@ -4514,7 +4511,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      create_non_durable_queue
+      create\_non\_durable\_queue
 
 
       .. raw:: html
@@ -4550,7 +4547,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      delete_durable_queue
+      delete\_durable\_queue
 
 
       .. raw:: html
@@ -4586,7 +4583,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      delete_non_durable_queue
+      delete\_non\_durable\_queue
 
 
       .. raw:: html
@@ -4920,8 +4917,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -5035,8 +5032,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -5150,8 +5147,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -5366,7 +5363,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Timeout (in seconds) for proxy connections to a node. Time mod_cluster will wait for the back-end response before returning an error.
+      Timeout (in seconds) for proxy connections to a node. Time mod\_cluster will wait for the back-end response before returning an error.
 
 
       .. raw:: html
@@ -5438,7 +5435,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      List of reverse proxies for mod_cluster to register with defined by 'outbound-socket-binding' in 'socket-binding-group'.
+      List of reverse proxies for mod\_cluster to register with defined by 'outbound-socket-binding' in 'socket-binding-group'.
 
 
       .. raw:: html
@@ -5690,7 +5687,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Reference to the SSLContext to be used by mod_cluster.
+      Reference to the SSLContext to be used by mod\_cluster.
 
 
       .. raw:: html
@@ -5769,8 +5766,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -5812,8 +5809,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -5855,8 +5852,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -6077,7 +6074,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      enter the respective value, corresponding to name. https://docs.jboss.org/infinispan/9.4/serverconfigdocs/jboss-as-deployment-scanner_2_0.html
+      enter the respective value, corresponding to name. https://docs.jboss.org/infinispan/9.4/serverconfigdocs/jboss-as-deployment-scanner\_2\_0.html
 
 
       .. raw:: html
@@ -6193,8 +6190,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -6820,6 +6817,372 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow:
+
+      .. rst-class:: ansible-option-title
+
+      **undertow**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Undertow configuration
+
+
+      .. raw:: html
+
+        </div>
+    
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/configuration"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/configuration"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/configuration:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/configuration:
+
+      .. rst-class:: ansible-option-title
+
+      **configuration**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/configuration" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Configuration
+
+
+      .. raw:: html
+
+        </div>
+    
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/configuration/filter"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/configuration/filter"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/configuration/filter:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/configuration/filter:
+
+      .. rst-class:: ansible-option-title
+
+      **filter**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/configuration/filter" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      The type of filter to use
+
+
+      .. raw:: html
+
+        </div>
+
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server:
+
+      .. rst-class:: ansible-option-title
+
+      **server**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      List of servers to setup using Undertow
+
+
+      .. raw:: html
+
+        </div>
+    
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server/host:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server/host:
+
+      .. rst-class:: ansible-option-title
+
+      **host**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server/host" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      List of hosts for this server
+
+
+      .. raw:: html
+
+        </div>
+    
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/filter_ref"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/filter_ref"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server/host/filter_ref:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server/host/filter_ref:
+
+      .. rst-class:: ansible-option-title
+
+      **filter_ref**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/filter_ref" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Reference to the filtertype
+
+
+      .. raw:: html
+
+        </div>
+    
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/filter_ref/gzipfilter"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/filter_ref/gzipfilter"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server/host/filter_ref/gzipfilter:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server/host/filter_ref/gzipfilter:
+
+      .. rst-class:: ansible-option-title
+
+      **gzipfilter**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/filter_ref/gzipfilter" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Gzip filter
+
+
+      .. raw:: html
+
+        </div>
+    
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/filter_ref/gzipfilter/predicate"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/filter_ref/gzipfilter/predicate"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server/host/filter_ref/gzipfilter/predicate:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server/host/filter_ref/gzipfilter/predicate:
+
+      .. rst-class:: ansible-option-title
+
+      **predicate**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/filter_ref/gzipfilter/predicate" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string` / :ansible-option-required:`required`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Predicate describing relevant requests for filtering
+
+
+      .. raw:: html
+
+        </div>
+
+
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/name"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/name"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server/host/name:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server/host/name:
+
+      .. rst-class:: ansible-option-title
+
+      **name**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/name" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string` / :ansible-option-required:`required`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Server name.
+
+
+      .. raw:: html
+
+        </div>
+
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/undertow/server/name"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/name"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/undertow/server/name:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/undertow/server/name:
+
+      .. rst-class:: ansible-option-title
+
+      **name**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/undertow/server/name" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string` / :ansible-option-required:`required`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Server name.
+
+
+      .. raw:: html
+
+        </div>
+
+
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-components/xadatasources"></div>
         <div class="ansibleOptionAnchor" id="parameter-subsystems/xadatasources"></div>
 
@@ -6893,8 +7256,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -7204,8 +7567,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -7323,8 +7686,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`no`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-choices-entry:`false`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 
@@ -7603,8 +7966,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-default-bold:`no` :ansible-option-default:`← (default)`
-      - :ansible-option-choices-entry:`yes`
+      - :ansible-option-default-bold:`false` :ansible-option-default:`← (default)`
+      - :ansible-option-choices-entry:`true`
 
       .. raw:: html
 

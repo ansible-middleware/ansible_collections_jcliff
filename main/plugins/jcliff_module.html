@@ -106,9 +106,6 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This module is part of the <a class="reference external" href="https://galaxy.ansible.com/middleware_automation/jcliff">middleware_automation.jcliff collection</a> (version 0.0.23).</p>
-<p>You might already have this collection installed if you are using the <code class="docutils literal notranslate"><span class="pre">ansible</span></code> package.
-It is not included in <code class="docutils literal notranslate"><span class="pre">ansible-core</span></code>.
-To check whether it is installed, run <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">list</span></code>.</p>
 <p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">middleware_automation.jcliff</span></code>.</p>
 <p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">middleware_automation.jcliff.jcliff</span></code>.</p>
 </div>
@@ -299,8 +296,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Adds to the repository in a disabled state.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -352,8 +349,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Specifies whether the deployment should be managed.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -433,8 +430,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Sockets using this interface should be bound to a wildcard address</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -454,8 +451,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Part of the selection criteria for choosing an IP address for this interface should be whether or not the address is link-local</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -467,8 +464,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Part of the selection criteria for choosing an IP address for this interface should be whether or not it is a loopback address</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -488,8 +485,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether or not its network interface supports multicast</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -525,8 +522,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether or not its network interface is a point-to-point interface</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -538,8 +535,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether or not it is a publicly routable address</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -559,8 +556,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether or it is a site-local address</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -580,8 +577,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether its network interface is currently up</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -593,8 +590,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether its network interface is a virtual interface</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -646,8 +643,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Should only be used during development and NEVER in production as it will disable verification of SSL certificates. Default false.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -683,8 +680,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the adapter will look inside the token for application level role mappings for the user. The default value is false.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -696,8 +693,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the adapter will verify whether the token contains this client name (resource) as an audience. Default is false.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -773,8 +770,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Set ssl</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1258,8 +1255,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether to enable multicast-based advertise mechanism.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1287,8 +1284,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>If false, the contexts are registered with the reverse proxy as disabled.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1316,8 +1313,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether to enable packet flushing on the reverse proxy.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1457,8 +1454,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Indicates whether subsequent requests for a given session should be routed to the same node, if possible.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1470,8 +1467,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the reverse proxy should run an error in the event that the balancer is unable to route a request to the node to which it is stuck.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1483,8 +1480,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the reverse proxy should remove session stickiness when the balancer is unable to route a request to the node to which it is stuck.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1562,8 +1559,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Whether the port value should remain fixed even if numeric offsets are applied to the other outbound sockets in the socket group.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1704,6 +1701,86 @@ To check whether it is installed, run <code class="code docutils literal notrans
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow"></span><strong>undertow</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Undertow configuration</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/configuration"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/configuration"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-configuration"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-configuration"></span><strong>configuration</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/configuration" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Configuration</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/configuration/filter"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/configuration/filter"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-configuration-filter"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-configuration-filter"></span><strong>filter</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/configuration/filter" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The type of filter to use</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server"></span><strong>server</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>List of servers to setup using Undertow</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server-host"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server-host"></span><strong>host</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server/host" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>List of hosts for this server</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/filter_ref"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/filter_ref"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server-host-filter-ref"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server-host-filter-ref"></span><strong>filter_ref</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/filter_ref" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Reference to the filtertype</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/filter_ref/gzipfilter"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/filter_ref/gzipfilter"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server-host-filter-ref-gzipfilter"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server-host-filter-ref-gzipfilter"></span><strong>gzipfilter</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/filter_ref/gzipfilter" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Gzip filter</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/filter_ref/gzipfilter/predicate"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/filter_ref/gzipfilter/predicate"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server-host-filter-ref-gzipfilter-predicate"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server-host-filter-ref-gzipfilter-predicate"></span><strong>predicate</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/filter_ref/gzipfilter/predicate" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Predicate describing relevant requests for filtering</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server/host/name"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/host/name"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server-host-name"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server-host-name"></span><strong>name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server/host/name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Server name.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-components/undertow/server/name"></div>
+<div class="ansibleOptionAnchor" id="parameter-subsystems/undertow/server/name"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-undertow-server-name"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-undertow-server-name"></span><strong>name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-components/undertow/server/name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Server name.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-components/xadatasources"></div>
 <div class="ansibleOptionAnchor" id="parameter-subsystems/xadatasources"></div><p class="ansible-option-title" id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-subsystems-xadatasources"><span id="ansible-collections-middleware-automation-jcliff-jcliff-module-parameter-components-xadatasources"></span><strong>xadatasources</strong></p>
 <a class="ansibleOptionLink" href="#parameter-components/xadatasources" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
@@ -1721,8 +1798,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>Mutually exclusive to validate-on-match.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1795,8 +1872,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Should datasource attempt recovery.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1826,8 +1903,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <p>returns true or false.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-choices-entry">no</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-choices-entry">false</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1893,8 +1970,8 @@ To check whether it is installed, run <code class="code docutils literal notrans
 <td><div class="ansible-option-cell"><p>Debug output.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><span class="ansible-option-default-bold">no</span> <span class="ansible-option-default">← (default)</span></p></li>
-<li><p><span class="ansible-option-choices-entry">yes</span></p></li>
+<li><p><span class="ansible-option-default-bold">false</span> <span class="ansible-option-default">← (default)</span></p></li>
+<li><p><span class="ansible-option-choices-entry">true</span></p></li>
 </ul>
 </div></td>
 </tr>
