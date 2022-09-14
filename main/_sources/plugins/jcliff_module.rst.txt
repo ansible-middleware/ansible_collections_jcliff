@@ -7498,6 +7498,84 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/xadatasources/max_pool_size"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/xadatasources/max_pool_size"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/xadatasources/max_pool_size:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/xadatasources/max_pool_size:
+
+      .. rst-class:: ansible-option-title
+
+      **max_pool_size**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/xadatasources/max_pool_size" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`integer`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      The max-pool-size element specifies the maximum number of
+
+      connections for a pool. No more connections will be created
+
+      in each sub-pool
+
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/xadatasources/min_pool_size"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/xadatasources/min_pool_size"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/xadatasources/min_pool_size:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/xadatasources/min_pool_size:
+
+      .. rst-class:: ansible-option-title
+
+      **min_pool_size**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/xadatasources/min_pool_size" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`integer`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      The min-pool-size element specifies the minimum number of
+
+      connections for a pool.
+
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-components/xadatasources/name"></div>
         <div class="ansibleOptionAnchor" id="parameter-subsystems/xadatasources/name"></div>
 
@@ -7852,6 +7930,42 @@ Parameters
       .. rst-class:: ansible-option-line
 
       :ansible-option-default-bold:`Default:` :ansible-option-default:`"undefined"`
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-components/xadatasources/xa_datasource_class"></div>
+        <div class="ansibleOptionAnchor" id="parameter-subsystems/xadatasources/xa_datasource_class"></div>
+
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-components/xadatasources/xa_datasource_class:
+      .. _ansible_collections.middleware_automation.jcliff.jcliff_module__parameter-subsystems/xadatasources/xa_datasource_class:
+
+      .. rst-class:: ansible-option-title
+
+      **xa_datasource_class**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-components/xadatasources/xa_datasource_class" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      The fully qualified name of the javax.sql.XADataSource implementation
+
 
       .. raw:: html
 
