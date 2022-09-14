@@ -1,13 +1,20 @@
-{ "datasource" => {
-  "{{ values['name'] }}" => {
-    {% if 'pool_name' in values %} "pool-name" => "{{ values['pool_name'] }}", {% endif %}
-    "connection-url" => "{{ values['connection_url'] }}",
-    "driver-name" => "{{ values['driver_name'] }}",
-    "jndi-name" => "{{ values['jndi_name'] }}",
-    {% if 'password' in values %} "password" => "{{ values['password'] }}", {% endif %}
-    {% if 'user_name' in values %} "user-name" => "{{ values['user_name'] }}", {% endif %}
-    {% if 'enabled' in values %} "enabled" => "{{ values['enabled'] }}", {% endif %}
-    {% if 'use_java_context' in values %} "use-java-context" => "{{ values['use_java_context'] }}" {% endif %}
-   }
- }
+{
+  "datasource" => {
+    "{{ values['name'] }}" => {
+      {% if 'pool_name' in values %} "pool-name" => "{{ values['pool_name'] }}", {% endif %}
+      "connection-url" => "{{ values['connection_url'] }}",
+      "driver-name" => "{{ values['driver_name'] }}",
+      "jndi-name" => "{{ values['jndi_name'] }}",
+      {% if 'password' in values %} "password" => "{{ values['password'] }}", {% endif %}
+      {% if 'user_name' in values %} "user-name" => "{{ values['user_name'] }}", {% endif %}
+      {% if 'enabled' in values %} "enabled" => "{{ values['enabled'] }}", {% endif %}
+      {% if 'use_java_context' in values %} "use-java-context" => "{{ values['use_java_context'] }}" {% endif %}
+      {% if 'min_pool_size' in values %} "min-pool-size" => "{{ values['min_pool_size'] }}", {% endif %}
+      {% if 'max_pool_size' in values %} "max-pool-size" => "{{ values['max_pool_size'] }}", {% endif %}
+      {% if 'check_valid_connection_sql' in values %} "check-valid-connection-sql" => "{{ values['check_valid_connection_sql'] }}", {% endif %}
+      {% if 'validate_on_match' in values %} "validate-on-match" => "{{ values['validate_on_match'] }}", {% endif %}
+      {% if 'idle_timeout_minutes' in values %} "idle-timeout-minutes" => "{{ values['idle_timeout_minutes'] }}", {% endif %}
+      {% if 'query_timeout' in values %} "query-timeout" => "{{ values['query_timeout'] }}", {% endif %}
+    }
+  }
 }
