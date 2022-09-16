@@ -199,9 +199,15 @@ $spec = @{
                     }
                 }
                 logging = @{ type = "list"; required = $false ; elements = "dict";
-                    options = @{
-                        name = @{ type = "str" ; required = $true }
-                        level = @{ type = "str"; required = $false }
+                    options = @{ 
+                        logger = @{ type = "list"; required = $false; elements = "dict";
+                            options = @{
+                                name = @{ type = "str" ; required = $true }
+                                level = @{ type = "str"; required = $false }
+                            }
+                        }
+                        add_logging_api_dependencies=@{ type = "bool"; required = $false }
+                        use_deployment_logging_config= @{type="bool"; required = $false }
                     }
                 }
             }

@@ -22,3 +22,10 @@ docs/_build/
 *.retry
 
 changelogs/.plugin-cache.yaml
+
+# venv artifacts.
+share/
+bin/
+lib/
+lib64
+pyvenv.cfg
