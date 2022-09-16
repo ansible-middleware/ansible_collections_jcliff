@@ -1,18 +1,20 @@
 { "logging" => {
-    {% if 'logger' in values %}
-    "logger" => {
-      {% for item in values['logger'] %}
-      "{{ item['name'] }}" => {
-            "level" => "{{ item['level'] }}"
-        },
-      {% endfor %}
-    },
-    {% endif %}
-    {% if 'add_logging_api_dependencies' in values %}
-            "add-logging-api-dependencies" => "{{ values['add_logging_api_dependencies'] }}",
-    {% endif %}
-    {% if 'use_deployment_logging_config' in values %}
-            "use-deployment-logging-config" => "{{ values['use_deployment_logging_config'] }}",
-    {% endif %}
+    {% for logging in values %} 
+      {% if 'logger' in logging %}
+      "logger" => {
+        {% for item in logging['logger'] %}
+        "{{ item['name'] }}" => {
+              "level" => "{{ item['level'] }}"
+          },
+        {% endfor %}
+      },
+      {% endif %}
+      {% if 'add_logging_api_dependencies' in logging %}
+      "add-logging-api-dependencies" => "{{ logging['add_logging_api_dependencies'] }}",
+      {% endif %}
+      {% if 'use_deployment_logging_config' in logging %}
+      "use-deployment-logging-config" => "{{ logging['use_deployment_logging_config'] }}",
+      {% endif %}
+    {% endfor %}
   }
 }
