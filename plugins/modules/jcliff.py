@@ -1521,8 +1521,7 @@ def main():
                                             name=dict(type='str', required=True),
                                             level=dict(type='str', required=False))),
                                     add_logging_api_dependencies=dict(type='bool', required=False),
-                                    use_deployment_logging_config=dict(type='bool', required=False)
-                                    )),
+                                    use_deployment_logging_config=dict(type='bool', required=False))),
                             mail=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=True),
