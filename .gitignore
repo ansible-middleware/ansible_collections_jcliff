@@ -23,8 +23,9 @@ docs/_build/
 
 changelogs/.plugin-cache.yaml
 
-pyvenv.cfg
-lib64
+# venv artifacts.
 share/
 bin/
 lib/
+lib64
+pyvenv.cfg

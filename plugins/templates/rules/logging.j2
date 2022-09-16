@@ -1,10 +1,18 @@
 { "logging" => {
+    {% if 'logger' in values %}
     "logger" => {
-      {% for item in values %}
+      {% for item in values['logger'] %}
       "{{ item['name'] }}" => {
             "level" => "{{ item['level'] }}"
         },
       {% endfor %}
-    }
+    },
+    {% endif %}
+    {% if 'add_logging_api_dependencies' in values %}
+            "add-logging-api-dependencies" => "{{ values['add_logging_api_dependencies'] }}",
+    {% endif %}
+    {% if 'use_deployment_logging_config' in values %}
+            "use-deployment-logging-config" => "{{ values['use_deployment_logging_config'] }}",
+    {% endif %}
   }
 }

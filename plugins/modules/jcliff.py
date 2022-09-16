@@ -570,16 +570,30 @@ options:
         type: list
         elements: dict
         suboptions:
-          name:
+          logger:
             description:
-              - Replace name with name of the log category
-            type: str
-            required: True
-          level:
+              - Defines a logger category
+            type: list
+            elements: dict
+            suboptions:
+              name:
+                description:
+                  - Replace name with name of the log category
+                type: str
+                required: True
+              level:
+                description:
+                  - Replace level with log level that is to be set
+                type: str
+                required: False
+          add_logging_api_dependencies:
             description:
-              - Replace level with log level that is to be set
-            type: str
-            required: False
+              - Should logging API dependencies be added to deployments during the deployment process
+            type: bool
+          use_deployment_logging_config:
+            description:
+              - Should deployments use a logging configuration file found in the deployment
+            type: bool
       mail:
         description:
           - mail.
@@ -1446,8 +1460,13 @@ def main():
                                     virtual=dict(type='bool', required=False))),
                             logging=dict(
                                 type='list', required=False, elements='dict', options=dict(
-                                    name=dict(type='str', required=True),
-                                    level=dict(type='str', required=False))),
+                                    logger=dict(
+                                        type='list', required=False, elements='dict', options=dict(
+                                            name=dict(type='str', required=True),
+                                            level=dict(type='str', required=False))),
+                                    add_logging_api_dependencies=dict(type='bool', required=False),
+                                    use_deploymeny_logging_config=dict(type='bool', required=False)
+                                    )),
                             mail=dict(
                                 type='list', required=False, elements='dict', options=dict(
                                     name=dict(type='str', required=True),
